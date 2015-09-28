@@ -1,3 +1,6 @@
 Terminologie à définir (et exemples à donner):
   abstract declarator
   type qualifier
+
+Eliminate uses of $syntaxerror.
+
