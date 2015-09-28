@@ -6,3 +6,4 @@ pre_parser.dot
 pre_parser.follow
 pre_parser.pdf
 pre_parser.messages
+pre_parser.conflicts
