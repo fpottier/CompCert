@@ -1,0 +1,53 @@
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME VOLATILE XOR_ASSIGN 
+#
+# specifier_qualifier_list(type_name) -> TYPEDEF_NAME type_qualifier_list . [ STAR RPAREN LPAREN LBRACK ]
+# type_qualifier_list -> type_qualifier_list . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
+#
+# We are trying to recognize a specifier_qualifier_list.
+# We have already recognized at least one type_qualifier.
+# This is in the context of a type_name.
+# Thus, this specifier_qualifier_list should be followed with
+# abstract_declarator? RPAREN.
+# Thus, we expect either:
+# 1. One more type_qualifier
+# 2. An abstract_declarator
+# 3. A closing parenthesis.
+#
+translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
+#
+#
+# specifier_qualifier_list(type_name) -> TYPEDEF_NAME . [ STAR RPAREN LPAREN LBRACK ]
+# specifier_qualifier_list(type_name) -> TYPEDEF_NAME . type_qualifier_list [ STAR RPAREN LPAREN LBRACK ]
+#
+# Same as above, except we have not recognized any type qualifiers yet.
+
+Ill-formed type name.
+At this point, one of the following is expected:
+  a type qualifier, or
+  an abstract declarator, or
+  a closing parenthesis.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
+#
+# argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
+# attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+#
+# We are trying to recognize an alignas specifier.
+# We have already recognized at least one argument_expression.
+# We expect either "COMMA assignment_expression" or RPAREN.
+# I suppose the assignment_expression must be an "integer constant expression".
+
+Ill-formed alignas specifier.
+At this point, one of the following is expected:
+  a comma, followed with an integer constant expression, or
+  a closing parenthesis.
+
+# ------------------------------------------------------------------------------
+
+# Local Variables:
+# mode: shell-script
+# End:
