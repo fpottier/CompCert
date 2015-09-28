@@ -1,4 +1,4 @@
-.PHONY: all interpret interpret_canonical
+.PHONY: all interpret interpret_error interpret_error_canonical
 
 # Temporary Makefile, used to work on the grammar(s).
 
@@ -23,7 +23,10 @@ all:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
 
 interpret:
-	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret-error
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret
 
-interpret_canonical:
-	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret-error --canonical
+interpret_error:
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --interpret-error
+
+interpret_error_canonical:
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --interpret-error --canonical
