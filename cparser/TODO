@@ -4,3 +4,27 @@ Terminologie à définir (et exemples à donner):
 
 Eliminate uses of $syntaxerror.
 
+Demander à Jacques-Henri:
+  pourquoi la re-classification des tokens? (en général)
+  pourquoi set_id_type semble parfois appelé pour rien? (e.g. re-classifier un VAR_NAME en VarId)
+  peut-on changer la première production de specifier_qualifier_list ainsi:
+    specifier_qualifier_list(context):
+    | type_qualifier_list? i = TYPEDEF_NAME               specifier_qualifier_list_no_typedef_name?
+    ça reconnaît plus de choses et ça ne crée aucun conflit.
+    ou bien ça n'a pas de sens? mais de toute façon Parser.vy l'accepte donc ça doit être attrapé plus loin?
+  en déduire si on peut unifier les messages 1 et 3 de handcrafted.messages
+    en autorisant qualifier ou specifier.
+
+Le message 3 serait:
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME 
+#
+# type_name -> specifier_qualifier_list(type_name) . option(abstract_declarator) [ RPAREN ]
+
+Ill-formed type name.
+At this point, one of the following is expected:
+  an abstract declarator, or
+  a closing parenthesis.
+
