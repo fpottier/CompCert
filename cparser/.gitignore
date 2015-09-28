@@ -1,0 +1,8 @@
+# Ignore the following temporary files:
+lr.csv
+pre_parser.automaton
+pre_parser.canonical
+pre_parser.dot
+pre_parser.follow
+pre_parser.pdf
+pre_parser.messages
