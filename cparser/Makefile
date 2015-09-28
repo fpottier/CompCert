@@ -11,10 +11,11 @@ all:
 # Compile Menhir.
 	make -C $(SRC)
 # Produce a description of the automaton.
-# Compute the symbolic FOLLOW sets.
 # Compute the dependency graph.
-	$(MENHIR) $(COMPCERT).mly $(FLAGS) --dump --explain --graph -lg 3 2>$(COMPCERT).follow
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --dump --explain --graph
 	dot -Tpdf -o $(COMPCERT).pdf $(COMPCERT).dot
+# Compute the symbolic FOLLOW sets.
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) -lg 3 2>$(COMPCERT).follow
 # Re-generate the list of error messages.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
 # Re-generate the list of error messages for the canonical automaton.
