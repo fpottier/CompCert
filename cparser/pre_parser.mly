@@ -25,16 +25,6 @@
   let declare_typename (i,_,_) =
     !declare_typename i
 
-  let syntax_error pos =
-    Cerrors.fatal_error "%s:%d: syntax error"
-        pos.Lexing.pos_fname pos.Lexing.pos_lnum
-
-  let unclosed opening closing pos1 pos2 =
-    Cerrors.info "%s:%d: syntax error: expecting '%s'"
-        pos2.Lexing.pos_fname pos2.Lexing.pos_lnum closing;
-    Cerrors.fatal_error "%s:%d: this is the location of the unclosed '%s'"
-        pos1.Lexing.pos_fname pos1.Lexing.pos_lnum opening
-
 %}
 
 %token<string * Pre_parser_aux.identifier_type ref * Cabs.cabsloc>
@@ -120,20 +110,14 @@ primary_expression:
 | string_literals_list
 | LPAREN expression RPAREN
     {}
-| LPAREN expression error
-    { unclosed "(" ")" $startpos($1) $endpos }
 
 postfix_expression:
 | primary_expression
 | postfix_expression LBRACK expression RBRACK
 | postfix_expression LPAREN argument_expression_list? RPAREN
     {}
-| postfix_expression LPAREN argument_expression_list? error
-    { unclosed "(" ")" $startpos($2) $endpos }
 | BUILTIN_VA_ARG LPAREN assignment_expression COMMA type_name RPAREN
     {}
-| BUILTIN_VA_ARG LPAREN assignment_expression COMMA type_name error
-    { unclosed "(" ")" $startpos($2) $endpos }
 | postfix_expression DOT i = general_identifier
 | postfix_expression PTR i = general_identifier
     { set_id_type i OtherId }
@@ -141,10 +125,6 @@ postfix_expression:
 | postfix_expression DEC
 | LPAREN type_name RPAREN LBRACE initializer_list COMMA? RBRACE
     {}
-| LPAREN type_name error
-    { unclosed "(" ")" $startpos($1) $endpos }
-| LPAREN type_name RPAREN LBRACE initializer_list COMMA? error
-    { unclosed "{" "}" $startpos($4) $endpos }
 
 argument_expression_list:
 | assignment_expression
@@ -347,10 +327,6 @@ struct_or_union_specifier:
 | struct_or_union attribute_specifier_list i = general_identifier LBRACE struct_declaration_list RBRACE
 | struct_or_union attribute_specifier_list i = general_identifier
     { set_id_type i OtherId }
-| struct_or_union attribute_specifier_list LBRACE struct_declaration_list error
-    { unclosed "{" "}" $startpos($3) $endpos }
-| struct_or_union attribute_specifier_list general_identifier LBRACE struct_declaration_list error
-    { unclosed "{" "}" $startpos($4) $endpos }
 
 struct_or_union:
 | STRUCT
@@ -393,10 +369,6 @@ enum_specifier:
 | ENUM attribute_specifier_list i = general_identifier LBRACE enumerator_list COMMA? RBRACE
 | ENUM attribute_specifier_list i = general_identifier
     { set_id_type i OtherId }
-| ENUM attribute_specifier_list LBRACE enumerator_list COMMA? error
-    { unclosed "{" "}" $startpos($3) $endpos }
-| ENUM attribute_specifier_list general_identifier LBRACE enumerator_list COMMA? error
-    { unclosed "{" "}" $startpos($4) $endpos }
 
 enumerator_list:
 | declare_varname(enumerator)
@@ -520,8 +492,6 @@ c_initializer:
 | assignment_expression
 | LBRACE initializer_list COMMA? RBRACE
     {}
-| LBRACE initializer_list COMMA? error
-    { unclosed "{" "}" $startpos($1) $endpos }
 
 initializer_list:
 | designation? c_initializer
@@ -572,8 +542,6 @@ labeled_statement(last_statement):
 compound_statement:
 | LBRACE in_context(block_item_list?) RBRACE
     {}
-| LBRACE in_context(block_item_list?) error
-    { unclosed "{" "}" $startpos($1) $endpos }
 
 block_item_list:
 | block_item_list? block_item
@@ -659,8 +627,6 @@ translation_unit_file:
 | translation_unit EOF
 | EOF
     {}
-| error
-    { syntax_error $endpos }
 
 translation_unit:
 | external_declaration
@@ -713,6 +679,4 @@ declaration_list:
 function_definition:
 | function_definition_begin LBRACE block_item_list? pop_context RBRACE
     { }
-| function_definition_begin LBRACE block_item_list? pop_context error
-    { unclosed "{" "}" $startpos($2) $endpos }
 
