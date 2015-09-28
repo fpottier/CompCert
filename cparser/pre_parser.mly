@@ -255,15 +255,15 @@ declaration:
 
 declaration_specifiers_no_type:
 | storage_class_specifier_no_typedef declaration_specifiers_no_type?
-| type_qualifier declaration_specifiers_no_type?
-| function_specifier declaration_specifiers_no_type?
+| type_qualifier                     declaration_specifiers_no_type?
+| function_specifier                 declaration_specifiers_no_type?
     {}
 
 declaration_specifiers_no_typedef_name:
 | storage_class_specifier_no_typedef declaration_specifiers_no_typedef_name?
-| type_qualifier declaration_specifiers_no_typedef_name?
-| function_specifier declaration_specifiers_no_typedef_name?
-| type_specifier_no_typedef_name declaration_specifiers_no_typedef_name?
+| type_qualifier                     declaration_specifiers_no_typedef_name?
+| function_specifier                 declaration_specifiers_no_typedef_name?
+| type_specifier_no_typedef_name     declaration_specifiers_no_typedef_name?
     {}
 
 declaration_specifiers:
@@ -350,7 +350,7 @@ specifier_qualifier_list:
 
 specifier_qualifier_list_no_typedef_name:
 | type_specifier_no_typedef_name specifier_qualifier_list_no_typedef_name?
-| type_qualifier specifier_qualifier_list_no_typedef_name?
+| type_qualifier                 specifier_qualifier_list_no_typedef_name?
     {}
 
 struct_declarator_list:
