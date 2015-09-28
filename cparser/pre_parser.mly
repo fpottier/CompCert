@@ -59,7 +59,13 @@ when a is a TYPEDEF_NAME. It is specified by 6.7.5.3 11.
 
 (* Helpers *)
 
-%inline option(X):
+option(X):
+| /* nothing */
+    { None }
+| x = X
+    { Some x }
+
+%inline ioption(X):
 | /* nothing */
     { None }
 | x = X
@@ -267,17 +273,17 @@ declaration_specifiers_no_typedef_name:
     {}
 
 declaration_specifiers:
-| declaration_specifiers_no_type? i = TYPEDEF_NAME declaration_specifiers_no_type?
+| ioption(declaration_specifiers_no_type) i = TYPEDEF_NAME declaration_specifiers_no_type?
     { set_id_type i TypedefId }
-| declaration_specifiers_no_type? type_specifier_no_typedef_name declaration_specifiers_no_typedef_name?
+| ioption(declaration_specifiers_no_type) type_specifier_no_typedef_name declaration_specifiers_no_typedef_name?
     {}
 
 declaration_specifiers_typedef:
-| declaration_specifiers_no_type? TYPEDEF declaration_specifiers_no_type? i = TYPEDEF_NAME declaration_specifiers_no_type?
-| declaration_specifiers_no_type? i = TYPEDEF_NAME declaration_specifiers_no_type? TYPEDEF declaration_specifiers_no_type?
+| ioption(declaration_specifiers_no_type) TYPEDEF declaration_specifiers_no_type? i = TYPEDEF_NAME declaration_specifiers_no_type?
+| ioption(declaration_specifiers_no_type) i = TYPEDEF_NAME declaration_specifiers_no_type? TYPEDEF declaration_specifiers_no_type?
     { set_id_type i TypedefId }
-| declaration_specifiers_no_type? TYPEDEF declaration_specifiers_no_type? type_specifier_no_typedef_name declaration_specifiers_no_typedef_name?
-| declaration_specifiers_no_type? type_specifier_no_typedef_name declaration_specifiers_no_typedef_name? TYPEDEF declaration_specifiers_no_typedef_name?
+| ioption(declaration_specifiers_no_type) TYPEDEF declaration_specifiers_no_type? type_specifier_no_typedef_name declaration_specifiers_no_typedef_name?
+| ioption(declaration_specifiers_no_type) type_specifier_no_typedef_name declaration_specifiers_no_typedef_name? TYPEDEF declaration_specifiers_no_typedef_name?
     {}
 
 init_declarator_list:
@@ -438,7 +444,7 @@ function_specifier:
     {}
 
 declarator:
-| pointer? x = direct_declarator attribute_specifier_list
+| ioption(pointer) x = direct_declarator attribute_specifier_list
     { x }
 
 direct_declarator:
@@ -484,13 +490,13 @@ type_name:
 
 abstract_declarator:
 | pointer
-| pointer? direct_abstract_declarator
+| ioption(pointer) direct_abstract_declarator
     {}
 
 direct_abstract_declarator:
 | LPAREN abstract_declarator RPAREN
-| direct_abstract_declarator? LBRACK type_qualifier_list? assignment_expression? RBRACK
-| direct_abstract_declarator? LPAREN in_context(parameter_type_list?) RPAREN
+| ioption(direct_abstract_declarator) LBRACK type_qualifier_list? assignment_expression? RBRACK
+| ioption(direct_abstract_declarator) LPAREN in_context(parameter_type_list?) RPAREN
     {}
 
 c_initializer:
@@ -647,7 +653,7 @@ external_declaration:
     {}
 
 function_definition_begin:
-| declaration_specifiers pointer? x=direct_declarator
+| declaration_specifiers ioption(pointer) x=direct_declarator
     { match x with
       | (_, None) -> $syntaxerror
       | (i, Some l) ->
@@ -659,7 +665,7 @@ function_definition_begin:
 	    | Some i -> declare_varname i
 	  ) l
     }
-| declaration_specifiers pointer? x=direct_declarator 
+| declaration_specifiers ioption(pointer) x=direct_declarator 
   LPAREN params=identifier_list RPAREN in_context(declaration_list)
     { match x with
       | (_, Some _) -> $syntaxerror
