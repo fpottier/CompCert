@@ -1,4 +1,4 @@
-.PHONY: all interpret interpret_error interpret_error_canonical
+.PHONY: all update interpret interpret_error interpret_error_canonical
 
 # Temporary Makefile, used to work on the grammar(s).
 
@@ -6,6 +6,7 @@ SRC      := $(HOME)/dev/menhir/src
 MENHIR   := $(SRC)/_stage2/menhir.native
 COMPCERT := pre_parser
 FLAGS    := --no-stdlib --lalr -la 2
+MSGS     := handcrafted.messages
 
 all:
 # Compile Menhir.
@@ -21,6 +22,11 @@ all:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
 # Re-generate the list of error messages for the canonical automaton.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
+
+update:
+# Update the auto-comments.
+	mv -f $(MSGS) $(MSGS).bak
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --update-errors $(MSGS).bak > $(MSGS)
 
 interpret:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret
