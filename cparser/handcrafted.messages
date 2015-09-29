@@ -1,10 +1,10 @@
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
-#
-# specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
-# type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
-#
+##
+## specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
+## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
+##
 # We are trying to recognize a specifier_qualifier_list.
 # This is in the context of a type_name.
 # Thus, this specifier_qualifier_list should be followed with
@@ -24,10 +24,10 @@ At this point, one of the following is expected:
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
-#
-# argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
-# attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
-#
+##
+## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
+## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
 # We are trying to recognize an alignas specifier.
 # We have already recognized at least one argument_expression.
 # We expect either "COMMA assignment_expression" or RPAREN.
