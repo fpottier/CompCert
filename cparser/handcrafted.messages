@@ -36,9 +36,14 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 # We have already recognized at least one argument_expression.
 # We expect either "COMMA assignment_expression" or RPAREN.
 # I suppose the assignment_expression must be an "integer constant expression".
+# We must be careful: this state is reached via spurious reductions.
+# COMMA and RPAREN are not the only possible tokens at this point.
+# Any token that allows continuing the expression that has been read already
+# would be OK too.
 
 Ill-formed alignas specifier.
-At this point, one of the following is expected:
+If the expression up to this point is complete, then
+at this point, one of the following is expected:
   a comma, followed with an integer constant expression, or
   a closing parenthesis.
 
