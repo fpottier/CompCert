@@ -1,5 +1,3 @@
-.PHONY: all update interpret interpret_error interpret_error_canonical
-
 # Temporary Makefile, used to work on the grammar(s).
 
 SRC      := $(HOME)/dev/menhir/src
@@ -26,15 +24,23 @@ all:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
 
 update:
-# Update the auto-comments.
+# Update the auto-comments in $(MSGS).
 	mv -f $(MSGS) $(MSGS).bak
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --update-errors $(MSGS).bak > $(MSGS)
 
+compare:
+# Check $(MSGS) for completeness.
+# We assume $(COMPCERT).messages is up-to-date.
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --compare-errors $(COMPCERT).messages --compare-errors $(MSGS)
+
 interpret:
+# Interpret one sentence (interactive).
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret
 
 interpret_error:
+# Interpret one error sentence (interactive).
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --interpret-error
 
 interpret_error_canonical:
+# Interpret one error sentence in the canonical automaton (interactive).
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --interpret-error --canonical
