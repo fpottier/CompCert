@@ -176,22 +176,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN COMMA 
-##
-## Ends in an error in state: 342.
-##
-## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-
-Ill-formed alignas specifier.
-Up to this point, a type name has been recognized.
-If this type name is complete,
-then at this point, a closing parenthesis ')' is expected.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
 ## Ends in an error in state: 278.
