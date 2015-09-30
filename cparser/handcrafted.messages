@@ -172,54 +172,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
-##
-## Ends in an error in state: 289.
-##
-## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-
-# The first LPAREN in this example must be the beginning of an abstract_declarator.
-# It leads us into a state where we do not yet know the meaning of the opening parenthesis:
-#   direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
-#   direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
-#   direct_abstract_declarator -> LPAREN . pointer direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
-#   direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-# i.e. (a-b-c) this could be the opening parenthesis in a pair of parentheses,
-#   or (d) this could be the opening parenthesis in a function type.
-# The second LPAREN takes us again into the same state.
-# The RPAREN allows us to recognize that we have a function type of no parameters (d).
-# Hence, LPAREN RPAREN forms a direct_abstract_declarator.
-# At this point, the status of the first LPAREN is still undetermined (regular paren,
-# or beginning of a function type?) but that is not a problem for us.
-
-# Thanks to our use of inline_abstract_declarator in this production:
-#   direct_abstract_declarator:
-#   | LPAREN inline_abstract_declarator RPAREN
-# we know for sure that we have recognized a direct_abstract_declarator.
-
-# (Without this trick, we would know only that we have recognized either an abstract_declarator or
-# a direct_abstract_declarator which has spuriously reduced to abstract_declarator. This would
-# pose a problem because we would not know for sure what are the permitted continuations.)
-
-# Here, thanks to this trick, there are no spurious reductions, so we know for sure
-# what the permitted continuations are.
-
-# It is difficult to be consistent in the terminology. Here, a closing
-# parenthesis would FOLLOW a direct_abstract_declarator, but would also
-# COMPLETE a direct_abstract_declarator, since the production is
-# direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN
-
-Up to this point, a direct abstract declarator has been recognized.
-At this point, one of the following is expected:
-  an opening bracket '[',     continuing this direct abstract declarator; or
-  an opening parenthesis '(', continuing this direct abstract declarator; or
-  a closing parenthesis ')',  following this direct abstract declarator.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN COMMA 
 ##
 ## Ends in an error in state: 337.
@@ -248,6 +200,46 @@ At this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
+##
+## Ends in an error in state: 289.
+##
+## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+##
+#
+# The first LPAREN in this example must be the beginning of an abstract_declarator.
+# It leads us into a state where we do not yet know the meaning of the opening parenthesis:
+#   direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
+#   direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+#   direct_abstract_declarator -> LPAREN . pointer direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+#   direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+# i.e. (a-b-c) this could be the opening parenthesis in a pair of parentheses,
+#   or (d) this could be the opening parenthesis in a function type.
+# The second LPAREN takes us again into the same state.
+# The RPAREN allows us to recognize that we have a function type of no parameters (d).
+# Hence, LPAREN RPAREN forms a direct_abstract_declarator.
+# At this point, the status of the first LPAREN is still undetermined (regular paren,
+# or beginning of a function type?) but that is not a problem for us.
+#
+# Thanks to our use of inline_abstract_declarator in this production:
+#   direct_abstract_declarator:
+#   | LPAREN inline_abstract_declarator RPAREN
+# we know for sure that we have recognized a direct_abstract_declarator.
+#
+# (Without this trick, we would know only that we have recognized either an abstract_declarator or
+# a direct_abstract_declarator which has spuriously reduced to abstract_declarator. This would
+# pose a problem because we would not know for sure what are the permitted continuations.)
+#
+# Here, thanks to this trick, there are no spurious reductions, so we know for sure
+# what the permitted continuations are.
+#
+# It is difficult to be consistent in the terminology. Here, a closing
+# parenthesis would FOLLOW a direct_abstract_declarator, but would also
+# COMPLETE a direct_abstract_declarator, since the production is
+# direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN
+#
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 337.
@@ -256,15 +248,27 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
-
+#
 # This case is simplified by giving a phantom context parameter to abstract_declarator.
 # Here, we know we are in the context of a type_name, so RPAREN is allowed next.
 # If we were in the context of a parameter_declaration, COMMA would be allowed next.
-
-# This case is very similar to an earlier example (in fact, the error message is the
-# same). The states are different because here we know that we are at the top level
-# (type_name -> direct_abstract_declarator) whereas in the other example we are not
-# (direct_abstract_declarator -> direct_abstract_declarator).
+#
+# This case is very similar to the previous example (which is why we share the
+# error message). The states are different because here we know that we are at
+# the top level (type_name -> direct_abstract_declarator) whereas in the other
+# example we are not (direct_abstract_declarator ->
+# direct_abstract_declarator).
+#
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 275.
+##
+## direct_abstract_declarator -> LPAREN pointer direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+##
+#
+# Another very similar case, it seems.
 
 Up to this point, a direct abstract declarator has been recognized.
 At this point, one of the following is expected:
