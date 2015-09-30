@@ -32,20 +32,11 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME 
 ##
-## Ends in an error in state: 153.
+## Ends in an error in state: 215.
 ##
-## type_name -> specifier_qualifier_list(type_name) . option(abstract_declarator(type_name)) [ RPAREN ]
+## specifier_qualifier_list_no_typedef_name(type_name) -> type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 215, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> 
-## In state 327, spurious reduction of production specifier_qualifier_list_no_typedef_name -> type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
-## In state 320, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> specifier_qualifier_list_no_typedef_name 
-## In state 328, spurious reduction of production specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
-##
-
+#
 # This situation is rather similar to the one above.
 # We are also trying to recognize a type name.
 # As above, the continuation is abstract_declarator? RPAREN.
@@ -56,6 +47,13 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 # 2. One more type specifier (which cannot be a typedef name)
 # 3. An abstract declarator
 # 4. A closing parenthesis.
+#
+translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN 
+##
+## Ends in an error in state: 216.
+##
+## specifier_qualifier_list_no_typedef_name(type_name) -> type_qualifier . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
+##
 
 Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
@@ -68,7 +66,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 329.
+## Ends in an error in state: 334.
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -174,7 +172,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 337.
+## Ends in an error in state: 342.
 ##
 ## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -248,7 +246,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 #
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 337.
+## Ends in an error in state: 342.
 ##
 ## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -278,7 +276,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 335.
+## Ends in an error in state: 340.
 ##
 ## abstract_declarator(type_name) -> pointer direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -297,7 +295,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME 
 ##
-## Ends in an error in state: 333.
+## Ends in an error in state: 338.
 ##
 ## direct_abstract_declarator -> LPAREN pointer . RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN pointer . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -316,7 +314,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME 
 ##
-## Ends in an error in state: 334.
+## Ends in an error in state: 339.
 ##
 ## abstract_declarator(type_name) -> pointer . [ RPAREN ]
 ## abstract_declarator(type_name) -> pointer . direct_abstract_declarator [ RPAREN ]
@@ -342,7 +340,7 @@ followed with a closing parenthesis ')'.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 332.
+## Ends in an error in state: 337.
 ##
 ## direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -360,6 +358,8 @@ At this point, one of the following is expected:
     if this parenthesis is intended as a delimiter; or
   a parameter type list,
     if this parenthesis is intended as the beginning of a function declarator.
+
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 
