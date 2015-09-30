@@ -1,0 +1,100 @@
+A history of my changes to pre_parser.mly.
+
+------------------------------------------------------------------------------
+
+2015/09/28
+
+Remove all uses of the [error] token.
+
+------------------------------------------------------------------------------
+
+2015/09/28
+
+Added a phantom context parameter to [specifier_qualifier_list]. This allows
+distinguishing the two uses of specifier_qualifier_list, namely within a
+type_name and within a struct_declaration. This provides more "static context"
+and allows giving a better syntax error message.
+
+------------------------------------------------------------------------------
+
+2015/09/28
+
+Instead of inline options everywhere, use them only where necessary to avoid a
+conflict. The number of states goes down from 716 to 609, and the number of
+error messages that must be invented goes down as well.
+
+------------------------------------------------------------------------------
+
+2015/09/30
+
+In direct_abstract_declarator, changed option(assignment_expression) to
+ioption(assignment_expression), as follows:
+
+  direct_abstract_declarator:
+  | ioption(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
+
+This allows us to give distinct error messages for the case where an
+expression has been read and the case where an expression has not
+been read. In other words, more "static context".
+
+Analogous change in direct_declarator.
+
+611 states, 305 error states.
+
+------------------------------------------------------------------------------
+
+2015/09/30
+
+Created an inline clone of abstract_declarator, called
+inline_abstract_declarator.
+
+In direct_abstract_declarator, changed abstract_declarator to
+inline_abstract_declarator, as follows:
+
+  direct_abstract_declarator:
+  | LPAREN inline_abstract_declarator RPAREN
+
+616 states, 308 error states.
+
+Before this change, there was an error state that seemed quite difficult to
+explain, again by lack of static context. Here are my notes:
+
+  translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
+  ##
+  ## Ends in an error in state: 294.
+  ##
+  ## direct_abstract_declarator -> LPAREN abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+  ##
+  ## WARNING: This example involves spurious reductions.
+  ## This implies that, although the LR(1) items shown above provide an
+  ## accurate view of the past (what has been recognized so far), they
+  ## may provide an INCOMPLETE view of the future (what was expected next).
+  ## In state 291, spurious reduction of production abstract_declarator -> direct_abstract_declarator 
+  ##
+
+  # The first LPAREN in this example must be the beginning of an abstract_declarator.
+  # It leads us into a state where we do not yet know the meaning of the opening parenthesis:
+  #   direct_abstract_declarator -> LPAREN . abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+  #   direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+  # i.e. (a) this could be the opening parenthesis in a pair of parentheses,
+  #   or (b) this could be the opening parenthesis in a function type.
+  # The second LPAREN takes us again into the same state.
+  # The RPAREN allows us to recognize that we have a function type of no parameters.
+  # Hence, LPAREN RPAREN forms a direct_abstract_declarator.
+  # At this point, the status of the first LPAREN is still undetermined (regular paren,
+  # or beginning of a function type?) and so is the status of our direct_abstract_declarator
+  # (does it form an abstract_declarator all by itself, or is it followed by LBRACK or LPAREN?).
+
+  # In the general case, we have recognized either an abstract_declarator or
+  # just a direct_abstract_declarator (which has spuriously reduced to abstract_declarator).
+  # We may expect one the following:
+  #   RPAREN (as shown above; closes an opening parenthesis after an abstract_declarator)
+  #   LBRACK, LPAREN (continues a direct_abstract_declarator)
+  # If we have recognized a direct_abstract_declarator, then either of these three
+  # continuations is OK; if we have recognized an abstract_declarator that is not
+  # a direct_abstract_declarator, then only RPAREN is OK.
+
+In summary, we lack static context (we do not know whether we have read an
+abstract_declarator or a direct_abstract_declarator) and because of that,
+we do not know for sure which continuations we expect.
+
