@@ -41,6 +41,9 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
 ## In state 215, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> 
+## In state 327, spurious reduction of production specifier_qualifier_list_no_typedef_name -> type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
+## In state 320, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> specifier_qualifier_list_no_typedef_name 
+## In state 328, spurious reduction of production specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
 ##
 
 # This situation is rather similar to the one above.
@@ -76,6 +79,7 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 ## may provide an INCOMPLETE view of the future (what was expected next).
 ## In state 36, spurious reduction of production unary_expression -> postfix_expression 
 ## In state 42, spurious reduction of production cast_expression -> unary_expression 
+## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
 ## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
 ## In state 75, spurious reduction of production shift_expression -> additive_expression 
 ## In state 55, spurious reduction of production relational_expression -> shift_expression 
@@ -86,6 +90,8 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 ## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
 ## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
+## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
+## In state 113, spurious reduction of production argument_expression_list -> assignment_expression 
 ##
 
 # We are trying to recognize an alignas specifier.
@@ -119,6 +125,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON
 ## may provide an INCOMPLETE view of the future (what was expected next).
 ## In state 36, spurious reduction of production unary_expression -> postfix_expression 
 ## In state 42, spurious reduction of production cast_expression -> unary_expression 
+## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
 ## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
 ## In state 75, spurious reduction of production shift_expression -> additive_expression 
 ## In state 55, spurious reduction of production relational_expression -> shift_expression 
@@ -129,6 +136,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON
 ## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
 ## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
+## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
 ##
 
 # We are trying to recognize an array declarator.
