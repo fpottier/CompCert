@@ -451,7 +451,10 @@ direct_declarator:
 | i = general_identifier
     { set_id_type i VarId; (i, None) }
 | LPAREN x = declarator RPAREN
-| x = direct_declarator LBRACK type_qualifier_list? assignment_expression? RBRACK
+| x = direct_declarator LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
+    /* fpottier: using ioption above, even though option would work,
+       because knowing whether the size has been read allows us to
+       give better syntax error messages. */
     { x }
 | x = direct_declarator LPAREN l=in_context(parameter_type_list?) RPAREN
     { match snd x with
