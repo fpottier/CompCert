@@ -1,10 +1,16 @@
 A history of my changes to pre_parser.mly.
 
+Initial commit: 1b5db33...
+
+726 states. (Assuming --lalr mode.)
+
 ------------------------------------------------------------------------------
 
 2015/09/28
 
 Remove all uses of the [error] token.
+
+707 states, 367 error states.
 
 ------------------------------------------------------------------------------
 
@@ -15,6 +21,8 @@ distinguishing the two uses of specifier_qualifier_list, namely within a
 type_name and within a struct_declaration. This provides more "static context"
 and allows giving a better syntax error message.
 
+716 states, 374 error states.
+
 ------------------------------------------------------------------------------
 
 2015/09/28
@@ -22,6 +30,8 @@ and allows giving a better syntax error message.
 Instead of inline options everywhere, use them only where necessary to avoid a
 conflict. The number of states goes down from 716 to 609, and the number of
 error messages that must be invented goes down as well.
+
+609 states, 305 error states.
 
 ------------------------------------------------------------------------------
 
