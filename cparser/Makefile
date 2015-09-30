@@ -15,11 +15,13 @@ all:
 # Produce a description of the automaton.
 # Compute the dependency graph.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --dump --explain --graph
+	sleep 2
 	dot -Tpdf -o $(COMPCERT).pdf $(COMPCERT).dot
 # Compute the symbolic FOLLOW sets.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) -lg 3 2>$(COMPCERT).follow
 # Re-generate the list of error messages.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
+	sleep 2
 # Re-generate the list of error messages for the canonical automaton.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
 
