@@ -308,13 +308,31 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 ## may provide an INCOMPLETE view of the future (what was expected next).
 ## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
 ##
-
+#
 # Both productions above stem from the inlining in
 # direct_abstract_declarator -> LPAREN inline_abstract_declarator RPAREN.
 # We can describe them by saying we expect an optional direct_abstract_declarator,
 # followed with a closing parenthesis.
+#
+translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME 
+##
+## Ends in an error in state: 334.
+##
+## abstract_declarator(type_name) -> pointer . [ RPAREN ]
+## abstract_declarator(type_name) -> pointer . direct_abstract_declarator [ RPAREN ]
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+##
+#
+# Very similar to the above example. The difference is that above we have seen an
+# LPAREN and we expect a matching RPAREN, whereas here we are in the context of a
+# type_name and that is why we know an RPAREN should come.
 
-Up to this point, an opening parenthesis '(' and a pointer have been recognized.
+Up to this point, a pointer has been recognized.
 If this pointer is complete,
 then at this point,
 an optional direct abstract declarator is expected,
