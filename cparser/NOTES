@@ -124,3 +124,17 @@ create one? Or maybe I just missed this opportunity on 2015/09/28.)
 
 612 states, 306 error states.
 
+------------------------------------------------------------------------------
+
+2015/09/30
+
+Added a phantom context parameter to [abstract_declarator]. This allows
+distinguishing the two uses of abstract_declarator, namely within a type_name
+and within a parameter_declaration. This provides more "static context" and
+allows giving a better syntax error message, as this allows us to know what is
+expected next: a closing parenthesis or a comma.
+
+Strangely (?), this leads to fewer error states!
+
+615 states, 302 error states.
+

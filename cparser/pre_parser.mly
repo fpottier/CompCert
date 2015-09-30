@@ -484,14 +484,14 @@ parameter_list:
 parameter_declaration:
 | declaration_specifiers id=declare_varname(fst(declarator))
     { Some id }
-| declaration_specifiers abstract_declarator?
+| declaration_specifiers abstract_declarator(parameter_declaration)?
     { None }
 
 type_name:
-| specifier_qualifier_list(type_name) abstract_declarator?
+| specifier_qualifier_list(type_name) abstract_declarator(type_name)?
     {}
 
-abstract_declarator:
+abstract_declarator(context):
 | pointer
 | ioption(pointer) direct_abstract_declarator
     {}
