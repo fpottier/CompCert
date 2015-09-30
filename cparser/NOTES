@@ -138,3 +138,14 @@ Strangely (?), this leads to fewer error states!
 
 615 states, 302 error states.
 
+------------------------------------------------------------------------------
+
+2015/09/30
+
+Added a phantom context parameter to [specifier_qualifier_list_no_typedef_name].
+This is consistent with the fact that [specifier_qualifier_list] already had one.
+This gives me better static context in at least one state, and (strangely?) does
+not increase the number of error states.
+
+620 states, 302 error states.
+

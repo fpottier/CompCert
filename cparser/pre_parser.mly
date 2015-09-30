@@ -356,12 +356,17 @@ struct_declaration:
 specifier_qualifier_list(context):
 | type_qualifier_list? i = TYPEDEF_NAME type_qualifier_list?
     { set_id_type i TypedefId }
-| type_qualifier_list? type_specifier_no_typedef_name specifier_qualifier_list_no_typedef_name?
+| type_qualifier_list? type_specifier_no_typedef_name specifier_qualifier_list_no_typedef_name(context)?
     {}
 
-specifier_qualifier_list_no_typedef_name:
-| type_specifier_no_typedef_name specifier_qualifier_list_no_typedef_name?
-| type_qualifier                 specifier_qualifier_list_no_typedef_name?
+(* The [context] parameter is unused. It does not influence the language
+   that is accepted. It records the identity of the caller (here, either
+   [struct_declaration] or [type_name]). This forces a distinction between
+   certain states in the automaton, and allows us to give more precise
+   syntax error messages. -fpottier *)
+specifier_qualifier_list_no_typedef_name(context):
+| type_specifier_no_typedef_name specifier_qualifier_list_no_typedef_name(context)?
+| type_qualifier                 specifier_qualifier_list_no_typedef_name(context)?
     {}
 
 struct_declarator_list:
