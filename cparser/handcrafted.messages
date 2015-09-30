@@ -367,6 +367,23 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN 
+##
+## Ends in an error in state: 181.
+##
+## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . TYPEDEF_NAME option(type_qualifier_list) [ STAR RPAREN LPAREN LBRACK ]
+## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
+## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT SIGNED SHORT RESTRICT PACKED LONG INT FLOAT ENUM DOUBLE CONST CHAR ATTRIBUTE ALIGNAS ]
+##
+
+# We are trying to recognize a specifier-qualifier-list, and have not yet seen
+# a type specifier, which is why we know the list is not finished.
+
+Ill-formed specifier-qualifier-list.
+At this point, one of the following is expected:
+  a type qualifier, continuing this specifier-qualifier-list; or
+  a type specifier, continuing this specifier-qualifier-list.
+
 # ------------------------------------------------------------------------------
 
 # Local Variables:
