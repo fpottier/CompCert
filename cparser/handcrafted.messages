@@ -13,15 +13,20 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 # Thus, this specifier_qualifier_list should be followed with
 # abstract_declarator? RPAREN.
 # Thus, we expect either:
-# 1. One more type qualifier
-# 2. An abstract declarator
-# 3. A closing parenthesis.
+# 1. One more type qualifier (part of the type name)
+# 2. An abstract declarator  (part of the type name)
+# 3. A closing parenthesis   (which follows the type name).
+#
+# What we have read so far in fact forms a valid type name. If we could
+# (spuriously) reduce the first production above, we would find that we
+# have a complete specifier_qualifier_list(type_name), hence a complete
+# type name.
 
-Ill-formed type name.
+Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
-  a type qualifier, or
-  an abstract declarator, or
-  a closing parenthesis ')'.
+  a type qualifier,          continuing this type name; or
+  an abstract declarator,    continuing this type name; or
+  a closing parenthesis ')', following this type name.
 
 # ------------------------------------------------------------------------------
 
@@ -49,12 +54,12 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 # 3. An abstract declarator
 # 4. A closing parenthesis.
 
-Ill-formed type name.
+Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
-  a type qualifier, or
-  a type specifier, or
-  an abstract declarator, or
-  a closing parenthesis ')'.
+  a type qualifier,          continuing this type name; or
+  a type specifier,          continuing this type name; or
+  an abstract declarator,    continuing this type name; or
+  a closing parenthesis ')', following this type name.
 
 # ------------------------------------------------------------------------------
 
@@ -94,10 +99,11 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 # would be OK too.
 
 Ill-formed alignas specifier.
-If the expression up to this point is complete,
+Up to this point, an expression has been recognized.
+If this expression is complete,
 then at this point, one of the following is expected:
-  a comma ',', followed with an integer constant expression, or
-  a closing parenthesis ')'.
+  a comma ',' and an expression, continuing this alignas specifier; or
+  a closing parenthesis ')',     completing this alignas specifier.
 
 # ------------------------------------------------------------------------------
 
@@ -131,7 +137,8 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON
 # This expression could be incomplete (spurious reductions).
 
 Ill-formed array declarator.
-If the expression up to this point is complete,
+Up to this point, an expression has been recognized.
+If this expression is complete,
 then at this point, a closing bracket ']' is expected.
 
 # ------------------------------------------------------------------------------
@@ -151,9 +158,48 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN
 
 Ill-formed array declarator.
 At this point, one of the following is expected:
-  a type qualifier, or
-  an expression, or
+  a type qualifier; or
+  an expression; or
   a closing bracket ']'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
+##
+## Ends in an error in state: 294.
+##
+## direct_abstract_declarator -> LPAREN abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 291, spurious reduction of production abstract_declarator -> direct_abstract_declarator 
+##
+
+# The first LPAREN in this example must be the beginning of an abstract_declarator.
+# It leads us into a state where we do not yet know the meaning of the opening parenthesis:
+#   direct_abstract_declarator -> LPAREN . abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+#   direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+# i.e. (a) this could be the opening parenthesis in a pair of parentheses,
+#   or (b) this could be the opening parenthesis in a function type.
+# The second LPAREN takes us again into the same state.
+# The RPAREN allows us to recognize that we have a function type of no parameters.
+# Hence, LPAREN RPAREN forms a direct_abstract_declarator.
+# At this point, the status of the first LPAREN is still undetermined (regular paren,
+# or beginning of a function type?) and so is the status of our direct_abstract_declarator
+# (does it form an abstract_declarator all by itself, or is it followed by LBRACK or LPAREN?).
+
+# In the general case, we have recognized either an abstract_declarator or
+# just a direct_abstract_declarator (which has spuriously reduced to abstract_declarator).
+# We may expect one the following:
+#   RPAREN (as shown above; closes an opening parenthesis after an abstract_declarator)
+#   LBRACK, LPAREN (continues a direct_abstract_declarator)
+# If we have recognized a direct_abstract_declarator, then either of these three
+# continuations is OK; if we have recognized an abstract_declarator that is not
+# a direct_abstract_declarator, then only RPAREN is OK.
+
+<YOUR SYNTAX ERROR MESSAGE HERE>
 
 # ------------------------------------------------------------------------------
 
