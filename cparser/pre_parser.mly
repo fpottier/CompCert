@@ -452,9 +452,9 @@ direct_declarator:
     { set_id_type i VarId; (i, None) }
 | LPAREN x = declarator RPAREN
 | x = direct_declarator LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
-    /* fpottier: using ioption above, even though option would work,
-       because knowing whether the size has been read allows us to
-       give better syntax error messages. */
+    /* Using ioption above, even though option would work,
+       because knowing whether the size has been read allows
+       us to give better syntax error messages. -fpottier */
     { x }
 | x = direct_declarator LPAREN l=in_context(parameter_type_list?) RPAREN
     { match snd x with
@@ -491,11 +491,19 @@ type_name:
 | specifier_qualifier_list(type_name) abstract_declarator(type_name)?
     {}
 
+(* The [context] parameter is unused. It does not influence the language
+   that is accepted. It records the identity of the caller (here, either
+   [parameter_declaration] or [type_name]). This forces a distinction between
+   certain states in the automaton, and allows us to give more precise
+   syntax error messages. -fpottier *)
 abstract_declarator(context):
 | pointer
 | ioption(pointer) direct_abstract_declarator
     {}
 
+/* This is semantically equivalent to abstract_declarator, but is
+   inlined at its use site. This improves the static context and
+   allows us to give better syntax error messages. -fpottier */
 %inline inline_abstract_declarator:
 | pointer
 | ioption(pointer) direct_abstract_declarator
@@ -504,9 +512,9 @@ abstract_declarator(context):
 direct_abstract_declarator:
 | LPAREN inline_abstract_declarator RPAREN
 | option(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
-    /* fpottier: using ioption above, even though option would work,
-       because knowing whether the size has been read allows us to
-       give better syntax error messages. */
+    /* Using ioption above, even though option would work,
+       because knowing whether the size has been read allows
+       us to give better syntax error messages. -fpottier */
 | ioption(direct_abstract_declarator) LPAREN in_context(parameter_type_list?) RPAREN
     {}
 
