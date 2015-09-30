@@ -496,8 +496,13 @@ abstract_declarator:
 | ioption(pointer) direct_abstract_declarator
     {}
 
+%inline inline_abstract_declarator:
+| pointer
+| ioption(pointer) direct_abstract_declarator
+    {}
+
 direct_abstract_declarator:
-| LPAREN abstract_declarator RPAREN
+| LPAREN inline_abstract_declarator RPAREN
 | ioption(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
     /* fpottier: using ioption above, even though option would work,
        because knowing whether the size has been read allows us to
