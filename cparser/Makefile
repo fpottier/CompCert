@@ -19,9 +19,9 @@ all:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) -lg 3 2>$(COMPCERT).follow
 # Re-generate the list of error messages.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
-	sleep 2
+#	sleep 2
 # Re-generate the list of error messages for the canonical automaton.
-	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
+#	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
 
 update:
 # Update the auto-comments in $(MSGS).
