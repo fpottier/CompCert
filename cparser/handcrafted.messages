@@ -387,6 +387,21 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS XOR_ASSIGN 
+##
+## Ends in an error in state: 177.
+##
+## attribute_specifier -> ALIGNAS . LPAREN argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+## attribute_specifier -> ALIGNAS . LPAREN type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+
+# Fingers in the nose.
+
+Ill-formed alignas specifier.
+At this point, an opening parenthesis '(' is expected.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
