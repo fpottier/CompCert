@@ -34,7 +34,7 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 ##
 ## Ends in an error in state: 153.
 ##
-## type_name -> specifier_qualifier_list(type_name) . option(abstract_declarator) [ RPAREN ]
+## type_name -> specifier_qualifier_list(type_name) . option(abstract_declarator(type_name)) [ RPAREN ]
 ##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
@@ -207,6 +207,11 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 # Here, thanks to this trick, there are no spurious reductions, so we know for sure
 # what the permitted continuations are.
 
+# It is difficult to be consistent in the terminology. Here, a closing
+# parenthesis would FOLLOW a direct_abstract_declarator, but would also
+# COMPLETE a direct_abstract_declarator, since the production is
+# direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN
+
 Up to this point, a direct abstract declarator has been recognized.
 At this point, one of the following is expected:
   an opening bracket '[',     continuing this direct abstract declarator; or
@@ -217,17 +222,11 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 179.
+## Ends in an error in state: 337.
 ##
-## attribute_specifier -> ALIGNAS LPAREN type_name . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 296, spurious reduction of production abstract_declarator -> direct_abstract_declarator 
-## In state 299, spurious reduction of production option(abstract_declarator) -> abstract_declarator 
-## In state 335, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator) 
+## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
+## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
 
 Ill-formed alignas specifier.
@@ -251,26 +250,27 @@ At this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 296.
+## Ends in an error in state: 337.
 ##
-## abstract_declarator -> direct_abstract_declarator . [ RPAREN COMMA ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
+## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
 
-# Tricky case, it seems.
-# In the canonical automaton, we see that COMMA is not allowed after
-# this example sentence.
-# In the LALR automaton, some states have been merged, so we do not
-# know for sure whether RPAREN and COMMA are allowed here. They may
-# or not be allowed, depending on which sentence took us to this state.
+# This case is simplified by giving a phantom context parameter to abstract_declarator.
+# Here, we know we are in the context of a type_name, so RPAREN is allowed next.
+# If we were in the context of a parameter_declaration, COMMA would be allowed next.
+
+# This case is very similar to an earlier example (in fact, the error message is the
+# same). The states are different because here we know that we are at the top level
+# (type_name -> direct_abstract_declarator) whereas in the other example we are not
+# (direct_abstract_declarator -> direct_abstract_declarator).
 
 Up to this point, a direct abstract declarator has been recognized.
 At this point, one of the following is expected:
   an opening bracket '[',     continuing this direct abstract declarator; or
   an opening parenthesis '(', continuing this direct abstract declarator; or
-  a closing parenthesis ')'; (maybe!) or
-  a comma ',' (maybe!).
+  a closing parenthesis ')',  following this direct abstract declarator.
 
 # ------------------------------------------------------------------------------
 
