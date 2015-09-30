@@ -311,6 +311,29 @@ followed with a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 332.
+##
+## direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
+## direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+## direct_abstract_declarator -> LPAREN . pointer direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+## direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+##
+
+# The first three productions above stem from the inlining in
+# direct_abstract_declarator -> LPAREN inline_abstract_declarator RPAREN.
+# The fourth one is different.
+
+An opening parenthesis '(' has been recognized.
+At this point, one of the following is expected:
+  an abstract declarator,
+    if this parenthesis is intended as a delimiter; or
+  a parameter type list,
+    if this parenthesis is intended as the beginning of a function declarator.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:

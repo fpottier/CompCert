@@ -1,4 +1,4 @@
-Terminologie à définir (et exemples à donner):
+Terminologie à passer en revue (et exemples à donner):
   abstract declarator
   alignas specifier
   array declarator    # both abstract and non-abstract, is it ok to mix the terminology?
