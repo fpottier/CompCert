@@ -1,6 +1,10 @@
 Terminologie à définir (et exemples à donner):
   abstract declarator
+  alignas specifier
+  array declarator
+  type name
   type qualifier
+  type specifier
 
 Eliminate uses of $syntaxerror.
 

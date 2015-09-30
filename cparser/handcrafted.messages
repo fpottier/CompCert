@@ -21,7 +21,7 @@ Ill-formed type name.
 At this point, one of the following is expected:
   a type qualifier, or
   an abstract declarator, or
-  a closing parenthesis.
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
@@ -54,13 +54,13 @@ At this point, one of the following is expected:
   a type qualifier, or
   a type specifier, or
   an abstract declarator, or
-  a closing parenthesis.
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 327.
+## Ends in an error in state: 329.
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -96,8 +96,43 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 Ill-formed alignas specifier.
 If the expression up to this point is complete,
 then at this point, one of the following is expected:
-  a comma, followed with an integer constant expression, or
-  a closing parenthesis.
+  a comma ',', followed with an integer constant expression, or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON 
+##
+## Ends in an error in state: 270.
+##
+## direct_abstract_declarator -> LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 36, spurious reduction of production unary_expression -> postfix_expression 
+## In state 42, spurious reduction of production cast_expression -> unary_expression 
+## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
+## In state 75, spurious reduction of production shift_expression -> additive_expression 
+## In state 55, spurious reduction of production relational_expression -> shift_expression 
+## In state 72, spurious reduction of production equality_expression -> relational_expression 
+## In state 90, spurious reduction of production and_expression -> equality_expression 
+## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
+## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
+## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
+## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
+## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
+##
+
+# We are trying to recognize an array declarator.
+# We have seen the opening bracket, (maybe) some type qualifiers,
+# and an expression, which represents the array size.
+# This expression could be incomplete (spurious reductions).
+
+Ill-formed array declarator.
+If the expression up to this point is complete,
+then at this point, a closing square bracket ']' is expected.
 
 # ------------------------------------------------------------------------------
 
