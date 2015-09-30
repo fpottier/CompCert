@@ -275,6 +275,17 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN
 ##
 #
 # Another very similar case, it seems.
+#
+translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 335.
+##
+## abstract_declarator(type_name) -> pointer direct_abstract_declarator . [ RPAREN ]
+## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+##
+# Another very similar case, it seems.
+#
 
 Up to this point, a direct abstract declarator has been recognized.
 At this point, one of the following is expected:
