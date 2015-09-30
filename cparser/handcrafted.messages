@@ -194,6 +194,12 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIP
 ##
 ## direct_abstract_declarator -> direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
+##
+## Ends in an error in state: 280.
+##
+## direct_abstract_declarator -> LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+##
 
 Ill-formed function declarator.
 At this point, a closing parenthesis ')' is expected.
