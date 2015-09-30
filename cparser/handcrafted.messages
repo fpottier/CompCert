@@ -278,6 +278,33 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME 
+##
+## Ends in an error in state: 333.
+##
+## direct_abstract_declarator -> LPAREN pointer . RPAREN [ RPAREN LPAREN LBRACK ]
+## direct_abstract_declarator -> LPAREN pointer . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+##
+
+# Both productions above stem from the inlining in
+# direct_abstract_declarator -> LPAREN inline_abstract_declarator RPAREN.
+# We can describe them by saying we expect an optional direct_abstract_declarator,
+# followed with a closing parenthesis.
+
+Up to this point, an opening parenthesis '(' and a pointer have been recognized.
+If this pointer is complete,
+then at this point,
+an optional direct abstract declarator is expected,
+followed with a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
