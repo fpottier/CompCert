@@ -54,6 +54,12 @@ translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_qualifier . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
+translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN 
+##
+## Ends in an error in state: 214.
+##
+## specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
+##
 
 Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
