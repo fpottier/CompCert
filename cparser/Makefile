@@ -19,6 +19,8 @@ all:
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) -lg 3 2>$(COMPCERT).follow
 # Re-generate the list of error messages.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
+	@ echo "Number of error states that involve spurious reductions:"
+	@ grep WARNING pre_parser.messages | wc -l
 #	sleep 2
 # Re-generate the list of error messages for the canonical automaton.
 #	$(MENHIR) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
