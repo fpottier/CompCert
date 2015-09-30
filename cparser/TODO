@@ -5,6 +5,7 @@ Terminologie à passer en revue (et exemples à donner):
   direct abstract declarator
   function declarator # both abstract and non-abstract, is it ok to mix the terminology?
   pointer
+  specifier-qualifier-list
   type name
   type qualifier
   type specifier
