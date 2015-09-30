@@ -108,3 +108,19 @@ In summary, we lack static context (we do not know whether we have read an
 abstract_declarator or a direct_abstract_declarator) and because of that,
 we do not know for sure which continuations we expect.
 
+------------------------------------------------------------------------------
+
+2015/09/30
+
+In this production:
+
+  direct_abstract_declarator:
+  | ioption(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
+
+changed ioption(direct_abstract_declarator) to option(direct_abstract_declarator).
+This was done in reaction to two error situations that looked very similar to one
+another. For some reason, this does not create a conflict. (I think it used to
+create one? Or maybe I just missed this opportunity on 2015/09/28.)
+
+612 states, 306 error states.
+
