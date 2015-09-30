@@ -41,9 +41,9 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
 ## In state 215, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> 
-## In state 331, spurious reduction of production specifier_qualifier_list_no_typedef_name -> type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
-## In state 324, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> specifier_qualifier_list_no_typedef_name 
-## In state 332, spurious reduction of production specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
+## In state 327, spurious reduction of production specifier_qualifier_list_no_typedef_name -> type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
+## In state 320, spurious reduction of production option(specifier_qualifier_list_no_typedef_name) -> specifier_qualifier_list_no_typedef_name 
+## In state 328, spurious reduction of production specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name) 
 ##
 
 # This situation is rather similar to the one above.
@@ -68,7 +68,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 333.
+## Ends in an error in state: 329.
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -115,9 +115,9 @@ then at this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 270.
+## Ends in an error in state: 273.
 ##
-## direct_abstract_declarator -> LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
@@ -153,10 +153,10 @@ then at this point, a closing bracket ']' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN 
 ##
-## Ends in an error in state: 268.
+## Ends in an error in state: 271.
 ##
-## direct_abstract_declarator -> LBRACK option(type_qualifier_list) . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
-## direct_abstract_declarator -> LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TILDE STRING_LITERAL STAR SIZEOF RESTRICT RBRACK PLUS PACKED MINUS LPAREN INC DEC CONSTANT CONST BUILTIN_VA_ARG BANG ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
 
@@ -174,12 +174,11 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 293.
+## Ends in an error in state: 289.
 ##
 ## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
-## direct_abstract_declarator -> direct_abstract_declarator . LBRACK option(type_qualifier_list) RBRACK [ RPAREN LPAREN LBRACK ]
-## direct_abstract_declarator -> direct_abstract_declarator . LBRACK option(type_qualifier_list) assignment_expression RBRACK [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
+## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
 
 # The first LPAREN in this example must be the beginning of an abstract_declarator.
@@ -226,15 +225,27 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN COMMA
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 300, spurious reduction of production abstract_declarator -> direct_abstract_declarator 
-## In state 303, spurious reduction of production option(abstract_declarator) -> abstract_declarator 
-## In state 339, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator) 
+## In state 296, spurious reduction of production abstract_declarator -> direct_abstract_declarator 
+## In state 299, spurious reduction of production option(abstract_declarator) -> abstract_declarator 
+## In state 335, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator) 
 ##
 
 Ill-formed alignas specifier.
 Up to this point, a type name has been recognized.
 If this type name is complete,
 then at this point, a closing parenthesis ')' is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
+##
+## Ends in an error in state: 278.
+##
+## direct_abstract_declarator -> direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+##
+
+Ill-formed function declarator.
+At this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 

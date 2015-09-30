@@ -1,8 +1,9 @@
 Terminologie à définir (et exemples à donner):
   abstract declarator
   alignas specifier
-  array declarator # both abstract and non-abstract?
+  array declarator    # both abstract and non-abstract, is it ok to mix the terminology?
   direct abstract declarator
+  function declarator # both abstract and non-abstract, is it ok to mix the terminology?
   type name
   type qualifier
   type specifier
