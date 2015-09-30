@@ -132,7 +132,28 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON
 
 Ill-formed array declarator.
 If the expression up to this point is complete,
-then at this point, a closing square bracket ']' is expected.
+then at this point, a closing bracket ']' is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN 
+##
+## Ends in an error in state: 268.
+##
+## direct_abstract_declarator -> LBRACK option(type_qualifier_list) . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TILDE STRING_LITERAL STAR SIZEOF RESTRICT RBRACK PLUS PACKED MINUS LPAREN INC DEC CONSTANT CONST BUILTIN_VA_ARG BANG ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+
+# We are trying to recognize an array declarator.
+# We have seen the opening bracket and (maybe) some type qualifiers.
+# We are expecting more type qualifiers, or an expression, or a closing bracket.
+
+Ill-formed array declarator.
+At this point, one of the following is expected:
+  a type qualifier, or
+  an expression, or
+  a closing bracket ']'.
 
 # ------------------------------------------------------------------------------
 
