@@ -35,6 +35,9 @@ compare:
 # We assume $(COMPCERT).messages is up-to-date.
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --compare-errors $(COMPCERT).messages --compare-errors $(MSGS)
 
+compile:
+	$(MENHIR) $(COMPCERT).mly $(FLAGS) --compile-errors $(MSGS)
+
 interpret:
 # Interpret one sentence (interactive).
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --trace --interpret
