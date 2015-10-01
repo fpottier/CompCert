@@ -628,6 +628,56 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ATTRIBUTE LPAREN LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 159.
+##
+## attribute_specifier -> ATTRIBUTE LPAREN LPAREN . gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ATTRIBUTE LPAREN LPAREN 
+##
+
+# A non-empty attribute list is expected.
+# Hence, an attribute is expected.
+# (The gcc documentation says a list of attributes can be empty, but
+# since an attribute can be empty too, this creates a conflict.)
+
+Ill-formed gcc attribute specifier.
+At this point, a gcc attribute is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 158.
+##
+## attribute_specifier -> ATTRIBUTE LPAREN . LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ATTRIBUTE LPAREN 
+##
+
+Ill-formed gcc attribute specifier.
+At this point, another opening parenthesis '(' is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE XOR_ASSIGN 
+##
+## Ends in an error in state: 157.
+##
+## attribute_specifier -> ATTRIBUTE . LPAREN LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ATTRIBUTE 
+##
+
+Ill-formed gcc attribute specifier.
+At this point, two opening parentheses '((' are expected.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
