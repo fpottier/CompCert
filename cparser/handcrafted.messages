@@ -735,6 +735,7 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 # We would like to say "if this expression is complete..." in the message.
 # But we do not know for sure whether an expression was just read; maybe
 # the last enumerator that we have recognized was of the form enumeration_constant.
+# TEMPORARY
 #
 # We omit the fact that a comma is allowed just before the closing brace.
 
