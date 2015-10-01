@@ -7,6 +7,9 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
 ##
+## The known suffix of the stack is as follows:
+## option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) 
+##
 
 # We are trying to recognize a specifier_qualifier_list.
 # This is in the context of a type_name.
@@ -36,6 +39,9 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## type_specifier_no_typedef_name 
+##
 #
 # This situation is rather similar to the one above.
 # We are also trying to recognize a type name.
@@ -54,11 +60,17 @@ translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_qualifier . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## type_qualifier 
+##
 translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 214.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
+##
+## The known suffix of the stack is as follows:
+## option(type_qualifier_list) type_specifier_no_typedef_name 
 ##
 
 Up to this point, a type name has been recognized.
@@ -76,6 +88,9 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ALIGNAS LPAREN argument_expression_list 
 ##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
@@ -123,6 +138,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON
 ##
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ##
+## The known suffix of the stack is as follows:
+## option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression 
+##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
@@ -163,6 +181,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TILDE STRING_LITERAL STAR SIZEOF RESTRICT RBRACK PLUS PACKED MINUS LPAREN INC DEC CONSTANT CONST BUILTIN_VA_ARG BANG ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
+## The known suffix of the stack is as follows:
+## option(direct_abstract_declarator) LBRACK option(type_qualifier_list) 
+##
 
 # We are trying to recognize an array declarator.
 # We have seen the opening bracket and (maybe) some type qualifiers.
@@ -182,11 +203,17 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIP
 ##
 ## direct_abstract_declarator -> direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
+## The known suffix of the stack is as follows:
+## direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) 
+##
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
 ## Ends in an error in state: 280.
 ##
 ## direct_abstract_declarator -> LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN in_context(option(parameter_type_list)) 
 ##
 
 Ill-formed function declarator.
@@ -201,6 +228,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 ## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN direct_abstract_declarator 
 ##
 #
 # The first LPAREN in this example must be the beginning of an abstract_declarator.
@@ -242,6 +272,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## direct_abstract_declarator 
+##
 #
 # This case is simplified by giving a phantom context parameter to abstract_declarator.
 # Here, we know we are in the context of a type_name, so RPAREN is allowed next.
@@ -261,6 +294,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## LPAREN pointer direct_abstract_declarator 
+##
 #
 # Another very similar case, it seems.
 #
@@ -271,6 +307,9 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN
 ## abstract_declarator(type_name) -> pointer direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+##
+## The known suffix of the stack is as follows:
+## pointer direct_abstract_declarator 
 ##
 # Another very similar case, it seems.
 #
@@ -290,6 +329,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 ## direct_abstract_declarator -> LPAREN pointer . RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN pointer . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## LPAREN pointer 
+##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
@@ -308,6 +350,9 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME
 ##
 ## abstract_declarator(type_name) -> pointer . [ RPAREN ]
 ## abstract_declarator(type_name) -> pointer . direct_abstract_declarator [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## pointer 
 ##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
@@ -337,6 +382,9 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN XOR_ASSIGN
 ## direct_abstract_declarator -> LPAREN . pointer direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN . in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
 ##
+## The known suffix of the stack is as follows:
+## LPAREN 
+##
 
 # The first three productions above stem from the inlining in
 # direct_abstract_declarator -> LPAREN inline_abstract_declarator RPAREN.
@@ -359,6 +407,9 @@ translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT SIGNED SHORT RESTRICT PACKED LONG INT FLOAT ENUM DOUBLE CONST CHAR ATTRIBUTE ALIGNAS ]
 ##
+## The known suffix of the stack is as follows:
+## option(type_qualifier_list) 
+##
 
 # We are trying to recognize a specifier-qualifier-list, and have not yet seen
 # a type specifier, which is why we know the list is not finished.
@@ -377,6 +428,9 @@ translation_unit_file: ALIGNAS LPAREN XOR_ASSIGN
 ## attribute_specifier -> ALIGNAS LPAREN . argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS LPAREN . type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
+## The known suffix of the stack is as follows:
+## ALIGNAS LPAREN 
+##
 
 # This one seems easy. We have recognized ALIGNAS LPAREN, and nothing that makes sense beyond that.
 
@@ -393,6 +447,9 @@ translation_unit_file: ALIGNAS XOR_ASSIGN
 ##
 ## attribute_specifier -> ALIGNAS . LPAREN argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS . LPAREN type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ALIGNAS 
 ##
 
 # Fingers in the nose.
