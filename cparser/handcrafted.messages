@@ -2,7 +2,7 @@
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 183.
+## Ends in an error in state: 186.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
@@ -35,7 +35,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME 
 ##
-## Ends in an error in state: 212.
+## Ends in an error in state: 215.
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -56,7 +56,7 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 #
 translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN 
 ##
-## Ends in an error in state: 213.
+## Ends in an error in state: 216.
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_qualifier . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -65,7 +65,7 @@ translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN
 ##
 translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN 
 ##
-## Ends in an error in state: 211.
+## Ends in an error in state: 214.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -84,7 +84,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 329.
+## Ends in an error in state: 332.
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -133,7 +133,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 271.
+## Ends in an error in state: 274.
 ##
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ##
@@ -174,7 +174,7 @@ then at this point, a closing bracket ']' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN 
 ##
-## Ends in an error in state: 269.
+## Ends in an error in state: 272.
 ##
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
@@ -198,7 +198,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
-## Ends in an error in state: 276.
+## Ends in an error in state: 279.
 ##
 ## direct_abstract_declarator -> direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
@@ -207,7 +207,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIP
 ##
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
-## Ends in an error in state: 278.
+## Ends in an error in state: 281.
 ##
 ## direct_abstract_declarator -> LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
@@ -222,7 +222,7 @@ At this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 287.
+## Ends in an error in state: 290.
 ##
 ## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -265,7 +265,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 #
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 337.
+## Ends in an error in state: 340.
 ##
 ## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -287,7 +287,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN
 #
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 273.
+## Ends in an error in state: 276.
 ##
 ## direct_abstract_declarator -> LPAREN pointer direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -301,7 +301,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 335.
+## Ends in an error in state: 338.
 ##
 ## abstract_declarator(type_name) -> pointer direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -323,7 +323,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME 
 ##
-## Ends in an error in state: 333.
+## Ends in an error in state: 336.
 ##
 ## direct_abstract_declarator -> LPAREN pointer . RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN pointer . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -335,7 +335,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+## In state 158, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
 ##
 #
 # Both productions above stem from the inlining in
@@ -345,7 +345,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME 
 ##
-## Ends in an error in state: 334.
+## Ends in an error in state: 337.
 ##
 ## abstract_declarator(type_name) -> pointer . [ RPAREN ]
 ## abstract_declarator(type_name) -> pointer . direct_abstract_declarator [ RPAREN ]
@@ -357,7 +357,7 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+## In state 158, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
 ##
 #
 # Very similar to the above example. The difference is that above we have seen an
@@ -374,7 +374,7 @@ followed with a closing parenthesis ')'.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 332.
+## Ends in an error in state: 335.
 ##
 ## direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -400,7 +400,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN 
 ##
-## Ends in an error in state: 181.
+## Ends in an error in state: 184.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . TYPEDEF_NAME option(type_qualifier_list) [ STAR RPAREN LPAREN LBRACK ]
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
@@ -422,7 +422,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 178.
+## Ends in an error in state: 181.
 ##
 ## attribute_specifier -> ALIGNAS LPAREN . argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS LPAREN . type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -442,7 +442,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS XOR_ASSIGN 
 ##
-## Ends in an error in state: 177.
+## Ends in an error in state: 180.
 ##
 ## attribute_specifier -> ALIGNAS . LPAREN argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS . LPAREN type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -460,7 +460,7 @@ At this point, an opening parenthesis '(' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 174.
+## Ends in an error in state: 177.
 ##
 ## gcc_attribute_list -> gcc_attribute_list COMMA . gcc_attribute [ RPAREN COMMA ]
 ##
@@ -480,7 +480,7 @@ At this point, a gcc attribute is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 172.
+## Ends in an error in state: 175.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list RPAREN . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -495,7 +495,7 @@ At this point, another closing parenthesis ')' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 171.
+## Ends in an error in state: 174.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list . RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## gcc_attribute_list -> gcc_attribute_list . COMMA gcc_attribute [ RPAREN COMMA ]
@@ -516,7 +516,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMMA VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 167.
+## Ends in an error in state: 170.
 ##
 ## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
 ## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME COMMA argument_expression_list . RPAREN [ RPAREN COMMA ]
@@ -559,7 +559,7 @@ then at this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 166.
+## Ends in an error in state: 169.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME COMMA . argument_expression_list RPAREN [ RPAREN COMMA ]
 ##
@@ -574,7 +574,7 @@ At this point, an expression is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 165.
+## Ends in an error in state: 168.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME . COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
 ##
@@ -589,7 +589,7 @@ At this point, a comma ',' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 164.
+## Ends in an error in state: 167.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN . option(argument_expression_list) RPAREN [ RPAREN COMMA ]
 ## gcc_attribute -> gcc_attribute_word LPAREN . TYPEDEF_NAME COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
@@ -608,7 +608,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 163.
+## Ends in an error in state: 166.
 ##
 ## gcc_attribute -> gcc_attribute_word . [ RPAREN COMMA ]
 ## gcc_attribute -> gcc_attribute_word . LPAREN option(argument_expression_list) RPAREN [ RPAREN COMMA ]
@@ -630,7 +630,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 159.
+## Ends in an error in state: 162.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN . gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -650,7 +650,7 @@ At this point, a gcc attribute is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 158.
+## Ends in an error in state: 161.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN . LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -665,7 +665,7 @@ At this point, another opening parenthesis '(' is expected.
 
 translation_unit_file: ATTRIBUTE XOR_ASSIGN 
 ##
-## Ends in an error in state: 157.
+## Ends in an error in state: 160.
 ##
 ## attribute_specifier -> ATTRIBUTE . LPAREN LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -680,7 +680,7 @@ At this point, two opening parentheses '((' are expected.
 
 translation_unit_file: ENUM LBRACE VAR_NAME COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 198.
+## Ends in an error in state: 201.
 ##
 ## enumerator_list -> enumerator_list COMMA . declare_varname(enumerator) [ RBRACE COMMA ]
 ## option(COMMA) -> COMMA . [ RBRACE ]
@@ -698,7 +698,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON 
 ##
-## Ends in an error in state: 197.
+## Ends in an error in state: 200.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list option(other_identifier) LBRACE enumerator_list . option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ## enumerator_list -> enumerator_list . COMMA declare_varname(enumerator) [ RBRACE COMMA ]
@@ -724,9 +724,9 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 ## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
 ## In state 133, spurious reduction of production constant_expression -> conditional_expression 
-## In state 202, spurious reduction of production enumerator -> enumeration_constant EQ constant_expression 
-## In state 199, spurious reduction of production declare_varname(enumerator) -> enumerator 
-## In state 206, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
+## In state 205, spurious reduction of production enumerator -> enumeration_constant EQ constant_expression 
+## In state 202, spurious reduction of production declare_varname(enumerator) -> enumerator 
+## In state 209, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
 ##
 #
 # The last enumerator that we have recognized may be of the form
@@ -747,7 +747,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN 
 ##
-## Ends in an error in state: 201.
+## Ends in an error in state: 204.
 ##
 ## enumerator -> enumeration_constant EQ . constant_expression [ RBRACE COMMA ]
 ##
@@ -762,7 +762,7 @@ At this point, a constant expression is expected.
 
 translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 200.
+## Ends in an error in state: 203.
 ##
 ## enumerator -> enumeration_constant . [ RBRACE COMMA ]
 ## enumerator -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
@@ -781,7 +781,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE XOR_ASSIGN 
 ##
-## Ends in an error in state: 195.
+## Ends in an error in state: 198.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list option(other_identifier) LBRACE . enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ##
@@ -796,7 +796,7 @@ At this point, an enumerator is expected.
 
 translation_unit_file: ENUM VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 207.
+## Ends in an error in state: 210.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list general_identifier . [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ## option(other_identifier) -> general_identifier . [ LBRACE ]
@@ -818,7 +818,7 @@ Maybe an opening brace '{' would be good here?
 
 translation_unit_file: ENUM XOR_ASSIGN 
 ##
-## Ends in an error in state: 193.
+## Ends in an error in state: 196.
 ##
 ## attribute_specifier_list -> attribute_specifier_list . attribute_specifier [ VAR_NAME TYPEDEF_NAME PACKED LBRACE ATTRIBUTE ALIGNAS ]
 ## enum_specifier -> ENUM attribute_specifier_list . option(other_identifier) LBRACE enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
@@ -828,7 +828,7 @@ translation_unit_file: ENUM XOR_ASSIGN
 ## ENUM attribute_specifier_list 
 ##
 
-Ill-formed enum specifier.
+Ill-formed enumeration specifier.
 At this point, one of the following is expected:
   an attribute specifier; or
   an identifier; or
@@ -838,7 +838,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: INLINE XOR_ASSIGN 
 ##
-## Ends in an error in state: 236.
+## Ends in an error in state: 239.
 ##
 ## declaration_specifiers_no_type -> function_specifier . option(declaration_specifiers_no_type) [ VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STAR SIGNED SHORT SEMICOLON RPAREN LPAREN LONG LBRACK INT FLOAT ENUM DOUBLE COMMA CHAR ]
 ##
@@ -915,7 +915,7 @@ followed with an expression or a type name.
 
 translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 342.
+## Ends in an error in state: 345.
 ##
 ## postfix_expression -> BUILTIN_VA_ARG LPAREN assignment_expression . COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
@@ -1000,7 +1000,7 @@ At this point, an expression is expected.
 
 translation_unit_file: PACKED LPAREN INC LPAREN VOID RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 348.
+## Ends in an error in state: 351.
 ##
 ## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
@@ -1056,7 +1056,7 @@ At this point, an expression is expected.
 
 translation_unit_file: PACKED LPAREN LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 339.
+## Ends in an error in state: 342.
 ##
 ## expression -> expression . COMMA assignment_expression [ RPAREN COMMA ]
 ## primary_expression -> LPAREN expression . RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
@@ -1099,9 +1099,10 @@ then at this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 150.
+## Ends in an error in state: 153.
 ##
-## initializer_list -> initializer_list . COMMA option(designation) c_initializer [ RBRACE COMMA ]
+## initializer_list -> initializer_list . COMMA option(designation) assignment_expression [ RBRACE COMMA ]
+## initializer_list -> initializer_list . COMMA option(designation) LBRACE initializer_list option(COMMA) RBRACE [ RBRACE COMMA ]
 ## postfix_expression -> LPAREN type_name RPAREN LBRACE initializer_list . option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
@@ -1125,21 +1126,15 @@ translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE VAR_NAME SEMICOLO
 ## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
 ## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 143, spurious reduction of production c_initializer -> assignment_expression 
-## In state 149, spurious reduction of production initializer_list -> option(designation) c_initializer 
+## In state 152, spurious reduction of production initializer_list -> option(designation) assignment_expression 
 ##
 
 # Let's ignore the fact that a comma can precede a closing brace.
 # Let's mention just "an initializer", omitting the optional designation that precedes it.
 
-# TEMPORARY it sounds strange to say "if this list is complete,
-# then this list can be extended". We are troubled by the fact
-# that we don't know was an expression or a brace-delimited
-# sub-initializer.
-
 Ill-formed compound literal.
-Up to this point, an initializer list has been recognized.
-If this list is complete,
+Up to this point, an initializer has been recognized.
+If this initializer is complete,
 then at this point, one of the following is expected:
   a comma ',' followed with an initializer; or 
   a closing brace '}'.

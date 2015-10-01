@@ -1,13 +1,17 @@
 Terminologie à passer en revue (et exemples à donner):
   abstract declarator
   alignas specifier
+  _Alignof
   array declarator    # both abstract and non-abstract, is it ok to mix the terminology?
   attribute specifier
+  __builtin_va_arg
+  compound literal
   direct abstract declarator
   enumeration specifier
   enumerator
   function declarator # both abstract and non-abstract, is it ok to mix the terminology?
   gcc attribute
+  initializer
   pointer
   specifier-qualifier-list
   type name
