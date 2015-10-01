@@ -116,7 +116,8 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 # We are trying to recognize an alignas specifier.
 # We have already recognized at least one argument_expression.
 # We expect either "COMMA assignment_expression" or RPAREN.
-# I suppose the assignment_expression must be an "integer constant expression".
+# But, in CompCert, only one expression is allowed as part of ALIGNAS (see Elab.ml).
+# So we say we expect RPAREN.
 
 # We must be careful: this state is reached via spurious reductions.
 # COMMA and RPAREN are not the only possible tokens at this point.
@@ -126,9 +127,7 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 Ill-formed alignas specifier.
 Up to this point, an expression has been recognized.
 If this expression is complete,
-then at this point, one of the following is expected:
-  a comma ',' and an expression, continuing this alignas specifier; or
-  a closing parenthesis ')',     completing this alignas specifier.
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -436,7 +435,7 @@ translation_unit_file: ALIGNAS LPAREN XOR_ASSIGN
 
 Ill-formed alignas specifier.
 At this point, one of the following is expected:
-  an expression, or a list of expressions; or
+  an expression; or
   a type name.
 
 # ------------------------------------------------------------------------------
