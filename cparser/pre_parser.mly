@@ -80,6 +80,10 @@ general_identifier:
 | i = TYPEDEF_NAME
     { i }
 
+%inline other_identifier:
+  i = general_identifier
+    { set_id_type i OtherId }
+
 string_literals_list:
 | STRING_LITERAL
 | string_literals_list STRING_LITERAL
@@ -124,9 +128,9 @@ postfix_expression:
     {}
 | BUILTIN_VA_ARG LPAREN assignment_expression COMMA type_name RPAREN
     {}
-| postfix_expression DOT i = general_identifier
-| postfix_expression PTR i = general_identifier
-    { set_id_type i OtherId }
+| postfix_expression DOT other_identifier
+| postfix_expression PTR other_identifier
+    {}
 | postfix_expression INC
 | postfix_expression DEC
 | LPAREN type_name RPAREN LBRACE initializer_list COMMA? RBRACE
@@ -330,9 +334,9 @@ type_specifier_no_typedef_name:
 struct_or_union_specifier:
 | struct_or_union attribute_specifier_list LBRACE struct_declaration_list RBRACE
     {}
-| struct_or_union attribute_specifier_list i = general_identifier LBRACE struct_declaration_list RBRACE
-| struct_or_union attribute_specifier_list i = general_identifier
-    { set_id_type i OtherId }
+| struct_or_union attribute_specifier_list other_identifier LBRACE struct_declaration_list RBRACE
+| struct_or_union attribute_specifier_list other_identifier
+    {}
 
 struct_or_union:
 | STRUCT
@@ -382,9 +386,9 @@ struct_declarator:
 enum_specifier:
 | ENUM attribute_specifier_list LBRACE enumerator_list COMMA? RBRACE
     {}
-| ENUM attribute_specifier_list i = general_identifier LBRACE enumerator_list COMMA? RBRACE
-| ENUM attribute_specifier_list i = general_identifier
-    { set_id_type i OtherId }
+| ENUM attribute_specifier_list other_identifier LBRACE enumerator_list COMMA? RBRACE
+| ENUM attribute_specifier_list other_identifier
+    {}
 
 enumerator_list:
 | declare_varname(enumerator)
@@ -438,8 +442,7 @@ gcc_attribute:
     { set_id_type i VarId }
 
 gcc_attribute_word:
-| i = general_identifier
-    { set_id_type i OtherId }
+| other_identifier
 | CONST
 | PACKED
     {}
@@ -543,9 +546,8 @@ designator_list:
 
 designator:
 | LBRACK constant_expression RBRACK
+| DOT other_identifier
     {}
-| DOT i = general_identifier
-    { set_id_type i OtherId }
 
 statement_finish:
 | labeled_statement(statement_finish)
@@ -568,8 +570,7 @@ statement_intern:
     {}
 
 labeled_statement(last_statement):
-| i = general_identifier COLON last_statement
-    { set_id_type i OtherId }
+| other_identifier COLON last_statement
 | CASE constant_expression COLON last_statement
 | DEFAULT COLON last_statement
     {}
@@ -611,8 +612,7 @@ iteration_statement(stmt):
     {}
 
 jump_statement:
-| GOTO i = general_identifier SEMICOLON
-    { set_id_type i OtherId }
+| GOTO other_identifier SEMICOLON
 | CONTINUE SEMICOLON
 | BREAK SEMICOLON
 | RETURN expression? SEMICOLON
@@ -650,8 +650,9 @@ asm_operand:
     {}
 
 asm_op_name:
-| /*empty*/                             {}
-| LBRACK i = general_identifier RBRACK  { set_id_type i OtherId }
+| /*empty*/
+| LBRACK other_identifier RBRACK
+    {}
 
 asm_flags:
 | string_literals_list

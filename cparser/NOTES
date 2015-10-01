@@ -149,3 +149,10 @@ not increase the number of error states.
 
 620 states, 302 error states.
 
+------------------------------------------------------------------------------
+
+2015/10/01
+
+Introduced [other_identifier] as a more elegant way of recognizing a
+[general_identifier] and calling [set_id_type].
+
