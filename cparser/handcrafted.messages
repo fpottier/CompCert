@@ -991,6 +991,7 @@ translation_unit_file: PACKED LPAREN DEC XOR_ASSIGN
 
 # TEMPORARY should we say just "Ill-formed expression"?
 # TEMPORARY should we say "a unary expression is expected"?
+# Same questions for prefix increment below.
 
 Ill-formed prefix decrement expression.
 At this point, an expression is expected.
@@ -1037,6 +1038,19 @@ At this point, one of the following is expected:
   an expression (more likely).
 
 # ------------------------------------------------------------------------------
+
+translation_unit_file: PACKED LPAREN INC XOR_ASSIGN 
+##
+## Ends in an error in state: 21.
+##
+## unary_expression -> INC . unary_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## INC 
+##
+
+Ill-formed prefix increment expression.
+At this point, an expression is expected.
 
 # Local Variables:
 # mode: shell-script
