@@ -1052,6 +1052,51 @@ translation_unit_file: PACKED LPAREN INC XOR_ASSIGN
 Ill-formed prefix increment expression.
 At this point, an expression is expected.
 
+# ------------------------------------------------------------------------------
+
+translation_unit_file: PACKED LPAREN LPAREN VAR_NAME SEMICOLON 
+##
+## Ends in an error in state: 339.
+##
+## expression -> expression . COMMA assignment_expression [ RPAREN COMMA ]
+## primary_expression -> LPAREN expression . RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN expression 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 36, spurious reduction of production unary_expression -> postfix_expression 
+## In state 42, spurious reduction of production cast_expression -> unary_expression 
+## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
+## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
+## In state 75, spurious reduction of production shift_expression -> additive_expression 
+## In state 55, spurious reduction of production relational_expression -> shift_expression 
+## In state 72, spurious reduction of production equality_expression -> relational_expression 
+## In state 90, spurious reduction of production and_expression -> equality_expression 
+## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
+## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
+## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
+## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
+## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
+## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
+## In state 107, spurious reduction of production expression -> assignment_expression 
+##
+
+# Since we are saying "if this expression is complete",
+# there seems to be no need to say that this expression
+# can be continued with a comma and another expression.
+# So, let's just say a closing parenthesis is expected.
+
+Up to this point, an opening parenthesis '('
+and an expression have been recognized.
+If this expression is complete,
+then at this point, a closing parenthesis ')' is expected.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
