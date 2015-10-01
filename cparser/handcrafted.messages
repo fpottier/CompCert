@@ -1156,6 +1156,24 @@ At this point, an initializer is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 354.
+##
+## cast_expression -> LPAREN type_name RPAREN . cast_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN type_name RPAREN 
+##
+
+Ill-formed expression.
+At this point, one of the following is expected:
+  an expression,        if this is a cast;
+  an opening brace '{', if this is a compound literal.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
