@@ -989,10 +989,32 @@ translation_unit_file: PACKED LPAREN DEC XOR_ASSIGN
 ## DEC 
 ##
 
+# TEMPORARY should we say just "Ill-formed expression"?
 # TEMPORARY should we say "a unary expression is expected"?
 
 Ill-formed prefix decrement expression.
 At this point, an expression is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: PACKED LPAREN INC LPAREN VOID RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 348.
+##
+## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN type_name RPAREN 
+##
+
+# TEMPORARY
+# Most likely, the guy does not even know about compound literals,
+# so the error took place earlier. Maybe he intended to write a
+# cast expression, and he forgot to open one more parenthesis
+# before the one we see here?
+
+Ill-formed compound literal.
+At this point, an opening brace '{' is expected.
 
 # ------------------------------------------------------------------------------
 
