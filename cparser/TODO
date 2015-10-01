@@ -2,6 +2,7 @@ Terminologie à passer en revue (et exemples à donner):
   abstract declarator
   alignas specifier
   array declarator    # both abstract and non-abstract, is it ok to mix the terminology?
+  attribute specifier
   direct abstract declarator
   function declarator # both abstract and non-abstract, is it ok to mix the terminology?
   gcc attribute

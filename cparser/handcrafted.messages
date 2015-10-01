@@ -548,11 +548,82 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMM
 # We know for sure that we are parsing a gcc attribute.
 # A (non-empty) list of expressions has been read.
 
-Ill-formed attribute specifier.
+Ill-formed gcc attribute.
 Up to this point, an expression has been recognized.
 If this expression is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with another expression; or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMMA XOR_ASSIGN 
+##
+## Ends in an error in state: 166.
+##
+## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME COMMA . argument_expression_list RPAREN [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## gcc_attribute_word LPAREN TYPEDEF_NAME COMMA 
+##
+
+Ill-formed gcc attribute.
+At this point, an expression is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 165.
+##
+## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME . COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## gcc_attribute_word LPAREN TYPEDEF_NAME 
+##
+
+Ill-formed gcc attribute.
+At this point, a comma ',' is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 164.
+##
+## gcc_attribute -> gcc_attribute_word LPAREN . option(argument_expression_list) RPAREN [ RPAREN COMMA ]
+## gcc_attribute -> gcc_attribute_word LPAREN . TYPEDEF_NAME COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## gcc_attribute_word LPAREN 
+##
+
+Ill-formed gcc attribute.
+At this point, one of the following is expected:
+  an identifier, followed by a comma ',',
+    followed with a non-empty comma-separated list of expressions; or
+  a possibly empty comma-separated list of expressions.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 163.
+##
+## gcc_attribute -> gcc_attribute_word . [ RPAREN COMMA ]
+## gcc_attribute -> gcc_attribute_word . LPAREN option(argument_expression_list) RPAREN [ RPAREN COMMA ]
+## gcc_attribute -> gcc_attribute_word . LPAREN TYPEDEF_NAME COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## gcc_attribute_word 
+##
+
+Ill-formed gcc attribute specifier.
+At this point, one of the following is expected:
+  an opening parenthesis '(',
+    followed with a list of parameters for this attribute; or
+  a comma,
+    followed with another attribute; or
   a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
