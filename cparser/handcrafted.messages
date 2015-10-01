@@ -964,6 +964,20 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG XOR_ASSIGN 
+##
+## Ends in an error in state: 25.
+##
+## postfix_expression -> BUILTIN_VA_ARG . LPAREN assignment_expression COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## BUILTIN_VA_ARG 
+##
+
+Ill-formed use of __builtin_va_arg.
+At this point, an opening parenthesis '(' is expected.
+
+# ------------------------------------------------------------------------------
 
 # Local Variables:
 # mode: shell-script
