@@ -745,6 +745,40 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN 
+##
+## Ends in an error in state: 199.
+##
+## declare_varname(enumerator) -> enumeration_constant EQ . constant_expression [ RBRACE COMMA ]
+##
+## The known suffix of the stack is as follows:
+## enumeration_constant EQ 
+##
+
+Ill-formed enumeration specifier.
+At this point, a constant expression is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 198.
+##
+## declare_varname(enumerator) -> enumeration_constant . [ RBRACE COMMA ]
+## declare_varname(enumerator) -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
+##
+## The known suffix of the stack is as follows:
+## enumeration_constant 
+##
+
+Ill-formed enumeration specifier.
+At this point, one of the following is expected:
+  an equals sign '=', followed with a constant expression; or
+  a comma ',', followed with an enumerator; or
+  a closing brace '}'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
