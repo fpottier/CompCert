@@ -728,75 +728,9 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 ## In state 198, spurious reduction of production declare_varname(enumerator) -> enumerator 
 ## In state 205, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
 ##
-
-# The last enumerator that we have recognized may be of the form
-# enumeration_constant EQ constant_expression
-# and if that is the case, maybe the constant_expression could be continued.
-# We would like to say "if this expression is complete..." in the message.
-# But we do not know for sure whether an expression was just read; maybe
-# the last enumerator that we have recognized was of the form enumeration_constant.
-
-# We omit the fact that a comma is allowed just before the closing brace.
-
-Ill-formed enumeration specifier.
-At this point, one of the following is expected:
-  a comma ',', followed with an enumerator; or
-  a closing brace '}'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN 
-##
-## Ends in an error in state: 199.
-##
-## declare_varname(enumerator) -> enumeration_constant EQ . constant_expression [ RBRACE COMMA ]
-##
-## The known suffix of the stack is as follows:
-## enumeration_constant EQ 
-##
-
-Ill-formed enumeration specifier.
-At this point, a constant expression is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 198.
-##
-## declare_varname(enumerator) -> enumeration_constant . [ RBRACE COMMA ]
-## declare_varname(enumerator) -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
-##
-## The known suffix of the stack is as follows:
-## enumeration_constant 
-##
-
-Ill-formed enumeration specifier.
-At this point, one of the following is expected:
-  an equals sign '=', followed with a constant expression; or
-  a comma ',', followed with an enumerator; or
-  a closing brace '}'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: ENUM LBRACE XOR_ASSIGN 
-##
-## Ends in an error in state: 194.
-##
-## enum_specifier -> ENUM attribute_specifier_list LBRACE . enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## ENUM attribute_specifier_list LBRACE 
-##
-
-Ill-formed enumeration specifier.
-At this point, an enumerator is expected.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: ENUM VAR_NAME LBRACE VAR_NAME EQ CONSTANT SEMICOLON 
 ##
-## Ends in an error in state: 207.
+## Ends in an error in state: 208.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list general_identifier LBRACE enumerator_list . option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ## enumerator_list -> enumerator_list . COMMA declare_varname(enumerator) [ RBRACE COMMA ]
@@ -822,11 +756,73 @@ translation_unit_file: ENUM VAR_NAME LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 ## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
 ## In state 133, spurious reduction of production constant_expression -> conditional_expression 
-## In state 200, spurious reduction of production declare_varname(enumerator) -> enumeration_constant EQ constant_expression 
-## In state 204, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
+## In state 201, spurious reduction of production enumerator -> enumeration_constant EQ constant_expression 
+## In state 198, spurious reduction of production declare_varname(enumerator) -> enumerator 
+## In state 205, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
+##
+#
+# The last enumerator that we have recognized may be of the form
+# enumeration_constant EQ constant_expression
+# and if that is the case, maybe the constant_expression could be continued.
+# We would like to say "if this expression is complete..." in the message.
+# But we do not know for sure whether an expression was just read; maybe
+# the last enumerator that we have recognized was of the form enumeration_constant.
+#
+# We omit the fact that a comma is allowed just before the closing brace.
+
+Ill-formed enumeration specifier.
+At this point, one of the following is expected:
+  a comma ',', followed with an enumerator; or
+  a closing brace '}'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN 
+##
+## Ends in an error in state: 200.
+##
+## enumerator -> enumeration_constant EQ . constant_expression [ RBRACE COMMA ]
+##
+## The known suffix of the stack is as follows:
+## enumeration_constant EQ 
 ##
 
-TODO
+Ill-formed enumeration specifier.
+At this point, a constant expression is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 199.
+##
+## enumerator -> enumeration_constant . [ RBRACE COMMA ]
+## enumerator -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
+##
+## The known suffix of the stack is as follows:
+## enumeration_constant 
+##
+
+Ill-formed enumeration specifier.
+At this point, one of the following is expected:
+  an equals sign '=', followed with a constant expression; or
+  a comma ',', followed with an enumerator; or
+  a closing brace '}'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ENUM LBRACE XOR_ASSIGN 
+##
+## Ends in an error in state: 194.
+##
+## enum_specifier -> ENUM attribute_specifier_list LBRACE . enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ENUM attribute_specifier_list LBRACE 
+##
+
+Ill-formed enumeration specifier.
+At this point, an enumerator is expected.
 
 # ------------------------------------------------------------------------------
 
