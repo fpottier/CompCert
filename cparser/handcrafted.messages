@@ -1018,6 +1018,26 @@ At this point, an opening brace '{' is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: PACKED LPAREN INC LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 22.
+##
+## postfix_expression -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## primary_expression -> LPAREN . expression RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN 
+##
+
+# TEMPORARY is it ok to say something is likely?
+
+Ill-formed expression.
+At this point, one of the following is expected:
+  a type name (if this is the beginning of a compound literal); or
+  an expression (more likely).
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
