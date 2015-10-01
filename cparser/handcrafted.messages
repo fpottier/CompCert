@@ -794,6 +794,42 @@ At this point, an enumerator is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ENUM VAR_NAME LBRACE VAR_NAME EQ CONSTANT SEMICOLON 
+##
+## Ends in an error in state: 207.
+##
+## enum_specifier -> ENUM attribute_specifier_list general_identifier LBRACE enumerator_list . option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
+## enumerator_list -> enumerator_list . COMMA declare_varname(enumerator) [ RBRACE COMMA ]
+##
+## The known suffix of the stack is as follows:
+## ENUM attribute_specifier_list general_identifier LBRACE enumerator_list 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 36, spurious reduction of production unary_expression -> postfix_expression 
+## In state 32, spurious reduction of production cast_expression -> unary_expression 
+## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
+## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
+## In state 75, spurious reduction of production shift_expression -> additive_expression 
+## In state 55, spurious reduction of production relational_expression -> shift_expression 
+## In state 72, spurious reduction of production equality_expression -> relational_expression 
+## In state 90, spurious reduction of production and_expression -> equality_expression 
+## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
+## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
+## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
+## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
+## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
+## In state 133, spurious reduction of production constant_expression -> conditional_expression 
+## In state 200, spurious reduction of production declare_varname(enumerator) -> enumeration_constant EQ constant_expression 
+## In state 204, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
+##
+
+TODO
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
