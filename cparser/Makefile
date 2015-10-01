@@ -27,8 +27,10 @@ all:
 
 update:
 # Update the auto-comments in $(MSGS).
-	mv -f $(MSGS) $(MSGS).bak
-	$(MENHIR) $(COMPCERT).mly $(FLAGS) --update-errors $(MSGS).bak > $(MSGS)
+	@ mv -f $(MSGS) $(MSGS).bak
+	@ if ! $(MENHIR) $(COMPCERT).mly $(FLAGS) --update-errors $(MSGS).bak > $(MSGS) ; then \
+	  cp $(MSGS).bak $(MSGS) ; \
+	fi
 
 compare:
 # Check $(MSGS) for completeness.
