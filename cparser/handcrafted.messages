@@ -836,6 +836,22 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: INLINE XOR_ASSIGN 
+##
+## Ends in an error in state: 236.
+##
+## declaration_specifiers_no_type -> function_specifier . option(declaration_specifiers_no_type) [ VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STAR SIGNED SHORT SEMICOLON RPAREN LPAREN LONG LBRACK INT FLOAT ENUM DOUBLE COMMA CHAR ]
+##
+## The known suffix of the stack is as follows:
+## function_specifier 
+##
+
+# TEMPORARY again, difficult to know what should come next.
+
+You got me. I am confused.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
