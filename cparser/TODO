@@ -4,6 +4,8 @@ Terminologie à passer en revue (et exemples à donner):
   array declarator    # both abstract and non-abstract, is it ok to mix the terminology?
   attribute specifier
   direct abstract declarator
+  enumeration specifier
+  enumerator
   function declarator # both abstract and non-abstract, is it ok to mix the terminology?
   gcc attribute
   pointer

@@ -678,6 +678,24 @@ At this point, two opening parentheses '((' are expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ENUM LBRACE VAR_NAME COMMA XOR_ASSIGN 
+##
+## Ends in an error in state: 197.
+##
+## enumerator_list -> enumerator_list COMMA . declare_varname(enumerator) [ RBRACE COMMA ]
+## option(COMMA) -> COMMA . [ RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## enumerator_list COMMA 
+##
+
+Ill-formed enumeration specifier.
+At this point, one of the following is expected:
+  an enumerator; or
+  a closing brace '}'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
