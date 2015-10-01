@@ -154,5 +154,16 @@ not increase the number of error states.
 2015/10/01
 
 Introduced [other_identifier] as a more elegant way of recognizing a
-[general_identifier] and calling [set_id_type].
+[general_identifier] and calling [set_id_type i OtherId].
+
+------------------------------------------------------------------------------
+
+2015/10/01
+
+Factorized two productions in [struct_or_union_specifier], and similarly in
+[enum_specifier], by using [other_identifier?]. Technically, I believe that
+this implies [set_id_type i OtherId] is called earlier, but it does not make
+a difference anyway.
+
+615 states, 299 error states.
 

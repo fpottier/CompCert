@@ -332,9 +332,7 @@ type_specifier_no_typedef_name:
     {}
 
 struct_or_union_specifier:
-| struct_or_union attribute_specifier_list LBRACE struct_declaration_list RBRACE
-    {}
-| struct_or_union attribute_specifier_list other_identifier LBRACE struct_declaration_list RBRACE
+| struct_or_union attribute_specifier_list other_identifier? LBRACE struct_declaration_list RBRACE
 | struct_or_union attribute_specifier_list other_identifier
     {}
 
@@ -384,9 +382,7 @@ struct_declarator:
     {}
 
 enum_specifier:
-| ENUM attribute_specifier_list LBRACE enumerator_list COMMA? RBRACE
-    {}
-| ENUM attribute_specifier_list other_identifier LBRACE enumerator_list COMMA? RBRACE
+| ENUM attribute_specifier_list other_identifier? LBRACE enumerator_list COMMA? RBRACE
 | ENUM attribute_specifier_list other_identifier
     {}
 
