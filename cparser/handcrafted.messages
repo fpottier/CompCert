@@ -458,6 +458,53 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ATTRIBUTE LPAREN LPAREN COMMA XOR_ASSIGN 
+##
+## Ends in an error in state: 174.
+##
+## gcc_attribute_list -> gcc_attribute_list COMMA . gcc_attribute [ RPAREN COMMA ]
+##
+
+# We are expecting a gcc_attribute. This symbol is nullable, so
+# RPAREN and COMMA are permitted too, but we can ignore this
+# possibility in the error message (why would someone use an
+# empty attribute?).
+
+Ill-formed attribute specifier.
+At this point, a gcc attribute is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 172.
+##
+## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list RPAREN . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+##
+
+Ill-formed attribute specifier.
+At this point, another closing parenthesis ')' is expected.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 171.
+##
+## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list . RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+## gcc_attribute_list -> gcc_attribute_list . COMMA gcc_attribute [ RPAREN COMMA ]
+##
+
+# We have a seen a (non-empty) attribute list, so we expect either
+# a COMMA or a closing LPAREN LPAREN.
+
+Ill-formed attribute specifier.
+At this point, one of the following is expected:
+  a comma ',', followed with a gcc attribute; or
+  two closing parentheses '))'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
