@@ -167,3 +167,15 @@ a difference anyway.
 
 615 states, 299 error states.
 
+------------------------------------------------------------------------------
+
+2015/10/01
+
+Parameterized all of the expressions with a phantom context, which can take 9
+different values. This takes us closer to the canonical automaton. It is an
+attempt to be able to say what should come after an expression, if it is
+complete.
+
+1484 states, 638 error states.
+
+

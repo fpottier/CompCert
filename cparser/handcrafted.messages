@@ -2,7 +2,7 @@
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 183.
+## Ends in an error in state: 150.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
@@ -35,7 +35,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME 
 ##
-## Ends in an error in state: 212.
+## Ends in an error in state: 708.
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -56,7 +56,7 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 #
 translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN 
 ##
-## Ends in an error in state: 213.
+## Ends in an error in state: 709.
 ##
 ## specifier_qualifier_list_no_typedef_name(type_name) -> type_qualifier . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -65,7 +65,7 @@ translation_unit_file: ALIGNAS LPAREN VOID VOLATILE XOR_ASSIGN
 ##
 translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN 
 ##
-## Ends in an error in state: 211.
+## Ends in an error in state: 707.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name . option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
 ##
@@ -84,80 +84,46 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 329.
+## Ends in an error in state: 217.
 ##
-## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
-## attribute_specifier -> ALIGNAS LPAREN argument_expression_list . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . LBRACK expression(RBRACK) RBRACK [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . LPAREN option(argument_expression_list) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . DOT general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . PTR general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . INC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . DEC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> postfix_expression(argument_expression_list) . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
-## ALIGNAS LPAREN argument_expression_list 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 113, spurious reduction of production argument_expression_list -> assignment_expression 
+## postfix_expression(argument_expression_list) 
 ##
 
-# We are trying to recognize an alignas specifier.
-# We have already recognized at least one argument_expression.
-# We expect either "COMMA assignment_expression" or RPAREN.
-# But, in CompCert, only one expression is allowed as part of ALIGNAS (see Elab.ml).
-# So we say we expect RPAREN.
+# This is an expression in the context of argument_expression_list.
+# If this expression is complete, then COMMA and RPAREN are the only
+# permitted continuations.
 
-# We must be careful: this state is reached via spurious reductions.
-# COMMA and RPAREN are not the only possible tokens at this point.
-# Any token that allows continuing the expression that has been read already
-# would be OK too.
-
-Ill-formed alignas specifier.
 Up to this point, an expression has been recognized.
 If this expression is complete,
-then at this point, a closing parenthesis ')' is expected.
+then at this point, one of the following is expected:
+  a comma ',', followed with another expression; or
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 271.
+## Ends in an error in state: 376.
 ##
-## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . LBRACK expression(RBRACK) RBRACK [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . LPAREN option(argument_expression_list) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . DOT general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . PTR general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . INC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RBRACK) -> postfix_expression(RBRACK) . DEC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(RBRACK) -> postfix_expression(RBRACK) . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT RBRACK QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
-## option(direct_abstract_declarator) LBRACK option(type_qualifier_list) assignment_expression 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
+## postfix_expression(RBRACK) 
 ##
 
 # We are trying to recognize an array declarator.
@@ -174,10 +140,10 @@ then at this point, a closing bracket ']' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LBRACK XOR_ASSIGN 
 ##
-## Ends in an error in state: 269.
+## Ends in an error in state: 765.
 ##
 ## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . RBRACK [ RPAREN LPAREN LBRACK COMMA ]
-## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . assignment_expression RBRACK [ RPAREN LPAREN LBRACK COMMA ]
+## direct_abstract_declarator -> option(direct_abstract_declarator) LBRACK option(type_qualifier_list) . assignment_expression(RBRACK) RBRACK [ RPAREN LPAREN LBRACK COMMA ]
 ## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TILDE STRING_LITERAL STAR SIZEOF RESTRICT RBRACK PLUS PACKED MINUS LPAREN INC DEC CONSTANT CONST BUILTIN_VA_ARG BANG ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
 ## The known suffix of the stack is as follows:
@@ -198,7 +164,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
-## Ends in an error in state: 276.
+## Ends in an error in state: 772.
 ##
 ## direct_abstract_declarator -> direct_abstract_declarator LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
@@ -207,7 +173,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN VOID COMMA ELLIP
 ##
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN VOID COMMA ELLIPSIS XOR_ASSIGN 
 ##
-## Ends in an error in state: 278.
+## Ends in an error in state: 774.
 ##
 ## direct_abstract_declarator -> LPAREN in_context(option(parameter_type_list)) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
@@ -222,7 +188,7 @@ At this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 287.
+## Ends in an error in state: 783.
 ##
 ## direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -265,7 +231,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 #
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 337.
+## Ends in an error in state: 947.
 ##
 ## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -287,7 +253,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN
 #
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 273.
+## Ends in an error in state: 769.
 ##
 ## direct_abstract_declarator -> LPAREN pointer direct_abstract_declarator . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -301,7 +267,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 335.
+## Ends in an error in state: 945.
 ##
 ## abstract_declarator(type_name) -> pointer direct_abstract_declarator . [ RPAREN ]
 ## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
@@ -323,7 +289,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME 
 ##
-## Ends in an error in state: 333.
+## Ends in an error in state: 943.
 ##
 ## direct_abstract_declarator -> LPAREN pointer . RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN pointer . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -335,7 +301,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+## In state 125, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
 ##
 #
 # Both productions above stem from the inlining in
@@ -345,7 +311,7 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME 
 ##
-## Ends in an error in state: 334.
+## Ends in an error in state: 944.
 ##
 ## abstract_declarator(type_name) -> pointer . [ RPAREN ]
 ## abstract_declarator(type_name) -> pointer . direct_abstract_declarator [ RPAREN ]
@@ -357,7 +323,7 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 155, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
+## In state 125, spurious reduction of production pointer -> STAR option(type_qualifier_list) 
 ##
 #
 # Very similar to the above example. The difference is that above we have seen an
@@ -374,7 +340,7 @@ followed with a closing parenthesis ')'.
 
 translation_unit_file: ALIGNAS LPAREN VOID LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 332.
+## Ends in an error in state: 942.
 ##
 ## direct_abstract_declarator -> LPAREN . pointer RPAREN [ RPAREN LPAREN LBRACK ]
 ## direct_abstract_declarator -> LPAREN . direct_abstract_declarator RPAREN [ RPAREN LPAREN LBRACK ]
@@ -400,7 +366,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN 
 ##
-## Ends in an error in state: 181.
+## Ends in an error in state: 148.
 ##
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . TYPEDEF_NAME option(type_qualifier_list) [ STAR RPAREN LPAREN LBRACK ]
 ## specifier_qualifier_list(type_name) -> option(type_qualifier_list) . type_specifier_no_typedef_name option(specifier_qualifier_list_no_typedef_name(type_name)) [ STAR RPAREN LPAREN LBRACK ]
@@ -422,7 +388,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 178.
+## Ends in an error in state: 152.
 ##
 ## attribute_specifier -> ALIGNAS LPAREN . argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS LPAREN . type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -442,7 +408,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ALIGNAS XOR_ASSIGN 
 ##
-## Ends in an error in state: 177.
+## Ends in an error in state: 151.
 ##
 ## attribute_specifier -> ALIGNAS . LPAREN argument_expression_list RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## attribute_specifier -> ALIGNAS . LPAREN type_name RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
@@ -460,7 +426,7 @@ At this point, an opening parenthesis '(' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 174.
+## Ends in an error in state: 938.
 ##
 ## gcc_attribute_list -> gcc_attribute_list COMMA . gcc_attribute [ RPAREN COMMA ]
 ##
@@ -480,7 +446,7 @@ At this point, a gcc attribute is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 172.
+## Ends in an error in state: 936.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list RPAREN . RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -495,7 +461,7 @@ At this point, another closing parenthesis ')' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 171.
+## Ends in an error in state: 935.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN gcc_attribute_list . RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ## gcc_attribute_list -> gcc_attribute_list . COMMA gcc_attribute [ RPAREN COMMA ]
@@ -514,52 +480,9 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMMA VAR_NAME SEMICOLON 
-##
-## Ends in an error in state: 167.
-##
-## argument_expression_list -> argument_expression_list . COMMA assignment_expression [ RPAREN COMMA ]
-## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME COMMA argument_expression_list . RPAREN [ RPAREN COMMA ]
-##
-## The known suffix of the stack is as follows:
-## gcc_attribute_word LPAREN TYPEDEF_NAME COMMA argument_expression_list 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 113, spurious reduction of production argument_expression_list -> assignment_expression 
-##
-
-# We know for sure that we are parsing a gcc attribute.
-# A (non-empty) list of expressions has been read.
-
-Ill-formed gcc attribute.
-Up to this point, an expression has been recognized.
-If this expression is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with another expression; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 166.
+## Ends in an error in state: 136.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME COMMA . argument_expression_list RPAREN [ RPAREN COMMA ]
 ##
@@ -574,7 +497,7 @@ At this point, an expression is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 165.
+## Ends in an error in state: 135.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN TYPEDEF_NAME . COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
 ##
@@ -589,7 +512,7 @@ At this point, a comma ',' is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 164.
+## Ends in an error in state: 134.
 ##
 ## gcc_attribute -> gcc_attribute_word LPAREN . option(argument_expression_list) RPAREN [ RPAREN COMMA ]
 ## gcc_attribute -> gcc_attribute_word LPAREN . TYPEDEF_NAME COMMA argument_expression_list RPAREN [ RPAREN COMMA ]
@@ -608,7 +531,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 163.
+## Ends in an error in state: 133.
 ##
 ## gcc_attribute -> gcc_attribute_word . [ RPAREN COMMA ]
 ## gcc_attribute -> gcc_attribute_word . LPAREN option(argument_expression_list) RPAREN [ RPAREN COMMA ]
@@ -630,7 +553,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ATTRIBUTE LPAREN LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 159.
+## Ends in an error in state: 129.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN LPAREN . gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -650,7 +573,7 @@ At this point, a gcc attribute is expected.
 
 translation_unit_file: ATTRIBUTE LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 158.
+## Ends in an error in state: 128.
 ##
 ## attribute_specifier -> ATTRIBUTE LPAREN . LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -665,7 +588,7 @@ At this point, another opening parenthesis '(' is expected.
 
 translation_unit_file: ATTRIBUTE XOR_ASSIGN 
 ##
-## Ends in an error in state: 157.
+## Ends in an error in state: 127.
 ##
 ## attribute_specifier -> ATTRIBUTE . LPAREN LPAREN gcc_attribute_list RPAREN RPAREN [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER RBRACK PLUS PACKED MINUS LPAREN LONG LBRACK LBRACE INT INLINE INC FLOAT EXTERN EQ ENUM DOUBLE DEC CONSTANT CONST COMMA COLON CHAR BUILTIN_VA_ARG BANG AUTO ATTRIBUTE AND ALIGNOF ALIGNAS ]
 ##
@@ -680,7 +603,7 @@ At this point, two opening parentheses '((' are expected.
 
 translation_unit_file: ENUM LBRACE VAR_NAME COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 198.
+## Ends in an error in state: 589.
 ##
 ## enumerator_list -> enumerator_list COMMA . declare_varname(enumerator) [ RBRACE COMMA ]
 ## option(COMMA) -> COMMA . [ RBRACE ]
@@ -698,35 +621,18 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON 
 ##
-## Ends in an error in state: 197.
+## Ends in an error in state: 627.
 ##
-## enum_specifier -> ENUM attribute_specifier_list option(other_identifier) LBRACE enumerator_list . option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
-## enumerator_list -> enumerator_list . COMMA declare_varname(enumerator) [ RBRACE COMMA ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . LBRACK expression(RBRACK) RBRACK [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . LPAREN option(argument_expression_list) RPAREN [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . DOT general_identifier [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . PTR general_identifier [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . INC [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## postfix_expression(enumerator) -> postfix_expression(enumerator) . DEC [ STAR SLASH RIGHT RBRACE QUESTION PTR PLUS PERCENT NEQ MINUS LT LPAREN LEQ LEFT LBRACK INC HAT GT GEQ EQEQ DOT DEC COMMA BARBAR BAR ANDAND AND ]
+## unary_expression(enumerator) -> postfix_expression(enumerator) . [ STAR SLASH RIGHT RBRACE QUESTION PLUS PERCENT NEQ MINUS LT LEQ LEFT HAT GT GEQ EQEQ COMMA BARBAR BAR ANDAND AND ]
 ##
 ## The known suffix of the stack is as follows:
-## ENUM attribute_specifier_list option(other_identifier) LBRACE enumerator_list 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 32, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 133, spurious reduction of production constant_expression -> conditional_expression 
-## In state 202, spurious reduction of production enumerator -> enumeration_constant EQ constant_expression 
-## In state 199, spurious reduction of production declare_varname(enumerator) -> enumerator 
-## In state 206, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
+## postfix_expression(enumerator) 
 ##
 #
 # The last enumerator that we have recognized may be of the form
@@ -748,9 +654,9 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN 
 ##
-## Ends in an error in state: 201.
+## Ends in an error in state: 592.
 ##
-## enumerator -> enumeration_constant EQ . constant_expression [ RBRACE COMMA ]
+## enumerator -> enumeration_constant EQ . constant_expression(enumerator) [ RBRACE COMMA ]
 ##
 ## The known suffix of the stack is as follows:
 ## enumeration_constant EQ 
@@ -763,10 +669,10 @@ At this point, a constant expression is expected.
 
 translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 200.
+## Ends in an error in state: 591.
 ##
 ## enumerator -> enumeration_constant . [ RBRACE COMMA ]
-## enumerator -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
+## enumerator -> enumeration_constant . EQ constant_expression(enumerator) [ RBRACE COMMA ]
 ##
 ## The known suffix of the stack is as follows:
 ## enumeration_constant 
@@ -782,7 +688,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: ENUM LBRACE XOR_ASSIGN 
 ##
-## Ends in an error in state: 195.
+## Ends in an error in state: 586.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list option(other_identifier) LBRACE . enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ##
@@ -797,7 +703,7 @@ At this point, an enumerator is expected.
 
 translation_unit_file: ENUM VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 207.
+## Ends in an error in state: 703.
 ##
 ## enum_specifier -> ENUM attribute_specifier_list general_identifier . [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
 ## option(other_identifier) -> general_identifier . [ LBRACE ]
@@ -819,7 +725,7 @@ Maybe an opening brace '{' would be good here?
 
 translation_unit_file: ENUM XOR_ASSIGN 
 ##
-## Ends in an error in state: 193.
+## Ends in an error in state: 584.
 ##
 ## attribute_specifier_list -> attribute_specifier_list . attribute_specifier [ VAR_NAME TYPEDEF_NAME PACKED LBRACE ATTRIBUTE ALIGNAS ]
 ## enum_specifier -> ENUM attribute_specifier_list . option(other_identifier) LBRACE enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
@@ -839,7 +745,7 @@ At this point, one of the following is expected:
 
 translation_unit_file: INLINE XOR_ASSIGN 
 ##
-## Ends in an error in state: 236.
+## Ends in an error in state: 732.
 ##
 ## declaration_specifiers_no_type -> function_specifier . option(declaration_specifiers_no_type) [ VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STAR SIGNED SHORT SEMICOLON RPAREN LPAREN LONG LBRACK INT FLOAT ENUM DOUBLE COMMA CHAR ]
 ##
@@ -855,20 +761,20 @@ You got me. I am confused.
 
 translation_unit_file: PACKED LPAREN ALIGNOF LPAREN VOID RPAREN WHILE 
 ##
-## Ends in an error in state: 127.
+## Ends in an error in state: 210.
 ##
-## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## unary_expression -> ALIGNOF LPAREN type_name RPAREN . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> ALIGNOF LPAREN type_name RPAREN . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## ALIGNOF LPAREN type_name RPAREN 
 ##
 translation_unit_file: PACKED LPAREN SIZEOF LPAREN VOID RPAREN WHILE 
 ##
-## Ends in an error in state: 357.
+## Ends in an error in state: 1110.
 ##
-## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## unary_expression -> SIZEOF LPAREN type_name RPAREN . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> SIZEOF LPAREN type_name RPAREN . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## SIZEOF LPAREN type_name RPAREN 
@@ -888,11 +794,11 @@ Hmm.
 
 translation_unit_file: PACKED LPAREN ALIGNOF LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 30.
+## Ends in an error in state: 208.
 ##
-## postfix_expression -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## primary_expression -> LPAREN . expression RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## unary_expression -> ALIGNOF LPAREN . type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## primary_expression(argument_expression_list) -> LPAREN . expression(RPAREN) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> ALIGNOF LPAREN . type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## ALIGNOF LPAREN 
@@ -910,10 +816,10 @@ At this point, one of the following is expected:
 
 translation_unit_file: PACKED LPAREN ALIGNOF XOR_ASSIGN 
 ##
-## Ends in an error in state: 29.
+## Ends in an error in state: 207.
 ##
-## unary_expression -> ALIGNOF . unary_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## unary_expression -> ALIGNOF . LPAREN type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> ALIGNOF . unary_expression(argument_expression_list) [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> ALIGNOF . LPAREN type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## ALIGNOF 
@@ -929,31 +835,18 @@ followed with an expression or a type name.
 
 translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 342.
+## Ends in an error in state: 203.
 ##
-## postfix_expression -> BUILTIN_VA_ARG LPAREN assignment_expression . COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . LBRACK expression(RBRACK) RBRACK [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . LPAREN option(argument_expression_list) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . DOT general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . PTR general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . INC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(COMMA) -> postfix_expression(COMMA) . DEC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(COMMA) -> postfix_expression(COMMA) . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
-## BUILTIN_VA_ARG LPAREN assignment_expression 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
+## postfix_expression(COMMA) 
 ##
 
 Ill-formed use of __builtin_va_arg.
@@ -965,9 +858,9 @@ then at this point, a comma ',' is expected.
 
 translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 26.
+## Ends in an error in state: 156.
 ##
-## postfix_expression -> BUILTIN_VA_ARG LPAREN . assignment_expression COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> BUILTIN_VA_ARG LPAREN . assignment_expression(COMMA) COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## BUILTIN_VA_ARG LPAREN 
@@ -980,9 +873,9 @@ At this point, an expression is expected.
 
 translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG XOR_ASSIGN 
 ##
-## Ends in an error in state: 25.
+## Ends in an error in state: 155.
 ##
-## postfix_expression -> BUILTIN_VA_ARG . LPAREN assignment_expression COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> BUILTIN_VA_ARG . LPAREN assignment_expression(COMMA) COMMA type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## BUILTIN_VA_ARG 
@@ -995,9 +888,9 @@ At this point, an opening parenthesis '(' is expected.
 
 translation_unit_file: PACKED LPAREN DEC XOR_ASSIGN 
 ##
-## Ends in an error in state: 23.
+## Ends in an error in state: 153.
 ##
-## unary_expression -> DEC . unary_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> DEC . unary_expression(argument_expression_list) [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## DEC 
@@ -1014,9 +907,9 @@ At this point, an expression is expected.
 
 translation_unit_file: PACKED LPAREN INC LPAREN VOID RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 348.
+## Ends in an error in state: 140.
 ##
-## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN type_name RPAREN 
@@ -1035,10 +928,10 @@ At this point, an opening brace '{' is expected.
 
 translation_unit_file: PACKED LPAREN INC LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 22.
+## Ends in an error in state: 138.
 ##
-## postfix_expression -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## primary_expression -> LPAREN . expression RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## primary_expression(argument_expression_list) -> LPAREN . expression(RPAREN) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN 
@@ -1055,9 +948,9 @@ At this point, one of the following is expected:
 
 translation_unit_file: PACKED LPAREN INC XOR_ASSIGN 
 ##
-## Ends in an error in state: 21.
+## Ends in an error in state: 137.
 ##
-## unary_expression -> INC . unary_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(argument_expression_list) -> INC . unary_expression(argument_expression_list) [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## INC 
@@ -1070,33 +963,18 @@ At this point, an expression is expected.
 
 translation_unit_file: PACKED LPAREN LPAREN VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 339.
+## Ends in an error in state: 42.
 ##
-## expression -> expression . COMMA assignment_expression [ RPAREN COMMA ]
-## primary_expression -> LPAREN expression . RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . LBRACK expression(RBRACK) RBRACK [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . LPAREN option(argument_expression_list) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . DOT general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . PTR general_identifier [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . INC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(RPAREN) -> postfix_expression(RPAREN) . DEC [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression(RPAREN) -> postfix_expression(RPAREN) . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
-## LPAREN expression 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 107, spurious reduction of production expression -> assignment_expression 
+## postfix_expression(RPAREN) 
 ##
 
 # Since we are saying "if this expression is complete",
@@ -1113,10 +991,10 @@ then at this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE VAR_NAME SEMICOLON 
 ##
-## Ends in an error in state: 150.
+## Ends in an error in state: 142.
 ##
 ## initializer_list -> initializer_list . COMMA option(designation) c_initializer [ RBRACE COMMA ]
-## postfix_expression -> LPAREN type_name RPAREN LBRACE initializer_list . option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN LBRACE initializer_list . option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN type_name RPAREN LBRACE initializer_list 
@@ -1125,22 +1003,22 @@ translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE VAR_NAME SEMICOLO
 ## This implies that, although the LR(1) items shown above provide an
 ## accurate view of the past (what has been recognized so far), they
 ## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 36, spurious reduction of production unary_expression -> postfix_expression 
-## In state 42, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 57, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 75, spurious reduction of production shift_expression -> additive_expression 
-## In state 55, spurious reduction of production relational_expression -> shift_expression 
-## In state 72, spurious reduction of production equality_expression -> relational_expression 
-## In state 90, spurious reduction of production and_expression -> equality_expression 
-## In state 98, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 99, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 100, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 84, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 82, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 103, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 143, spurious reduction of production c_initializer -> assignment_expression 
-## In state 149, spurious reduction of production initializer_list -> option(designation) c_initializer 
+## In state 967, spurious reduction of production unary_expression(c_initializer) -> postfix_expression(c_initializer) 
+## In state 989, spurious reduction of production cast_expression(c_initializer) -> unary_expression(c_initializer) 
+## In state 1000, spurious reduction of production multiplicative_expression(c_initializer) -> cast_expression(c_initializer) 
+## In state 993, spurious reduction of production additive_expression(c_initializer) -> multiplicative_expression(c_initializer) 
+## In state 1011, spurious reduction of production shift_expression(c_initializer) -> additive_expression(c_initializer) 
+## In state 991, spurious reduction of production relational_expression(c_initializer) -> shift_expression(c_initializer) 
+## In state 1008, spurious reduction of production equality_expression(c_initializer) -> relational_expression(c_initializer) 
+## In state 1028, spurious reduction of production and_expression(c_initializer) -> equality_expression(c_initializer) 
+## In state 1036, spurious reduction of production exclusive_or_expression(c_initializer) -> and_expression(c_initializer) 
+## In state 1037, spurious reduction of production inclusive_or_expression(c_initializer) -> exclusive_or_expression(c_initializer) 
+## In state 1038, spurious reduction of production logical_and_expression(c_initializer) -> inclusive_or_expression(c_initializer) 
+## In state 1022, spurious reduction of production logical_or_expression(c_initializer) -> logical_and_expression(c_initializer) 
+## In state 1018, spurious reduction of production conditional_expression(c_initializer) -> logical_or_expression(c_initializer) 
+## In state 1042, spurious reduction of production assignment_expression(c_initializer) -> conditional_expression(c_initializer) 
+## In state 1045, spurious reduction of production c_initializer -> assignment_expression(c_initializer) 
+## In state 1049, spurious reduction of production initializer_list -> option(designation) c_initializer 
 ##
 
 # Let's ignore the fact that a comma can precede a closing brace.
@@ -1157,9 +1035,9 @@ then at this point, one of the following is expected:
 
 translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE XOR_ASSIGN 
 ##
-## Ends in an error in state: 128.
+## Ends in an error in state: 141.
 ##
-## postfix_expression -> LPAREN type_name RPAREN LBRACE . initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN LBRACE . initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN type_name RPAREN LBRACE 
@@ -1172,10 +1050,10 @@ At this point, an initializer is expected.
 
 translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 351.
+## Ends in an error in state: 1071.
 ##
-## cast_expression -> LPAREN type_name RPAREN . cast_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## postfix_expression -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## cast_expression(argument_expression_list) -> LPAREN type_name RPAREN . cast_expression(argument_expression_list) [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN type_name RPAREN . LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN type_name RPAREN 
@@ -1190,11 +1068,11 @@ At this point, one of the following is expected:
 
 translation_unit_file: PACKED LPAREN LPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 20.
+## Ends in an error in state: 48.
 ##
-## cast_expression -> LPAREN . type_name RPAREN cast_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## postfix_expression -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-## primary_expression -> LPAREN . expression RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## cast_expression(argument_expression_list) -> LPAREN . type_name RPAREN cast_expression(argument_expression_list) [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## postfix_expression(argument_expression_list) -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## primary_expression(argument_expression_list) -> LPAREN . expression(RPAREN) RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH RPAREN RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
 ##
 ## The known suffix of the stack is as follows:
 ## LPAREN 

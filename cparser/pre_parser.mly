@@ -113,42 +113,42 @@ declare_typename(nt):
 
 (* Actual grammar *)
 
-primary_expression:
+primary_expression(context):
 | i = VAR_NAME
     { set_id_type i VarId }
 | CONSTANT
 | string_literals_list
-| LPAREN expression RPAREN
+| LPAREN expression(RPAREN) RPAREN
     {}
 
-postfix_expression:
-| primary_expression
-| postfix_expression LBRACK expression RBRACK
-| postfix_expression LPAREN argument_expression_list? RPAREN
+postfix_expression(context):
+| primary_expression(context)
+| postfix_expression(context) LBRACK expression(RBRACK) RBRACK
+| postfix_expression(context) LPAREN argument_expression_list? RPAREN
     {}
-| BUILTIN_VA_ARG LPAREN assignment_expression COMMA type_name RPAREN
+| BUILTIN_VA_ARG LPAREN assignment_expression(COMMA) COMMA type_name RPAREN
     {}
-| postfix_expression DOT other_identifier
-| postfix_expression PTR other_identifier
+| postfix_expression(context) DOT other_identifier
+| postfix_expression(context) PTR other_identifier
     {}
-| postfix_expression INC
-| postfix_expression DEC
+| postfix_expression(context) INC
+| postfix_expression(context) DEC
 | LPAREN type_name RPAREN LBRACE initializer_list COMMA? RBRACE
     {}
 
 argument_expression_list:
-| assignment_expression
-| argument_expression_list COMMA assignment_expression
+| assignment_expression(argument_expression_list)
+| argument_expression_list COMMA assignment_expression(argument_expression_list)
     {}
 
-unary_expression:
-| postfix_expression
-| INC unary_expression
-| DEC unary_expression
-| unary_operator cast_expression
-| SIZEOF unary_expression
+unary_expression(context):
+| postfix_expression(context)
+| INC unary_expression(context)
+| DEC unary_expression(context)
+| unary_operator cast_expression(context)
+| SIZEOF unary_expression(context)
 | SIZEOF LPAREN type_name RPAREN
-| ALIGNOF unary_expression
+| ALIGNOF unary_expression(context)
 | ALIGNOF LPAREN type_name RPAREN
     {}
 
@@ -161,77 +161,77 @@ unary_operator:
 | BANG
     {}
 
-cast_expression:
-| unary_expression
-| LPAREN type_name RPAREN cast_expression
+cast_expression(context):
+| unary_expression(context)
+| LPAREN type_name RPAREN cast_expression(context)
     {}
 
-multiplicative_expression:
-| cast_expression
-| multiplicative_expression STAR cast_expression
-| multiplicative_expression SLASH cast_expression
-| multiplicative_expression PERCENT cast_expression
+multiplicative_expression(context):
+| cast_expression(context)
+| multiplicative_expression(context) STAR cast_expression(context)
+| multiplicative_expression(context) SLASH cast_expression(context)
+| multiplicative_expression(context) PERCENT cast_expression(context)
     {}
 
-additive_expression:
-| multiplicative_expression
-| additive_expression PLUS multiplicative_expression
-| additive_expression MINUS multiplicative_expression
+additive_expression(context):
+| multiplicative_expression(context)
+| additive_expression(context) PLUS multiplicative_expression(context)
+| additive_expression(context) MINUS multiplicative_expression(context)
     {}
 
-shift_expression:
-| additive_expression
-| shift_expression LEFT additive_expression
-| shift_expression RIGHT additive_expression
+shift_expression(context):
+| additive_expression(context)
+| shift_expression(context) LEFT additive_expression(context)
+| shift_expression(context) RIGHT additive_expression(context)
     {}
 
-relational_expression:
-| shift_expression
-| relational_expression LT shift_expression
-| relational_expression GT shift_expression
-| relational_expression LEQ shift_expression
-| relational_expression GEQ shift_expression
+relational_expression(context):
+| shift_expression(context)
+| relational_expression(context) LT shift_expression(context)
+| relational_expression(context) GT shift_expression(context)
+| relational_expression(context) LEQ shift_expression(context)
+| relational_expression(context) GEQ shift_expression(context)
     {}
 
-equality_expression:
-| relational_expression
-| equality_expression EQEQ relational_expression
-| equality_expression NEQ relational_expression
+equality_expression(context):
+| relational_expression(context)
+| equality_expression(context) EQEQ relational_expression(context)
+| equality_expression(context) NEQ relational_expression(context)
     {}
 
-and_expression:
-| equality_expression
-| and_expression AND equality_expression
+and_expression(context):
+| equality_expression(context)
+| and_expression(context) AND equality_expression(context)
     {}
 
-exclusive_or_expression:
-| and_expression
-| exclusive_or_expression HAT and_expression
+exclusive_or_expression(context):
+| and_expression(context)
+| exclusive_or_expression(context) HAT and_expression(context)
     {}
 
-inclusive_or_expression:
-| exclusive_or_expression
-| inclusive_or_expression BAR exclusive_or_expression
+inclusive_or_expression(context):
+| exclusive_or_expression(context)
+| inclusive_or_expression(context) BAR exclusive_or_expression(context)
     {}
 
-logical_and_expression:
-| inclusive_or_expression
-| logical_and_expression ANDAND inclusive_or_expression
+logical_and_expression(context):
+| inclusive_or_expression(context)
+| logical_and_expression(context) ANDAND inclusive_or_expression(context)
     {}
 
-logical_or_expression:
-| logical_and_expression
-| logical_or_expression BARBAR logical_and_expression
+logical_or_expression(context):
+| logical_and_expression(context)
+| logical_or_expression(context) BARBAR logical_and_expression(context)
     {}
 
-conditional_expression:
-| logical_or_expression
-| logical_or_expression QUESTION expression COLON conditional_expression
+conditional_expression(context):
+| logical_or_expression(context)
+| logical_or_expression(context) QUESTION expression(COLON) COLON conditional_expression(context)
     {}
 
-assignment_expression:
-| conditional_expression
-| unary_expression assignment_operator assignment_expression
+assignment_expression(context):
+| conditional_expression(context)
+| unary_expression(context) assignment_operator assignment_expression(context)
     {}
 
 assignment_operator:
@@ -248,13 +248,13 @@ assignment_operator:
 | OR_ASSIGN
     {}
 
-expression:
-| assignment_expression
-| expression COMMA assignment_expression
+expression(context):
+| assignment_expression(context)
+| expression(context) COMMA assignment_expression(context)
     {}
 
-constant_expression:
-| conditional_expression
+constant_expression(context):
+| conditional_expression(context)
     {}
 
 declaration:
@@ -378,7 +378,7 @@ struct_declarator_list:
 
 struct_declarator:
 | declarator
-| declarator? COLON constant_expression
+| declarator? COLON constant_expression(struct_declarator)
     {}
 
 enum_specifier:
@@ -393,7 +393,7 @@ enumerator_list:
 
 enumerator:
 | i = enumeration_constant
-| i = enumeration_constant EQ constant_expression
+| i = enumeration_constant EQ constant_expression(enumerator)
     { i }
 
 enumeration_constant:
@@ -455,7 +455,7 @@ direct_declarator:
 | i = general_identifier
     { set_id_type i VarId; (i, None) }
 | LPAREN x = declarator RPAREN
-| x = direct_declarator LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
+| x = direct_declarator LBRACK type_qualifier_list? ioption(assignment_expression(RBRACK)) RBRACK
     /* Using ioption above, even though option would work,
        because knowing whether the size has been read allows
        us to give better syntax error messages. -fpottier */
@@ -515,7 +515,7 @@ abstract_declarator(context):
 
 direct_abstract_declarator:
 | LPAREN inline_abstract_declarator RPAREN
-| option(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression) RBRACK
+| option(direct_abstract_declarator) LBRACK type_qualifier_list? ioption(assignment_expression(RBRACK)) RBRACK
     /* Using ioption above, even though option would work,
        because knowing whether the size has been read allows
        us to give better syntax error messages. -fpottier */
@@ -523,7 +523,7 @@ direct_abstract_declarator:
     {}
 
 c_initializer:
-| assignment_expression
+| assignment_expression(c_initializer)
 | LBRACE initializer_list COMMA? RBRACE
     {}
 
@@ -541,7 +541,7 @@ designator_list:
     {}
 
 designator:
-| LBRACK constant_expression RBRACK
+| LBRACK constant_expression(RBRACK) RBRACK
 | DOT other_identifier
     {}
 
@@ -567,7 +567,7 @@ statement_intern:
 
 labeled_statement(last_statement):
 | other_identifier COLON last_statement
-| CASE constant_expression COLON last_statement
+| CASE constant_expression(COLON) COLON last_statement
 | DEFAULT COLON last_statement
     {}
 
@@ -586,32 +586,32 @@ block_item:
     {}
 
 expression_statement:
-| expression? SEMICOLON
+| expression(SEMICOLON)? SEMICOLON
     {}
 
 selection_statement_finish:
-| IF LPAREN expression RPAREN statement_finish
-| IF LPAREN expression RPAREN statement_intern ELSE statement_finish
-| SWITCH LPAREN expression RPAREN statement_finish
+| IF LPAREN expression(RPAREN) RPAREN statement_finish
+| IF LPAREN expression(RPAREN) RPAREN statement_intern ELSE statement_finish
+| SWITCH LPAREN expression(RPAREN) RPAREN statement_finish
     {}
 
 selection_statement_intern:
-| IF LPAREN expression RPAREN statement_intern ELSE statement_intern
-| SWITCH LPAREN expression RPAREN statement_intern
+| IF LPAREN expression(RPAREN) RPAREN statement_intern ELSE statement_intern
+| SWITCH LPAREN expression(RPAREN) RPAREN statement_intern
     {}
 
 iteration_statement(stmt):
-| WHILE LPAREN expression RPAREN stmt
-| DO statement_finish WHILE LPAREN expression RPAREN SEMICOLON
-| FOR LPAREN expression? SEMICOLON expression? SEMICOLON expression? RPAREN stmt
-| FOR LPAREN push_context declaration expression? SEMICOLON expression? RPAREN stmt pop_context
+| WHILE LPAREN expression(RPAREN) RPAREN stmt
+| DO statement_finish WHILE LPAREN expression(RPAREN) RPAREN SEMICOLON
+| FOR LPAREN expression(SEMICOLON)? SEMICOLON expression(SEMICOLON)? SEMICOLON expression(RPAREN)? RPAREN stmt
+| FOR LPAREN push_context declaration expression(SEMICOLON)? SEMICOLON expression(RPAREN)? RPAREN stmt pop_context
     {}
 
 jump_statement:
 | GOTO other_identifier SEMICOLON
 | CONTINUE SEMICOLON
 | BREAK SEMICOLON
-| RETURN expression? SEMICOLON
+| RETURN expression(SEMICOLON)? SEMICOLON
     {}
 
 asm_statement:
@@ -642,7 +642,7 @@ asm_operands_ne:
     {}
 
 asm_operand:
-| asm_op_name string_literals_list LPAREN expression RPAREN
+| asm_op_name string_literals_list LPAREN expression(RPAREN) RPAREN
     {}
 
 asm_op_name:
