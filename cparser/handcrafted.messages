@@ -894,6 +894,26 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: PACKED LPAREN ALIGNOF XOR_ASSIGN 
+##
+## Ends in an error in state: 29.
+##
+## unary_expression -> ALIGNOF . unary_expression [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression -> ALIGNOF . LPAREN type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## ALIGNOF 
+##
+
+# Let's not reveal that alignof can be used without parentheses.
+
+Ill-formed use of _Alignof.
+At this point, an opening parenthesis '(' is expected,
+followed with an expression or a type name.
+
+# ------------------------------------------------------------------------------
+
+
 # Local Variables:
 # mode: shell-script
 # End:
