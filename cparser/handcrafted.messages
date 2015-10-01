@@ -816,6 +816,26 @@ Maybe an opening brace '{' would be good here?
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ENUM XOR_ASSIGN 
+##
+## Ends in an error in state: 193.
+##
+## attribute_specifier_list -> attribute_specifier_list . attribute_specifier [ VAR_NAME TYPEDEF_NAME PACKED LBRACE ATTRIBUTE ALIGNAS ]
+## enum_specifier -> ENUM attribute_specifier_list . option(other_identifier) LBRACE enumerator_list option(COMMA) RBRACE [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
+## enum_specifier -> ENUM attribute_specifier_list . general_identifier [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## ENUM attribute_specifier_list 
+##
+
+Ill-formed enum specifier.
+At this point, one of the following is expected:
+  an attribute specifier; or
+  an identifier; or
+  an opening brace '{'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
