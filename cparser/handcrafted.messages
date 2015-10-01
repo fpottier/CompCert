@@ -870,6 +870,30 @@ translation_unit_file: PACKED LPAREN ALIGNOF LPAREN VOID RPAREN WHILE
 
 Hmm.
 
+# ------------------------------------------------------------------------------
+
+translation_unit_file: PACKED LPAREN ALIGNOF LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 30.
+##
+## postfix_expression -> LPAREN . type_name RPAREN LBRACE initializer_list option(COMMA) RBRACE [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## primary_expression -> LPAREN . expression RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+## unary_expression -> ALIGNOF LPAREN . type_name RPAREN [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RPAREN RIGHT_ASSIGN RIGHT RBRACK RBRACE QUESTION PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LEQ LEFT_ASSIGN LEFT HAT GT GEQ EQEQ EQ DIV_ASSIGN COMMA COLON BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
+##
+## The known suffix of the stack is as follows:
+## ALIGNOF LPAREN 
+##
+
+# Tricky because we do not know whether we are looking at a compound literal,
+# an ordinary parenthesized expression, or an alignof expression!
+# Fortunately, it is easy to say what is expected next.
+
+At this point, one of the following is expected:
+  an expression; or
+  a type name.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:

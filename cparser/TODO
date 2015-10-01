@@ -16,5 +16,8 @@ Terminologie à passer en revue (et exemples à donner):
 
 Eliminate uses of $syntaxerror.
 
-Demander à Xavier pourquoi alignof et sizeof acceptent une expression
-sans parenthèses.
+Demander à Xavier pourquoi alignof et sizeof acceptent une unary_expression
+sans parenthèses. Restreindre à primary_expression serait déjà plus
+raisonnable. Mais bon.
+
+
