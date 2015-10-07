@@ -459,7 +459,7 @@ translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN
 # We are trying to recognize a specifier-qualifier-list, and have not yet seen
 # a type specifier, which is why we know the list is not finished.
 
-Ill-formed specifier-qualifier-list.
+Ill-formed type name.
 At this point, one of the following is expected:
   a type qualifier; or
   a type specifier.
