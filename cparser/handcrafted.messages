@@ -2345,15 +2345,34 @@ translation_unit_file: VOID VAR_NAME LPAREN VOLATILE VOID XOR_ASSIGN
 ## declaration_specifiers_no_type type_specifier_no_typedef_name 
 ##
 
-# TEMPORARY same as above, it seems, minus the 'typedef'.
-# oh, and with a larger lookahead set.
-# incomplete list.
+# Analogous to the above two messages, except this time, we are in the
+# context of a parameter declaration (as opposed to a declaration or
+# function definition). This rules out 'typedef' and 'inline', for real,
+# I think. Also, this changes the continuation.
 
-Ill-formed ??.
+# We have seen a type specifier,
+# and possibly some declaration_specifiers_no_type.
+# We expect:
+# possibly more declaration_specifiers_no_type?,
+#   which means a list of:
+#     storage class specifiers,
+#     type qualifiers.
+
+# If this declaration_specifiers(parameter_declaration) is complete,
+# then we expect:
+#   declarator
+#   abstract_declarator
+#   or neither, which means that the parameter_declaration is over,
+#   which means we expect COMMA or RPAREN.
+
+Ill-formed parameter declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  ??.
+  a declarator; or
+  an abstract declarator; or
+  a comma ',', followed with a parameter declaration; or
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
