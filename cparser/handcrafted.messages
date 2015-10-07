@@ -2317,15 +2317,6 @@ translation_unit_file: VOID VAR_NAME LPAREN TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## TYPEDEF_NAME 
 ##
-translation_unit_file: VOID VAR_NAME LPAREN VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 238.
-##
-## declaration_specifiers(parameter_declaration) -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## type_specifier_no_typedef_name 
-##
 translation_unit_file: VOID VAR_NAME LPAREN VOLATILE TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 256.
@@ -2335,17 +2326,8 @@ translation_unit_file: VOID VAR_NAME LPAREN VOLATILE TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers_no_type TYPEDEF_NAME 
 ##
-translation_unit_file: VOID VAR_NAME LPAREN VOLATILE VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 258.
-##
-## declaration_specifiers(parameter_declaration) -> declaration_specifiers_no_type type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifiers_no_type type_specifier_no_typedef_name 
-##
 
-# Analogous to the above two messages, except this time, we are in the
+# Analogous to the above two situations, except this time, we are in the
 # context of a parameter declaration (as opposed to a declaration or
 # function definition). This rules out 'typedef' and 'inline', for real,
 # I think. Also, this changes the continuation.
@@ -2369,6 +2351,41 @@ Ill-formed parameter declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
+  a declarator; or
+  an abstract declarator; or
+  a comma ',', followed with a parameter declaration; or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: VOID VAR_NAME LPAREN VOID XOR_ASSIGN 
+##
+## Ends in an error in state: 238.
+##
+## declaration_specifiers(parameter_declaration) -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
+##
+## The known suffix of the stack is as follows:
+## type_specifier_no_typedef_name 
+##
+translation_unit_file: VOID VAR_NAME LPAREN VOLATILE VOID XOR_ASSIGN 
+##
+## Ends in an error in state: 258.
+##
+## declaration_specifiers(parameter_declaration) -> declaration_specifiers_no_type type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_no_type type_specifier_no_typedef_name 
+##
+
+# This situation is analogous to the previous one (above),
+# except we have seen a primitive type specifier (not a TYPEDEF_NAME),
+# so another primitive type specifier is OK.
+
+Ill-formed parameter declaration.
+At this point, one of the following is expected:
+  a storage class specifier; or
+  a type qualifier; or
+  a type specifier; or
   a declarator; or
   an abstract declarator; or
   a comma ',', followed with a parameter declaration; or
