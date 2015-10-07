@@ -2202,6 +2202,45 @@ translation_unit_file: VOLATILE TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers_no_type TYPEDEF_NAME 
 ##
+
+# We have seen a type specifier,
+# and possibly some declaration_specifiers_no_type.
+# We expect:
+# possibly more declaration_specifiers_no_type?,
+#   which means a list of:
+#     storage class specifiers,
+#     type qualifiers,
+#     function specifiers,
+# possibly followed with a TYPEDEF keyword.
+
+# Let's NOT mention the possibility of placing TYPEDEF somewhere in the middle.
+# This means we pretend to be definitely in a declaration_specifiers(declaration).
+# In other words, we are in the beginning of a declaration of function definition
+# (we do not know which, yet).
+
+# Let's also ignore the possibility of writing INLINE *after* the result type,
+# which sounds awkward.
+
+# If this declaration_specifiers(declaration) is complete,
+# then we expect:
+#   init_declarator_list? SEMICOLON          if this is a declaration;
+#   ioption(pointer) x=direct_declarator     if this is a function definition.
+#                                            (followed with a function body)
+
+Ill-formed declaration or function definition.
+At this point, one of the following is expected:
+  a storage class specifier; or
+  a type qualifier; or
+  a comma-separated list of init declarators,
+  followed with a semicolon ';',
+    if this is a declaration; or
+  a possibly empty list of pointers,
+  followed with a direct declarator,
+  followed with a function body,
+    if this is a function definition.
+
+# ------------------------------------------------------------------------------
+
 translation_unit_file: VOLATILE VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 535.
@@ -2249,26 +2288,23 @@ translation_unit_file: VOLATILE VOID VOLATILE LBRACK
 ## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
 ##
 
-# We have seen a type specifier, and possibly some declaration_specifiers_no_type.
-# We expect:
-# possibly more declaration_specifiers_no_type?,
-#   which means a list of:
-#     storage class specifiers,
-#     type qualifiers,
-#     function specifiers (i.e., INLINE, but I suspect this is illegal here).
-# possibly followed with a TYPEDEF keyword.
+# This situation is analogous to the previous one (above),
+# except we have seen a primitive type specifier (not a TYPEDEF_NAME),
+# so another primitive type specifier is OK.
 
-Ill-formed ??.
+Ill-formed declaration or function definition.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  ??; or
-  a 'typedef' keyword.
-
-# TEMPORARY incomplete list!
-# If the declaration_specifiers_no_type? is finished,
-# then the declaration_specifiers is finished too,
-# so it can be followed with... what? lack of context.
+  a type specifier; or
+  a comma-separated list of init declarators,
+  followed with a semicolon ';',
+    if this is a declaration; or
+  a possibly empty list of pointers,
+  followed with a direct declarator,
+  followed with a function body,
+    if this is a function definition.
+Ill-formed declaration or function definition.
 
 # ------------------------------------------------------------------------------
 
