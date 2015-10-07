@@ -2530,6 +2530,16 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE FOR LPAREN TYPEDEF_NAME XOR_ASSI
 ## The known suffix of the stack is as follows:
 ## TYPEDEF_NAME 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 529.
+##
+## declaration_specifiers(declaration(block_item)) -> declaration_specifiers_no_type TYPEDEF_NAME . option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type TYPEDEF_NAME . option(declaration_specifiers_no_type) TYPEDEF option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_no_type TYPEDEF_NAME 
+##
 
 # This is analogous to the error sentence TYPEDEF_NAME VOLATILE LONG,
 # except we are inside a block, instead of at the top level, so we
