@@ -3267,6 +3267,16 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE ASM LPAREN STRING_LITERAL XOR_AS
 ## The known suffix of the stack is as follows:
 ## ASM asm_attributes LPAREN string_literals_list 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO ASM LPAREN STRING_LITERAL XOR_ASSIGN 
+##
+## Ends in an error in state: 459.
+##
+## asm_statement(close_context) -> ASM asm_attributes LPAREN string_literals_list . asm_arguments RPAREN close_context SEMICOLON [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM ELSE DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+## string_literals_list -> string_literals_list . STRING_LITERAL [ STRING_LITERAL RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## ASM asm_attributes LPAREN string_literals_list 
+##
 
 # Expecting either one more string literal, or COLON, or RPAREN.
 
