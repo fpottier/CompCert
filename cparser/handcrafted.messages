@@ -4330,6 +4330,15 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE SWITCH XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## SWITCH open_context 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO SWITCH XOR_ASSIGN 
+##
+## Ends in an error in state: 390.
+##
+## selection_statement_finish(nop) -> SWITCH . LPAREN expression RPAREN statement_finish_close [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## SWITCH 
+##
 
 Ill-formed 'switch' statement.
 At this point, an opening parenthesis '(' is expected.
