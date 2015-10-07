@@ -2241,6 +2241,16 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: VOID XOR_ASSIGN 
+##
+## Ends in an error in state: 369.
+##
+## declaration_specifiers(declaration(external_declaration)) -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## type_specifier_no_typedef_name 
+##
 translation_unit_file: VOLATILE VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 676.
@@ -5095,7 +5105,7 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE TYPEDEF_NAME XOR_ASSIGN
 ## TYPEDEF_NAME 
 ##
 
-# We see a type name "foo" at the beginning of a block_item, it seems. (How do I know this? TEMPORARY)
+# We see a type name "foo" at the beginning of a block_item, it seems.
 # This could be the beginning of a declaration, "foo x".
 # In that case, we expect a possibly-empty list declaration_specifiers_no_type?,
 # which means a list of:
@@ -5103,9 +5113,9 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE TYPEDEF_NAME XOR_ASSIGN
 #   type qualifiers,
 #   function specifiers (i.e., INLINE, but I suspect this is illegal here).
 # After this list, we expect init_declarator_list? SEMICOLON.
-# The second form, where this could be a typedef, is exotic; ignore it.
-# This could also be a label, in which case we expect a colon.
-#   This case sounds slightly unlikely, too.
+# The second form, where this could be a typedef, is very exotic; ignore it.
+# This could also be a labeled statement, in which case we expect a colon.
+#   This case sounds rather unlikely. Let's omit it.
 
 A type identifier has been recognized.
 Assuming this is the beginning of a declaration,
@@ -5113,24 +5123,6 @@ at this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
   a list of init declarators, followed with a semicolon ';'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 369.
-##
-## declaration_specifiers(declaration(external_declaration)) -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## type_specifier_no_typedef_name 
-##
-
-# Similar to the one above? but without general_identifier -> TYPEDEF_NAME . [ COLON ]
-# TEMPORARY lacking context
-
-Hmm.
 
 # ------------------------------------------------------------------------------
 
