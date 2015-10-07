@@ -2415,10 +2415,20 @@ translation_unit_file: VOLATILE VAR_NAME
 ## In state 236, spurious reduction of production declaration_specifiers_no_type -> type_qualifier option(declaration_specifiers_no_type) 
 ##
 
-# TEMPORARY maybe hide the possibility of a 'typedef' keyword when not in head position
-# TEMPORARY what is the context?
-# TEMPORARY share this message with other states?
-# TEMPORARY find out where function_specifier (INLINE) is legal
+# We have seen some specifiers or qualifiers. We have probably seen at least
+# one of them, otherwise we would be "at the top level" of the file or of a
+# block, and the error would be signaled in another state, I think.
+
+# This could be the beginning of a declaration or function definition.
+
+# It could in theory be the beginning of a type definition, but only
+# if the TYPEDEF keyword is not in front, which sounds awkward, so
+# let's ignore that.
+
+# Again, we ignore the possibility of INLINE when not in front, as it
+# is awkward.
+
+# TEMPORARY unfinished
 
 At this point, one of the following is expected:
   a storage class specifier; or
