@@ -890,28 +890,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INLINE XOR_ASSIGN 
-##
-## Ends in an error in state: 374.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) declaration_specifier_no_type . [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) declaration_specifier_no_type 
-##
-translation_unit_file: VOLATILE XOR_ASSIGN 
-##
-## Ends in an error in state: 374.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) declaration_specifier_no_type . [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) declaration_specifier_no_type 
-##
 translation_unit_file: VOID INLINE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 249.
@@ -1886,32 +1864,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: STATIC XOR_ASSIGN 
-##
-## Ends in an error in state: 374.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) declaration_specifier_no_type . TYPEDEF_NAME list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) declaration_specifier_no_type . [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) declaration_specifier_no_type 
-##
-
-# We expect:
-#   more declaration specifiers;
-#   a type specifier;
-#   the typedef keyword;
-#   a variable name, an abstract declarator; (from parameter_declaration)
-#   an optional pointer, a direct declarator; (from function_definition_begin)
-#   an init_declarator_list or a SEMICOLON; (from declaration)
-
-# TEMPORARY really confusing lack of context
-
-Hmm.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: TYPEDEF TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 367.
@@ -1941,34 +1893,6 @@ translation_unit_file: VOLATILE TYPEDEF_NAME TYPEDEF XOR_ASSIGN
 ##
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
-##
-translation_unit_file: VOLATILE TYPEDEF TYPEDEF_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 367.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) TYPEDEF_NAME list(declaration_specifier_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VAR_NAME TYPEDEF_NAME STATIC STAR SEMICOLON RESTRICT REGISTER PACKED LPAREN INLINE EXTERN CONST AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) TYPEDEF_NAME list(declaration_specifier_no_type) 
-##
-translation_unit_file: VOLATILE TYPEDEF VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 368.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) type_specifier_no_typedef_name 
-##
-translation_unit_file: VOLATILE VOID TYPEDEF XOR_ASSIGN 
-##
-## Ends in an error in state: 372.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) TYPEDEF . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) TYPEDEF 
 ##
 
 # We have begun a type definition (a.k.a. declaration_specifiers_typedef).
@@ -2053,7 +1977,7 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID TYPEDEF AUTO TYPEDEF
 # which means a list of:
 #   storage class specifiers,
 #   type qualifiers,
-#   function specifiers (i.e., INLINE, but I suspect this is illegal here).
+#   function specifiers (i.e., INLINE, but I suspect this is illegal here). # TEMPORARY check
 #   type_specifier_no_typedef_name (e.g., VOID, etc.).
 # After this type definition,
 # we expect typedef_declarator_list? SEMICOLON.
@@ -2072,17 +1996,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: TYPEDEF VOLATILE VAR_NAME 
-##
-## Ends in an error in state: 365.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
-##
 translation_unit_file: TYPEDEF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 365.
@@ -2094,29 +2007,6 @@ translation_unit_file: TYPEDEF XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
 ##
-translation_unit_file: VOLATILE TYPEDEF XOR_ASSIGN 
-##
-## Ends in an error in state: 365.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
-##
-translation_unit_file: VOLATILE TYPEDEF VOLATILE VAR_NAME 
-##
-## Ends in an error in state: 365.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . TYPEDEF_NAME list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) . type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
-##
-
 
 # We have seen the TYPEDEF keyword, and possibly some declaration_specifiers_no_type.
 # We expect:
@@ -2165,28 +2055,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: TYPEDEF_NAME VOLATILE LONG 
-##
-## Ends in an error in state: 2.
-##
-## declaration_specifiers(declaration(external_declaration)) -> TYPEDEF_NAME list(declaration_specifier_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> TYPEDEF_NAME list(declaration_specifier_no_type) . TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VAR_NAME TYPEDEF_NAME TYPEDEF STATIC STAR SEMICOLON RESTRICT REGISTER PACKED LPAREN INLINE EXTERN CONST AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## TYPEDEF_NAME list(declaration_specifier_no_type) 
-##
-translation_unit_file: VOLATILE TYPEDEF_NAME VOLATILE LONG 
-##
-## Ends in an error in state: 376.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) . TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VAR_NAME TYPEDEF_NAME TYPEDEF STATIC STAR SEMICOLON RESTRICT REGISTER PACKED LPAREN INLINE EXTERN CONST AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) 
-##
 translation_unit_file: TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 2.
@@ -2258,35 +2126,7 @@ translation_unit_file: VOID XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
 ##
-translation_unit_file: VOLATILE VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 370.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
-##
 translation_unit_file: VOID VOLATILE LBRACK 
-##
-## Ends in an error in state: 371.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> 
-## In state 253, spurious reduction of production declaration_specifiers_no_typedef_name -> type_qualifier option(declaration_specifiers_no_typedef_name) 
-## In state 252, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
-##
-translation_unit_file: VOLATILE VOID VOLATILE LBRACK 
 ##
 ## Ends in an error in state: 371.
 ##
@@ -2385,15 +2225,6 @@ translation_unit_file: VOID VAR_NAME LPAREN VOID XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
 ##
-translation_unit_file: VOID VAR_NAME LPAREN VOLATILE VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 244.
-##
-## declaration_specifiers(parameter_declaration) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
-##
 
 # This situation is analogous to the previous one (above),
 # except we have seen a primitive type specifier (not a TYPEDEF_NAME),
@@ -2481,29 +2312,7 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE TYPEDEF_NAME VOLATILE LONG
 ## The known suffix of the stack is as follows:
 ## TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE FOR LPAREN TYPEDEF_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 404.
-##
-## declaration_specifiers(declaration(block_item)) -> TYPEDEF_NAME list(declaration_specifier_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> TYPEDEF_NAME list(declaration_specifier_no_type) . TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VAR_NAME TYPEDEF_NAME TYPEDEF STATIC STAR SEMICOLON RESTRICT REGISTER PACKED LPAREN INLINE EXTERN CONST AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## TYPEDEF_NAME list(declaration_specifier_no_type) 
-##
 translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 437.
-##
-## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) . TYPEDEF list(declaration_specifier_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_type) -> list(declaration_specifier_no_type) . declaration_specifier_no_type [ VOLATILE VAR_NAME TYPEDEF_NAME TYPEDEF STATIC STAR SEMICOLON RESTRICT REGISTER PACKED LPAREN INLINE EXTERN CONST AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE TYPEDEF_NAME VOLATILE LONG 
 ##
 ## Ends in an error in state: 437.
 ##
@@ -2549,34 +2358,6 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID XOR_ASSIGN
 ## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
 ##
 translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID VOLATILE LBRACK 
-##
-## Ends in an error in state: 434.
-##
-## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> 
-## In state 253, spurious reduction of production declaration_specifiers_no_typedef_name -> type_qualifier option(declaration_specifiers_no_typedef_name) 
-## In state 252, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 433.
-##
-## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE VOID VOLATILE LBRACK 
 ##
 ## Ends in an error in state: 434.
 ##
