@@ -2221,7 +2221,7 @@ translation_unit_file: VOLATILE TYPEDEF_NAME XOR_ASSIGN
 # Let's also ignore the possibility of writing INLINE *after* the result type,
 # which sounds awkward.
 
-# If this declaration_specifiers(declaration) is complete,
+# If this declaration_specifiers is complete,
 # then we expect:
 #   init_declarator_list? SEMICOLON          if this is a declaration;
 #   ioption(pointer) x=direct_declarator     if this is a function definition.
@@ -2416,8 +2416,8 @@ translation_unit_file: VOLATILE VAR_NAME
 ##
 
 # We have seen some specifiers or qualifiers. We have probably seen at least
-# one of them, otherwise we would be "at the top level" of the file or of a
-# block, and the error would be signaled in another state, I think.
+# one of them, otherwise we would be at the top level of the file, and the
+# error would be signaled in another state, I think.
 
 # This could be the beginning of a declaration or function definition.
 
@@ -2428,13 +2428,15 @@ translation_unit_file: VOLATILE VAR_NAME
 # Again, we ignore the possibility of INLINE when not in front, as it
 # is awkward.
 
-# TEMPORARY unfinished
+# We have not yet seen a type specifier, so we must see it, regardless
+# of whether this is a declaration or function definition.
 
+
+Ill-formed declaration or function definition.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a type specifier; or
-  a 'typedef' keyword.
+  a type specifier.
 
 # ------------------------------------------------------------------------------
 
