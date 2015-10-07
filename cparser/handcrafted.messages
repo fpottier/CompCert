@@ -3752,6 +3752,15 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN DO SEM
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE LPAREN 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 505.
+##
+## iteration_statement(nop,statement_finish_close) -> DO open_context statement_finish_close WHILE LPAREN . expression RPAREN close_context SEMICOLON [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## DO open_context statement_finish_close WHILE LPAREN 
+##
 
 Ill-formed 'do' ... 'while' statement.
 At this point, an expression is expected.
