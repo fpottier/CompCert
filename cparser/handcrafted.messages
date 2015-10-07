@@ -3658,6 +3658,15 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN TYPEDE
 ## The known suffix of the stack is as follows:
 ## general_identifier 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VAR_NAME COLON TYPEDEF_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 646.
+##
+## labeled_statement(statement_finish_noclose) -> general_identifier . COLON statement_finish_noclose [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## general_identifier 
+##
 translation_unit_file: VOID TYPEDEF_NAME LBRACE DO DEFAULT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 441.
