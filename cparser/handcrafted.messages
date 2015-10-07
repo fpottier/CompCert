@@ -27,9 +27,9 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 
 Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
-  a type qualifier,          continuing this type name; or
-  an abstract declarator,    continuing this type name; or
-  a closing parenthesis ')', following this type name.
+  a type qualifier; or
+  an abstract declarator; or
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
@@ -75,10 +75,10 @@ translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN
 
 Up to this point, a type name has been recognized.
 At this point, one of the following is expected:
-  a type qualifier,          continuing this type name; or
-  a type specifier,          continuing this type name; or
-  an abstract declarator,    continuing this type name; or
-  a closing parenthesis ')', following this type name.
+  a type qualifier; or
+  a type specifier; or
+  an abstract declarator; or
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
@@ -461,8 +461,8 @@ translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN
 
 Ill-formed specifier-qualifier-list.
 At this point, one of the following is expected:
-  a type qualifier, continuing this specifier-qualifier-list; or
-  a type specifier, continuing this specifier-qualifier-list.
+  a type qualifier; or
+  a type specifier.
 
 # ------------------------------------------------------------------------------
 
@@ -2875,9 +2875,9 @@ translation_unit_file: VOID TYPEDEF VAR_NAME XOR_ASSIGN
 Up to this point, a direct declarator has been recognized.
 At this point, one of the following is expected:
   an attribute specifier;     or
-  a opening bracket '[',      continuing this direct declarator; or
-  an opening parenthesis '(', continuing this direct declarator; or
-  ???,                        following this direct declarator.
+  a opening bracket '['; or
+  an opening parenthesis '('; or
+  ???.
 
 # ------------------------------------------------------------------------------
 
