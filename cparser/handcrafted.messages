@@ -2461,8 +2461,40 @@ translation_unit_file: VOLATILE VAR_NAME
 # We have not yet seen a type specifier, so we must see it, regardless
 # of whether this is a declaration or function definition.
 
-
 Ill-formed declaration or function definition.
+At this point, one of the following is expected:
+  a storage class specifier; or
+  a type qualifier; or
+  a type specifier.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE VAR_NAME 
+##
+## Ends in an error in state: 528.
+##
+## declaration_specifiers(declaration(block_item)) -> declaration_specifiers_no_type . TYPEDEF_NAME option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers(declaration(block_item)) -> declaration_specifiers_no_type . type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type . TYPEDEF option(declaration_specifiers_no_type) TYPEDEF_NAME option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type . TYPEDEF_NAME option(declaration_specifiers_no_type) TYPEDEF option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type . TYPEDEF option(declaration_specifiers_no_type) type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type . type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_no_type 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 230, spurious reduction of production option(declaration_specifiers_no_type) -> 
+## In state 236, spurious reduction of production declaration_specifiers_no_type -> type_qualifier option(declaration_specifiers_no_type) 
+##
+
+# Identical to the previous one, except we are not at the top level,
+# so we know this cannot be the beginning of a function definition.
+
+Ill-formed declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
