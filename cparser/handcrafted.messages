@@ -775,18 +775,25 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 ## In state 203, spurious reduction of production enumerator_list -> declare_varname(enumerator) 
 ##
 #
-# The last enumerator that we have recognized may be of the form
-# enumeration_constant EQ constant_expression
-# and if that is the case, maybe the constant_expression could be continued.
-# We would like to say "if this expression is complete..." in the message.
-# But we do not know for sure whether an expression was just read; maybe
-# the last enumerator that we have recognized was of the form enumeration_constant.
-# TEMPORARY
+# At first sight, it seems that the last enumerator that we have recognized
+# could be of the form either "enumeration_constant" or
+# "enumeration_constant EQ constant_expression".
+#
+# However, a moment's thought reveals that it cannot be of the first form,
+# otherwise the syntax error would have been detected in this state:
+#   enumerator -> enumeration_constant . [ RBRACE COMMA ]
+#   enumerator -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
+# To see this, try the sentence ENUM LBRACE VAR_NAME XOR_ASSIGN.
+#
+# So, the last enumerator must be of the second form, which means it is safe
+# for us to say "an expression has just been recognized".
 #
 # We omit the fact that a comma is allowed just before the closing brace.
 
 Ill-formed enumeration specifier.
-At this point, one of the following is expected:
+Up to this point, an expression has been recognized.
+If this expression is complete,
+then at this point, one of the following is expected:
   a comma ',', followed with an enumerator; or
   a closing brace '}'.
 
