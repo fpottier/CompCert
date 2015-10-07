@@ -580,8 +580,19 @@ abstract_declarator:
 | ioption(pointer) direct_abstract_declarator
     {}
 
+(* This is an %inline copy of [abstract_declarator]. It is identical in
+   meaning to [abstract_declarator] and should be kept in sync with it.
+   We use [inline_abstract_declarator] instead of [abstract_declarator]
+   in one place below, in the definition of [direct_abstract_declarator].
+   This helps us remove some confusion caused by the fact that a leading
+   LPAREN in a direct abstract declarator can be interpreted in two ways. *)
+%inline inline_abstract_declarator:
+| pointer
+| ioption(pointer) direct_abstract_declarator
+    {}
+
 direct_abstract_declarator:
-| LPAREN abstract_declarator RPAREN
+| LPAREN inline_abstract_declarator RPAREN
 | direct_abstract_declarator? LBRACK type_qualifier_list? optional(assignment_expression, RBRACK)
 | ioption(direct_abstract_declarator) LPAREN in_context(parameter_type_list?) RPAREN
     {}
