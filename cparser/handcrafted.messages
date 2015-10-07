@@ -646,7 +646,7 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN XOR_ASSIGN
 
 Ill-formed gcc attribute.
 At this point, one of the following is expected:
-  an identifier, followed by a comma ',',
+  an identifier, followed with a comma ',',
     followed with a non-empty comma-separated list of expressions; or
   a possibly empty comma-separated list of expressions.
 
@@ -668,7 +668,7 @@ Ill-formed gcc attribute specifier.
 At this point, one of the following is expected:
   an opening parenthesis '(',
     followed with a list of parameters for this attribute; or
-  a comma,
+  a comma ',',
     followed with another attribute; or
   a closing parenthesis ')'.
 
