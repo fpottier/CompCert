@@ -2008,8 +2008,29 @@ translation_unit_file: VOID TYPEDEF AUTO TYPEDEF
 ## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
 ## In state 372, spurious reduction of production declaration_specifiers_typedef -> type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID TYPEDEF AUTO TYPEDEF 
+##
+## Ends in an error in state: 519.
+##
+## declaration(block_item) -> declaration_specifiers_typedef . option(typedef_declarator_list) SEMICOLON [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_typedef 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 241, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> 
+## In state 242, spurious reduction of production declaration_specifiers_no_typedef_name -> storage_class_specifier_no_typedef option(declaration_specifiers_no_typedef_name) 
+## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
+## In state 372, spurious reduction of production declaration_specifiers_typedef -> type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) TYPEDEF option(declaration_specifiers_no_typedef_name) 
+##
 
 # We have begun a type definition (a.k.a. declaration_specifiers_typedef).
+
+# We could be at the top level or inside a block, but we do not care.
+
 # To complete this type definition,
 # we expect a possibly-empty list declaration_specifiers_no_typedef_name?,
 # which means a list of:
