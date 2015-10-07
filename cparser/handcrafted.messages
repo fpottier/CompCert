@@ -5109,6 +5109,22 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 274.
+##
+## in_context(option(parameter_type_list)) -> open_context . option(parameter_type_list) close_context [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## open_context 
+##
+
+At this point, one of the following is expected:
+  a parameter declaration; or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
 translation_unit_file: VOID VAR_NAME LPAREN VOID TYPEDEF_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 251.
