@@ -2449,6 +2449,48 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: VOID TYPEDEF_NAME LBRACE TYPEDEF_NAME VOLATILE LONG 
+##
+## Ends in an error in state: 402.
+##
+## declaration_specifiers(declaration(block_item)) -> TYPEDEF_NAME option(declaration_specifiers_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> TYPEDEF_NAME option(declaration_specifiers_no_type) . TYPEDEF option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## TYPEDEF_NAME option(declaration_specifiers_no_type) 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 230, spurious reduction of production option(declaration_specifiers_no_type) -> 
+## In state 236, spurious reduction of production declaration_specifiers_no_type -> type_qualifier option(declaration_specifiers_no_type) 
+## In state 235, spurious reduction of production option(declaration_specifiers_no_type) -> declaration_specifiers_no_type 
+##
+
+# This is analogous to the error sentence TYPEDEF_NAME VOLATILE LONG,
+# except we are inside a block, instead of at the top level, so we
+# know that this cannot be the beginning of a function definition.
+
+# This is an interesting situation where, by using phantom parameters,
+# we have forced a distinction between two states that would NOT be
+# distinguished in a canonical automaton. Indeed, the lookahead sets
+# are the same: the states would be the same if the phantom parameters
+# were erased.
+
+# Assuming that the list of init declarators is nonempty, we say that
+# we expect an init declarator, instead of saying that we expect a
+# possibly empty, comma-separated list of init declarators, followed
+# with a semicolon.
+
+Ill-formed declaration.
+At this point, one of the following is expected:
+  a storage class specifier; or
+  a type qualifier; or
+  an init declarator.
+
+# ------------------------------------------------------------------------------
+
 translation_unit_file: UNION LBRACE TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 315.
