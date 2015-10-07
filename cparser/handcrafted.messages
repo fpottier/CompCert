@@ -2620,6 +2620,24 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE VOID XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers_no_type type_specifier_no_typedef_name 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE VOID VOLATILE LBRACK 
+##
+## Ends in an error in state: 540.
+##
+## declaration_specifiers(declaration(block_item)) -> declaration_specifiers_no_type type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) . TYPEDEF option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_no_type type_specifier_no_typedef_name option(declaration_specifiers_no_typedef_name) 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 240, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> 
+## In state 247, spurious reduction of production declaration_specifiers_no_typedef_name -> type_qualifier option(declaration_specifiers_no_typedef_name) 
+## In state 246, spurious reduction of production option(declaration_specifiers_no_typedef_name) -> declaration_specifiers_no_typedef_name 
+##
 
 # Analogous to the above, except we have seen a primitive type specifier,
 # so another primitive type specifier is OK.
