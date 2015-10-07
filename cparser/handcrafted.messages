@@ -5441,6 +5441,16 @@ translation_unit_file: VOID VAR_NAME LPAREN VAR_NAME RPAREN XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers direct_declarator LPAREN identifier_list RPAREN open_context declaration_list 
 ##
+translation_unit_file: VOID STAR VAR_NAME LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+##
+## Ends in an error in state: 674.
+##
+## declaration_list -> declaration_list . declaration [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC SIGNED SHORT RESTRICT REGISTER PACKED LONG LBRACE INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
+## function_definition_begin -> declaration_specifiers pointer direct_declarator LPAREN identifier_list RPAREN open_context declaration_list . [ LBRACE ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers pointer direct_declarator LPAREN identifier_list RPAREN open_context declaration_list 
+##
 
 Ill-formed K&R function definition.
 At this point, one of the following is expected:
