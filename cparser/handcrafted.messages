@@ -2540,6 +2540,24 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers_no_type TYPEDEF_NAME 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE VOLATILE TYPEDEF_NAME VOLATILE LONG 
+##
+## Ends in an error in state: 530.
+##
+## declaration_specifiers(declaration(block_item)) -> declaration_specifiers_no_type TYPEDEF_NAME option(declaration_specifiers_no_type) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> declaration_specifiers_no_type TYPEDEF_NAME option(declaration_specifiers_no_type) . TYPEDEF option(declaration_specifiers_no_type) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers_no_type TYPEDEF_NAME option(declaration_specifiers_no_type) 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 230, spurious reduction of production option(declaration_specifiers_no_type) -> 
+## In state 236, spurious reduction of production declaration_specifiers_no_type -> type_qualifier option(declaration_specifiers_no_type) 
+## In state 235, spurious reduction of production option(declaration_specifiers_no_type) -> declaration_specifiers_no_type 
+##
 
 # This is analogous to the error sentence TYPEDEF_NAME VOLATILE LONG,
 # except we are inside a block, instead of at the top level, so we
