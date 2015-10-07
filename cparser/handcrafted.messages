@@ -3510,6 +3510,15 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN CASE X
 ## The known suffix of the stack is as follows:
 ## CASE 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO CASE XOR_ASSIGN 
+##
+## Ends in an error in state: 446.
+##
+## labeled_statement(statement_finish_close) -> CASE . constant_expression COLON statement_finish_close [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## CASE 
+##
 
 Ill-formed labeled statement.
 At this point, a constant expression is expected.
