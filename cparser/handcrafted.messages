@@ -3483,6 +3483,34 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN CASE V
 ## In state 79, spurious reduction of production conditional_expression -> logical_or_expression 
 ## In state 130, spurious reduction of production constant_expression -> conditional_expression 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO CASE VAR_NAME SEMICOLON 
+##
+## Ends in an error in state: 447.
+##
+## labeled_statement(statement_finish_close) -> CASE constant_expression . COLON statement_finish_close [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## CASE constant_expression 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 36, spurious reduction of production unary_expression -> postfix_expression 
+## In state 32, spurious reduction of production cast_expression -> unary_expression 
+## In state 65, spurious reduction of production multiplicative_expression -> cast_expression 
+## In state 59, spurious reduction of production additive_expression -> multiplicative_expression 
+## In state 78, spurious reduction of production shift_expression -> additive_expression 
+## In state 55, spurious reduction of production relational_expression -> shift_expression 
+## In state 71, spurious reduction of production equality_expression -> relational_expression 
+## In state 87, spurious reduction of production and_expression -> equality_expression 
+## In state 95, spurious reduction of production exclusive_or_expression -> and_expression 
+## In state 96, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
+## In state 97, spurious reduction of production logical_and_expression -> inclusive_or_expression 
+## In state 81, spurious reduction of production logical_or_expression -> logical_and_expression 
+## In state 79, spurious reduction of production conditional_expression -> logical_or_expression 
+## In state 130, spurious reduction of production constant_expression -> conditional_expression 
+##
 
 Ill-formed labeled statement.
 Up to this point, an expression has been recognized.
