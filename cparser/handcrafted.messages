@@ -945,9 +945,16 @@ translation_unit_file: VOID VOLATILE XOR_ASSIGN
 ## type_qualifier 
 ##
 
-# TEMPORARY again, difficult to know what should come next.
-# Some uses of inline should be followed with a function definition, intuitively,
-# others do not make sense at all, I believe.
+# TEMPORARY
+
+# We could be in a parameter declaration, a declaration, or a function
+# definition. We would like to have this information, not only to display an
+# accurate "Ill-formed ..." line, but also because this may influence what is
+# allowed next.
+
+# Furthermore, maybe we have already seen a TYPEDEF, maybe we have already seen a
+# TYPEDEF_NAME, maybe we have already seen a type_specifier_no_typedef_name, or
+# maybe we have seen neither of these. This too influences what is allowed next.
 
 You got me. I am confused.
 
