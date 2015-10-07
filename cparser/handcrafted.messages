@@ -4474,6 +4474,15 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE WHILE XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## WHILE open_context 
 ##
+translation_unit_file: VOID TYPEDEF_NAME LBRACE DO WHILE XOR_ASSIGN 
+##
+## Ends in an error in state: 385.
+##
+## iteration_statement(nop,statement_finish_close) -> WHILE . LPAREN expression RPAREN statement_finish_close [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## WHILE 
+##
 
 Ill-formed 'while' statement.
 At this point, an opening parenthesis '(' is expected.
