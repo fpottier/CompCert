@@ -890,34 +890,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID INLINE XOR_ASSIGN 
-##
-## Ends in an error in state: 252.
-##
-## declaration_specifiers_no_typedef_name -> declaration_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME TYPEDEF STAR SEMICOLON RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifier_no_typedef_name 
-##
 translation_unit_file: VOID STATIC XOR_ASSIGN 
-##
-## Ends in an error in state: 252.
-##
-## declaration_specifiers_no_typedef_name -> declaration_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME TYPEDEF STAR SEMICOLON RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifier_no_typedef_name 
-##
-translation_unit_file: VOID VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 252.
-##
-## declaration_specifiers_no_typedef_name -> declaration_specifier_no_typedef_name . option(declaration_specifiers_no_typedef_name) [ VAR_NAME TYPEDEF_NAME TYPEDEF STAR SEMICOLON RPAREN LPAREN LBRACK COMMA ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifier_no_typedef_name 
-##
-translation_unit_file: VOID VOLATILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 252.
 ##
