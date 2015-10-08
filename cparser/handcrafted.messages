@@ -2697,30 +2697,6 @@ Hmm.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID STAR XOR_ASSIGN 
-##
-## Ends in an error in state: 672.
-##
-## declarator -> list(pointer1) STAR option(type_qualifier_list) . direct_declarator attribute_specifier_list [ SEMICOLON EQ COMMA ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) . direct_declarator [ LBRACE ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) . direct_declarator LPAREN identifier_list RPAREN open_context declaration_list [ LBRACE ]
-## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TYPEDEF_NAME STAR RESTRICT PACKED LPAREN CONST ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) 
-##
-
-# If the pointer isn't finished, we expect
-#   one more type qualifier; or
-#   one more '*', possibly followed with type qualifiers.
-# If the pointer is finished, then what? Lack of context. TEMPORARY
-# sfollow(pointer) = RPAREN COMMA pop_context direct_declarator direct_abstract_declarator 
-
-Hmm.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: VOID TYPEDEF STAR RPAREN 
 ##
 ## Ends in an error in state: 229.
