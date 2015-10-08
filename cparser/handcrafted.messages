@@ -1883,7 +1883,7 @@ translation_unit_file: VOID TYPEDEF XOR_ASSIGN
 # which means a list of:
 #   storage class specifiers,
 #   type qualifiers,
-#   function specifiers (i.e., INLINE, but I suspect this is illegal here). # TEMPORARY check
+#   function specifiers (i.e., INLINE, but I suspect this is illegal here).
 #   type_specifier_no_typedef_name (e.g., VOID, etc.).
 # After this type definition,
 # we expect typedef_declarator_list? SEMICOLON.
