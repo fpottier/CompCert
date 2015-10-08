@@ -5430,6 +5430,45 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
+translation_unit_file: VOID VAR_NAME LPAREN VOID STAR XOR_ASSIGN 
+##
+## Ends in an error in state: 291.
+##
+## abstract_declarator(parameter_declaration) -> list(pointer1) STAR option(type_qualifier_list) . [ RPAREN COMMA ]
+## abstract_declarator(parameter_declaration) -> list(pointer1) STAR option(type_qualifier_list) . direct_abstract_declarator [ RPAREN COMMA ]
+## declarator -> list(pointer1) STAR option(type_qualifier_list) . direct_declarator attribute_specifier_list [ RPAREN COMMA ]
+## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
+## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TYPEDEF_NAME STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST COMMA ATTRIBUTE ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## list(pointer1) STAR option(type_qualifier_list) 
+##
+
+# We are in a parameter declaration, which can end with a declarator
+# or an abstract declarator.
+
+# So far, we have read a (non-empty) pointer,
+# which could form an abstract declarator,
+# hence a well-formed parameter declaration.
+
+# We expect:
+#   a type qualifier, extending our pointer;
+#   a star,           extending our pointer;
+#   a direct_abstract_declarator, extending our abstract declarator;
+#   a direct declarator, meaning that this is a declarator;
+#   COMMA, meaning that we move to the next parameter declaration;
+#   RPAREN, meaning that the list of parameter declaration is over.
+
+At this point, one of the following is expected:
+  a type qualifier; or
+  a star '*', possibly followed with type qualifiers; or
+  a direct declarator; or
+  a direct abstract declarator; or
+  a comma ',', followed with a parameter declaration; or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
 # Local Variables:
 # mode: shell-script
 # End:
