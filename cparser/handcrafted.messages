@@ -2558,14 +2558,13 @@ translation_unit_file: VOID STAR RPAREN
 ## declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) 
 ##
 
-# We are definitely at the beginning of a function definition, and have 
-# a return type (declaration_specifiers) and a pointer.
+# We are definitely at the beginning of a function definition, and have seen
+# a return type (declaration_specifiers) and a pointer1 (i.e. at least one STAR).
 # Here, either this pointer could be continued, or we expect a direct_declarator.
-
-# TEMPORARY not all forms of direct declarator are OK; try to understand what is going on
 
 Ill-formed function definition.
 At this point, one of the following is expected:
+  a type qualifier; or
   a star '*', possibly followed with type qualifiers; or
   a direct declarator.
 
