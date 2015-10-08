@@ -5444,8 +5444,11 @@ translation_unit_file: VOID VAR_NAME LPAREN VOID LPAREN STAR COMMA
 
 # TEMPORARY
 # I can say what is expected, but am a little lost as to why.
+# Can we say "Ill-formed declarator or abstract declarator"?
 
 At this point, one of the following is expected:
+  a type qualifier; or
+  a star '*', possibly followed with type qualifiers; or
   a direct declarator; or
   a direct abstract declarator, followed with a closing parenthesis ')'; or
   a closing parenthesis ')'.
