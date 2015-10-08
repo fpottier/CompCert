@@ -890,33 +890,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID STATIC XOR_ASSIGN 
-##
-## Ends in an error in state: 367.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
-
-# TEMPORARY
-
-# We could be in a parameter declaration, a declaration, or a function
-# definition. We would like to have this information, not only to display an
-# accurate "Ill-formed ..." line, but also because this may influence what is
-# allowed next.
-
-# Furthermore, maybe we have already seen a TYPEDEF, maybe we have already seen a
-# TYPEDEF_NAME, maybe we have already seen a type_specifier_no_typedef_name, or
-# maybe we have seen neither of these. This too influences what is allowed next.
-
-You got me. I am confused.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: PACKED LPAREN ALIGNOF LPAREN VOID RPAREN WHILE 
 ##
 ## Ends in an error in state: 123.
@@ -1908,26 +1881,6 @@ translation_unit_file: VOID TYPEDEF XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) TYPEDEF list(declaration_specifier_no_typedef_name) 
 ##
-translation_unit_file: VOID TYPEDEF AUTO TYPEDEF 
-##
-## Ends in an error in state: 369.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) TYPEDEF list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) TYPEDEF list(declaration_specifier_no_typedef_name) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID TYPEDEF AUTO TYPEDEF 
-##
-## Ends in an error in state: 369.
-##
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) TYPEDEF list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) TYPEDEF list(declaration_specifier_no_typedef_name) 
-##
 
 # We have begun a type definition (a.k.a. declaration_specifiers_typedef).
 
@@ -2078,17 +2031,6 @@ At this point, one of the following is expected:
 # ------------------------------------------------------------------------------
 
 translation_unit_file: VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 367.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
-translation_unit_file: VOID VOLATILE LBRACK 
 ##
 ## Ends in an error in state: 367.
 ##
@@ -2304,17 +2246,6 @@ At this point, one of the following is expected:
 # ------------------------------------------------------------------------------
 
 translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID XOR_ASSIGN 
-##
-## Ends in an error in state: 430.
-##
-## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VOID VOLATILE LBRACK 
 ##
 ## Ends in an error in state: 430.
 ##
@@ -5459,33 +5390,6 @@ translation_unit_file: VOID VAR_NAME LPAREN VAR_NAME XOR_ASSIGN
 Ill-formed K&R function definition.
 At this point, one of the following is expected:
   a comma ',', followed with an identifier; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: VOID VAR_NAME LPAREN VOID AUTO TYPEDEF 
-##
-## Ends in an error in state: 245.
-##
-## declaration_specifiers(parameter_declaration) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR RPAREN LPAREN LBRACK COMMA ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STATIC STAR SIGNED SHORT RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
-
-# This one is tricky, but workable.
-# The declaration_specifiers may not be finished, which is why one more declaration specifier would be OK.
-# declarator, abstract_declarator are visible in the items above.
-# If neither is given, then we expect COMMA or RPAREN, from parameter_declaration and parameter_list.
-
-Ill-formed parameter declaration.
-Up to this point, some declaration specifiers
-At this point, one of the following is expected:
-  a declaration specifier;
-  a declarator; or
-  an abstract declarator; or
-  a comma ',' followed with a parameter declaration; or
   a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
