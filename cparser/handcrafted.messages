@@ -377,9 +377,9 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME
 # LPAREN and we expect a matching RPAREN, whereas here we are in the context of a
 # type_name and that is why we know an RPAREN should come.
 
-Up to this point, a pointer has been recognized.
-If this pointer is complete,
-then at this point, one of the following is expected:
+At this point, one of the following is expected:
+  a type qualifier; or
+  a star '*', possibly followed with type qualifiers; or
   a direct abstract declarator, followed with a closing parenthesis ')'; or
   a closing parenthesis ')'.
 
