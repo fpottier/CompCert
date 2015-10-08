@@ -599,21 +599,24 @@ type_name:
 | specifier_qualifier_list(type_name) abstract_declarator(type_name)?
     {}
 
-(* The phantom parameter can be [parameter_declaration] or [type_name]. *)
-abstract_declarator(phantom):
+(* We define both %inline and non-%inline versions of [abstract_declarator].
+
+   The %inline version does not need a phantom parameter (which would
+   disappear upon inlining anyway). It is used in one place below, in the
+   definition of [direct_abstract_declarator]. This helps us remove some
+   confusion caused by the fact that a leading LPAREN in a direct abstract
+   declarator can be interpreted in two ways.
+
+   The non-%inline version has a phantom parameter, which can be
+   [parameter_declaration] or [type_name]. *)
+
+%inline inline_abstract_declarator:
 | pointer
 | ioption(pointer) direct_abstract_declarator
     {}
 
-(* This is an %inline copy of [abstract_declarator]. It is identical in
-   meaning to [abstract_declarator] and should be kept in sync with it.
-   We use [inline_abstract_declarator] instead of [abstract_declarator]
-   in one place below, in the definition of [direct_abstract_declarator].
-   This helps us remove some confusion caused by the fact that a leading
-   LPAREN in a direct abstract declarator can be interpreted in two ways. *)
-%inline inline_abstract_declarator:
-| pointer
-| ioption(pointer) direct_abstract_declarator
+abstract_declarator(phantom):
+  inline_abstract_declarator
     {}
 
 direct_abstract_declarator:
