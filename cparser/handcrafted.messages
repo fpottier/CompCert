@@ -46,8 +46,8 @@ translation_unit_file: ALIGNAS LPAREN VOID CHAR VAR_NAME
 # This situation is rather similar to the one above.
 # We are also trying to recognize a type name.
 # As above, the continuation is abstract_declarator? RPAREN.
-# Furthermore, the list of specifiers and qualifiers could
-# be incomplete (this state is reached via a spurious reduction).
+# Furthermore, the list of specifiers and qualifiers can
+# be incomplete.
 # Thus, we expect either:
 # 1. One more type qualifier
 # 2. One more type specifier (which cannot be a typedef name)
