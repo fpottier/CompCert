@@ -470,17 +470,20 @@ and singleline_comment = parse
       (* If the state number cannot be found -- which, in principle,
          should not happen, since our list of erroneous states is
          supposed to be complete! -- produce a generic message. *)
-      Printf.sprintf "This is an unknown syntax error (%d). Please report.\n" s
+      Printf.sprintf "This is an unknown syntax error (%d).\n\
+                      Please report this problem to the compiler vendor.\n" s
     in
     let open Lexing in
+    (* Display filename, line number (1-based), character number (0-based). *)
     let pos = lexbuf.lex_start_p in
-    Cerrors.fatal_error "%s:%d: syntax error.\n%s"
-      pos.pos_fname pos.pos_lnum msg
-    (* TEMPORARY should show exact character position; what's the standard format? *)
-    (* TEMPORARY possibly print the problematic token, like gcc *)
+    Cerrors.fatal_error "%s:%d:%d: syntax error.\n%s"
+      pos.pos_fname
+      pos.pos_lnum
+      (pos.pos_cnum - pos.pos_bol)
+      msg
+    (* TEMPORARY possibly print the previous token and the problematic token, like gcc *)
     (* TEMPORARY if the problematic token is a name, it could have been mis-classified;
                  show how it was classified *)
-    (* TEMPORARY line number is sometimes off by one? is lex_start_p the right position? *)
     (* TEMPORARY Cerrors.fatal_error is not great for displaying our multi-line messages *)
 
   (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
