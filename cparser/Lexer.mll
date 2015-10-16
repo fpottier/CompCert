@@ -451,13 +451,42 @@ and singleline_comment = parse
       else
         initial lexbuf
 
-  (* [record tokens lexer] produces a new lexer, based on [lexer], which
-     also records the token stream into the FIFO queue [tokens]. *)
+  (* A triple of a token and its start and end positions. *)
 
-  let record tokens (lexer : lexer) : lexer =
+  type triple =
+    Pre_parser.token * Lexing.position * Lexing.position
+
+  (* We would like to record the last two triples that were read (this is
+     used when displaying an error message). We already record all tokens
+     in a FIFO queue, but this does not give us access to the last two.
+     Plus, we actually need not just tokens, but triples: that is, we also
+     need position information. So, we maintain the last two triples in
+     addition to the FIFO queue. *)
+
+  type 'triple last2 =
+  | Zero
+  | One of 'triple
+  | Two of 'triple * (* most recent: *) 'triple
+
+  let update_last2 last2 triple =
+    match last2, triple with
+    | Zero, _ ->
+        One triple
+    | One triple1, triple2
+    | Two (_, triple1), triple2 ->
+        Two (triple1, triple2)
+
+  (* [record tokens lexer] produces a new lexer, based on [lexer], which
+     also: 1- records the token stream into the FIFO queue [tokens] and
+     2- records the last two triples. *)
+
+  let record tokens last2 (lexer : lexer) : lexer =
     fun lexbuf ->
       let token = lexer lexbuf in
       Queue.push token tokens;
+      let startp = lexbuf.Lexing.lex_start_p
+      and endp = lexbuf.Lexing.lex_curr_p in
+      last2 := update_last2 !last2 (token, startp, endp);
       token
 
   (* [state checkpoint] extracts the number of the current state out
@@ -480,11 +509,25 @@ and singleline_comment = parse
 
   (* [fail] is called if the pre_parser detects a syntax error. *)
 
-  let fail lexbuf checkpoint =
-    let s = state checkpoint in
+  let fail last2 checkpoint =
+    (* Extract information about the last valid token (if there is one)
+       and the invalid token. The start and end positions of the invalid
+       token are [lexbuf.lex_start_p] and [lexbuf.lex_curr_p], since this
+       is the last token that was read. *)
+    let (valid : triple option), (invalid : triple) =
+      match !last2 with
+      | Zero ->
+          assert false (* we cannot have failed, if we have read nothing *)
+      | One invalid ->
+          None, invalid
+      | Two (valid, invalid) ->
+          Some valid, invalid
+    in
+    (* Find out in which state the parser failed. *)
+    let s : int = state checkpoint in
+    (* Choose an error message, based on the state number [s].
+       This is typically a multi-line message. *)
     let msg = try
-      (* Choose an error message, based on the state number [s].
-         This is typically a multi-line message. *)
       Pre_parser_messages.message s
     with Not_found ->
       (* If the state number cannot be found -- which, in principle,
@@ -495,7 +538,7 @@ and singleline_comment = parse
     in
     let open Lexing in
     (* Display filename, line number (1-based), character number (0-based). *)
-    let pos = lexbuf.lex_start_p in
+    let (_, pos, _) = invalid in
     Cerrors.fatal_error "%s:%d:%d: syntax error.\n%s"
       pos.pos_fname
       pos.pos_lnum
@@ -508,7 +551,7 @@ and singleline_comment = parse
 
   (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
 
-  let invoke_pre_parser lexer lexbuf =
+  let invoke_pre_parser lexer lexbuf last2 =
     (* Here, we could in principle use the traditional API to the
        pre_parser, as follows:
     Pre_parser.translation_unit_file lexer lexbuf
@@ -517,14 +560,15 @@ and singleline_comment = parse
     let checkpoint = Pre_parser.Incremental.translation_unit_file()
     and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
     and succeed () = () in
-    I.loop_handle succeed (fail lexbuf) supplier checkpoint
+    I.loop_handle succeed (fail last2) supplier checkpoint
 
   let tokens_stream filename channel : token coq_Stream =
-    let tokens = Queue.create () in
     let lexbuf = Lexing.from_channel channel in
     lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     contexts_stk := [init_ctx];
-    invoke_pre_parser (record tokens lexer) lexbuf;
+    let tokens = Queue.create () in
+    let last2 = ref Zero in
+    invoke_pre_parser (record tokens last2 lexer) lexbuf last2;
     assert (List.length !contexts_stk = 1);
     let rec compute_token_stream () =
       let loop t v =
