@@ -476,6 +476,16 @@ and singleline_comment = parse
     | Two (_, triple1), triple2 ->
         Two (triple1, triple2)
 
+  (* [extract text triple] extracts the text that underlies a pair of
+     positions. *)
+
+  let extract text (_, pos1, pos2) =
+    let open Lexing in
+    let ofs1 = pos1.pos_cnum
+    and ofs2 = pos2.pos_cnum in
+    let len = ofs2 - ofs1 in
+    String.sub text ofs1 len
+
   (* [record tokens lexer] produces a new lexer, based on [lexer], which
      also: 1- records the token stream into the FIFO queue [tokens] and
      2- records the last two triples. *)
@@ -509,7 +519,7 @@ and singleline_comment = parse
 
   (* [fail] is called if the pre_parser detects a syntax error. *)
 
-  let fail last2 checkpoint =
+  let fail text last2 checkpoint =
     (* Extract information about the last valid token (if there is one)
        and the invalid token. The start and end positions of the invalid
        token are [lexbuf.lex_start_p] and [lexbuf.lex_curr_p], since this
@@ -522,6 +532,17 @@ and singleline_comment = parse
           None, invalid
       | Two (valid, invalid) ->
           Some valid, invalid
+    in
+    (* Construct a readable view of where the error occurred, i.e., what was
+       the last valid token and what is the invalid token. *)
+    let where : string =
+      match valid with
+      | None ->
+          Printf.sprintf "before '%s'"
+            (extract text invalid)
+      | Some valid ->
+          Printf.sprintf "after '%s' and before '%s'"
+            (extract text valid) (extract text invalid)
     in
     (* Find out in which state the parser failed. *)
     let s : int = state checkpoint in
@@ -539,19 +560,21 @@ and singleline_comment = parse
     let open Lexing in
     (* Display filename, line number (1-based), character number (0-based). *)
     let (_, pos, _) = invalid in
-    Cerrors.fatal_error "%s:%d:%d: syntax error.\n%s"
+    Cerrors.fatal_error "%s:%d:%d: syntax error %s.\n%s"
       pos.pos_fname
       pos.pos_lnum
       (pos.pos_cnum - pos.pos_bol)
+      where
       msg
-    (* TEMPORARY possibly print the previous token and the problematic token, like gcc *)
     (* TEMPORARY if the problematic token is a name, it could have been mis-classified;
                  show how it was classified *)
     (* TEMPORARY Cerrors.fatal_error is not great for displaying our multi-line messages *)
 
   (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
 
-  let invoke_pre_parser lexer lexbuf last2 =
+  let invoke_pre_parser filename text lexer last2 =
+    let lexbuf = Lexing.from_string text in
+    lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     (* Here, we could in principle use the traditional API to the
        pre_parser, as follows:
     Pre_parser.translation_unit_file lexer lexbuf
@@ -560,16 +583,15 @@ and singleline_comment = parse
     let checkpoint = Pre_parser.Incremental.translation_unit_file()
     and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
     and succeed () = () in
-    I.loop_handle succeed (fail last2) supplier checkpoint
+    I.loop_handle succeed (fail text last2) supplier checkpoint
 
   let tokens_stream filename text : token coq_Stream =
-    let lexbuf = Lexing.from_string text in
-    lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     contexts_stk := [init_ctx];
     let tokens = Queue.create () in
     let last2 = ref Zero in
-    invoke_pre_parser (record tokens last2 lexer) lexbuf last2;
+    invoke_pre_parser filename text (record tokens last2 lexer) last2;
     assert (List.length !contexts_stk = 1);
+
     let rec compute_token_stream () =
       let loop t v =
         Cons (Coq_existT (t, Obj.magic v), Lazy.from_fun compute_token_stream)
