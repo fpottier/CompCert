@@ -562,8 +562,8 @@ and singleline_comment = parse
     and succeed () = () in
     I.loop_handle succeed (fail last2) supplier checkpoint
 
-  let tokens_stream filename channel : token coq_Stream =
-    let lexbuf = Lexing.from_channel channel in
+  let tokens_stream filename text : token coq_Stream =
+    let lexbuf = Lexing.from_string text in
     lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     contexts_stk := [init_ctx];
     let tokens = Queue.create () in
