@@ -451,6 +451,15 @@ and singleline_comment = parse
       else
         initial lexbuf
 
+  (* [record tokens lexer] produces a new lexer, based on [lexer], which
+     also records the token stream into the FIFO queue [tokens]. *)
+
+  let record tokens (lexer : lexer) : lexer =
+    fun lexbuf ->
+      let token = lexer lexbuf in
+      Queue.push token tokens;
+      token
+
   (* [state checkpoint] extracts the number of the current state out
      of a pre_parser checkpoint. *)
 
@@ -512,15 +521,10 @@ and singleline_comment = parse
 
   let tokens_stream filename channel : token coq_Stream =
     let tokens = Queue.create () in
-    let lexer_wraper lexbuf : Pre_parser.token =
-      let res = lexer lexbuf in
-      Queue.push res tokens;
-      res
-    in
     let lexbuf = Lexing.from_channel channel in
     lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     contexts_stk := [init_ctx];
-    invoke_pre_parser lexer_wraper lexbuf;
+    invoke_pre_parser (record tokens lexer) lexbuf;
     assert (List.length !contexts_stk = 1);
     let rec compute_token_stream () =
       let loop t v =
