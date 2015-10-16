@@ -438,6 +438,64 @@ and singleline_comment = parse
   open Parser
   open Aut.GramDefs
 
+  module I = Pre_parser.MenhirInterpreter
+
+  (* [state checkpoint] extracts the number of the current state out
+     of a pre_parser checkpoint. *)
+
+  let state checkpoint =
+    match checkpoint with
+    | I.HandlingError env ->
+        let module G = MenhirLib.General in
+        begin match Lazy.force (I.stack env) with
+        | G.Nil ->
+            (* Hmm... The parser is in its initial state. Its number is
+               usually 0. This is a BIG HACK. TEMPORARY *)
+            0
+        | G.Cons (I.Element (s, _, _, _), _) ->
+            I.number s
+        end
+    | _ ->
+        assert false (* this cannot happen, I promise *)
+
+  (* [fail] is called if the pre_parser detects a syntax error. *)
+
+  let fail lexbuf checkpoint =
+    let s = state checkpoint in
+    let msg = try
+      (* Choose an error message, based on the state number [s].
+         This is typically a multi-line message. *)
+      Pre_parser_messages.message s
+    with Not_found ->
+      (* If the state number cannot be found -- which, in principle,
+         should not happen, since our list of erroneous states is
+         supposed to be complete! -- produce a generic message. *)
+      Printf.sprintf "This is an unknown syntax error (%d). Please report.\n" s
+    in
+    let open Lexing in
+    let pos = lexbuf.lex_start_p in
+    Cerrors.fatal_error "%s:%d: syntax error.\n%s"
+      pos.pos_fname pos.pos_lnum msg
+    (* TEMPORARY should show exact character position; what's the standard format? *)
+    (* TEMPORARY possibly print the problematic token, like gcc *)
+    (* TEMPORARY if the problematic token is a name, it could have been mis-classified;
+                 show how it was classified *)
+    (* TEMPORARY line number is sometimes off by one? is lex_start_p the right position? *)
+    (* TEMPORARY Cerrors.fatal_error is not great for displaying our multi-line messages *)
+
+  (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
+
+  let invoke_pre_parser lexer lexbuf =
+    (* Here, we could in principle use the traditional API to the
+       pre_parser, as follows:
+    Pre_parser.translation_unit_file lexer lexbuf
+       Instead, we use the incremental API, which offers us a way
+       of doing our own error handling. *)
+    let checkpoint = Pre_parser.Incremental.translation_unit_file()
+    and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
+    and succeed () = () in
+    I.loop_handle succeed (fail lexbuf) supplier checkpoint
+
   let tokens_stream filename channel : token coq_Stream =
     let tokens = Queue.create () in
     let lexer_wraper lexbuf : Pre_parser.token =
@@ -453,7 +511,7 @@ and singleline_comment = parse
     let lexbuf = Lexing.from_channel channel in
     lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
     contexts_stk := [init_ctx];
-    Pre_parser.translation_unit_file lexer_wraper lexbuf;
+    invoke_pre_parser lexer_wraper lexbuf;
     assert (List.length !contexts_stk = 1);
     let rec compute_token_stream () =
       let loop t v =
