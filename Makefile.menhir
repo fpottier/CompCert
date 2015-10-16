@@ -5,7 +5,7 @@
 # bit slower, but supports more features, including advanced error
 # reporting.
 
-MENHIR_TABLE = false
+MENHIR_TABLE = true
 
 # Executable.
 
