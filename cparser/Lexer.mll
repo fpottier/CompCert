@@ -440,6 +440,17 @@ and singleline_comment = parse
 
   module I = Pre_parser.MenhirInterpreter
 
+  type lexer = Lexing.lexbuf -> Pre_parser.token
+
+  (* This is the main entry point to the lexer. *)
+
+  let lexer : lexer =
+    fun lexbuf ->
+      if lexbuf.lex_curr_p.pos_cnum = lexbuf.lex_curr_p.pos_bol then
+        initial_linebegin lexbuf
+      else
+        initial lexbuf
+
   (* [state checkpoint] extracts the number of the current state out
      of a pre_parser checkpoint. *)
 
@@ -502,12 +513,7 @@ and singleline_comment = parse
   let tokens_stream filename channel : token coq_Stream =
     let tokens = Queue.create () in
     let lexer_wraper lexbuf : Pre_parser.token =
-      let res =
-        if lexbuf.lex_curr_p.pos_cnum = lexbuf.lex_curr_p.pos_bol then
-          initial_linebegin lexbuf
-        else
-          initial lexbuf
-      in
+      let res = lexer lexbuf in
       Queue.push res tokens;
       res
     in
