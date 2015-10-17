@@ -1,0 +1,16 @@
+Isoler ErrorReporting.
+
+Extraire de la pile une zone délimitée par deux locations.
+  Enlever les newline s'il y en a, abréger si trop long.
+  Vérifier qu'un token ne contient jamais newline.
+Syntaxe $i dans les messages d'erreur.
+
+If the problematic token is a name, it could have been mis-classified; show how it was classified.
+
+Cerrors.fatal_error is not great for displaying our multi-line messages.
+
+Pour faire une bonne comparaison avec gcc, transformer
+les messages d'erreur en syntaxe concrète, puis les
+faire manger à gcc/clang/CompCert, et comparer les
+résultats côte à côte. 
+

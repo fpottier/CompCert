@@ -566,9 +566,6 @@ and singleline_comment = parse
       (pos.pos_cnum - pos.pos_bol)
       where
       msg
-    (* TEMPORARY if the problematic token is a name, it could have been mis-classified;
-                 show how it was classified *)
-    (* TEMPORARY Cerrors.fatal_error is not great for displaying our multi-line messages *)
 
   (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
 
