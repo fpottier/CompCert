@@ -438,155 +438,52 @@ and singleline_comment = parse
   open Parser
   open Aut.GramDefs
 
-  module I = Pre_parser.MenhirInterpreter
-
-  type lexer = Lexing.lexbuf -> Pre_parser.token
-
   (* This is the main entry point to the lexer. *)
 
-  let lexer : lexer =
+  let lexer : lexbuf -> Pre_parser.token =
     fun lexbuf ->
       if lexbuf.lex_curr_p.pos_cnum = lexbuf.lex_curr_p.pos_bol then
         initial_linebegin lexbuf
       else
         initial lexbuf
 
-  (* A triple of a token and its start and end positions. *)
+  (* [lexer tokens buffer] is a new lexer, which wraps [lexer], and also: 1-
+     records the token stream into the FIFO queue [tokens] and 2- records the
+     start and end positions of the last two tokens in the two-place buffer
+     [buffer]. *)
 
-  type triple =
-    Pre_parser.token * Lexing.position * Lexing.position
-
-  (* We would like to record the last two triples that were read (this is
-     used when displaying an error message). We already record all tokens
-     in a FIFO queue, but this does not give us access to the last two.
-     Plus, we actually need not just tokens, but triples: that is, we also
-     need position information. So, we maintain the last two triples in
-     addition to the FIFO queue. *)
-
-  type 'triple last2 =
-  | Zero
-  | One of 'triple
-  | Two of 'triple * (* most recent: *) 'triple
-
-  let update_last2 last2 triple =
-    match last2, triple with
-    | Zero, _ ->
-        One triple
-    | One triple1, triple2
-    | Two (_, triple1), triple2 ->
-        Two (triple1, triple2)
-
-  (* [extract text triple] extracts the text that underlies a pair of
-     positions. *)
-
-  let extract text (_, pos1, pos2) =
-    let open Lexing in
-    let ofs1 = pos1.pos_cnum
-    and ofs2 = pos2.pos_cnum in
-    let len = ofs2 - ofs1 in
-    String.sub text ofs1 len
-
-  (* [record tokens lexer] produces a new lexer, based on [lexer], which
-     also: 1- records the token stream into the FIFO queue [tokens] and
-     2- records the last two triples. *)
-
-  let record tokens last2 (lexer : lexer) : lexer =
+  let lexer tokens buffer : lexbuf -> Pre_parser.token =
     fun lexbuf ->
       let token = lexer lexbuf in
       Queue.push token tokens;
-      let startp = lexbuf.Lexing.lex_start_p
-      and endp = lexbuf.Lexing.lex_curr_p in
-      last2 := update_last2 !last2 (token, startp, endp);
+      let startp = lexbuf.lex_start_p
+      and endp = lexbuf.lex_curr_p in
+      buffer := ErrorReports.update !buffer (startp, endp);
       token
 
-  (* [state checkpoint] extracts the number of the current state out
-     of a pre_parser checkpoint. *)
+  (* [invoke_pre_parser] is in charge of calling the pre_parser. It uses
+     the incremental API, which allows us to do our own error handling. *)
 
-  let state checkpoint =
-    match checkpoint with
-    | I.HandlingError env ->
-        let module G = MenhirLib.General in
-        begin match Lazy.force (I.stack env) with
-        | G.Nil ->
-            (* Hmm... The parser is in its initial state. Its number is
-               usually 0. This is a BIG HACK. TEMPORARY *)
-            0
-        | G.Cons (I.Element (s, _, _, _), _) ->
-            I.number s
-        end
-    | _ ->
-        assert false (* this cannot happen, I promise *)
-
-  (* [fail] is called if the pre_parser detects a syntax error. *)
-
-  let fail text last2 checkpoint =
-    (* Extract information about the last valid token (if there is one)
-       and the invalid token. The start and end positions of the invalid
-       token are [lexbuf.lex_start_p] and [lexbuf.lex_curr_p], since this
-       is the last token that was read. *)
-    let (valid : triple option), (invalid : triple) =
-      match !last2 with
-      | Zero ->
-          assert false (* we cannot have failed, if we have read nothing *)
-      | One invalid ->
-          None, invalid
-      | Two (valid, invalid) ->
-          Some valid, invalid
-    in
-    (* Construct a readable view of where the error occurred, i.e., what was
-       the last valid token and what is the invalid token. *)
-    let where : string =
-      match valid with
-      | None ->
-          Printf.sprintf "before '%s'"
-            (extract text invalid)
-      | Some valid ->
-          Printf.sprintf "after '%s' and before '%s'"
-            (extract text valid) (extract text invalid)
-    in
-    (* Find out in which state the parser failed. *)
-    let s : int = state checkpoint in
-    (* Choose an error message, based on the state number [s].
-       This is typically a multi-line message. *)
-    let msg = try
-      Pre_parser_messages.message s
-    with Not_found ->
-      (* If the state number cannot be found -- which, in principle,
-         should not happen, since our list of erroneous states is
-         supposed to be complete! -- produce a generic message. *)
-      Printf.sprintf "This is an unknown syntax error (%d).\n\
-                      Please report this problem to the compiler vendor.\n" s
-    in
-    let open Lexing in
-    (* Display filename, line number (1-based), character number (0-based). *)
-    let (_, pos, _) = invalid in
-    Cerrors.fatal_error "%s:%d:%d: syntax error %s.\n%s"
-      pos.pos_fname
-      pos.pos_lnum
-      (pos.pos_cnum - pos.pos_bol)
-      where
-      msg
-
-  (* [invoke_pre_parser] is in charge of calling the pre_parser. *)
-
-  let invoke_pre_parser filename text lexer last2 =
+  let invoke_pre_parser filename text lexer buffer =
     let lexbuf = Lexing.from_string text in
     lexbuf.lex_curr_p <- {lexbuf.lex_curr_p with pos_fname = filename; pos_lnum = 1};
-    (* Here, we could in principle use the traditional API to the
-       pre_parser, as follows:
-    Pre_parser.translation_unit_file lexer lexbuf
-       Instead, we use the incremental API, which offers us a way
-       of doing our own error handling. *)
+    let module I = Pre_parser.MenhirInterpreter in
     let checkpoint = Pre_parser.Incremental.translation_unit_file()
     and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
-    and succeed () = () in
-    I.loop_handle succeed (fail text last2) supplier checkpoint
+    and succeed () = ()
+    and fail checkpoint =
+      Cerrors.fatal_error "%s" (ErrorReports.report text !buffer checkpoint)
+    in
+    I.loop_handle succeed fail supplier checkpoint
+
+  (* [tokens_stream filename text] runs the pre_parser and produces a stream
+     of (appropriately classified) tokens. *)
 
   let tokens_stream filename text : token coq_Stream =
     contexts_stk := [init_ctx];
     let tokens = Queue.create () in
-    let last2 = ref Zero in
-    invoke_pre_parser filename text (record tokens last2 lexer) last2;
+    let buffer = ref ErrorReports.Zero in
+    invoke_pre_parser filename text (lexer tokens buffer) buffer;
     assert (List.length !contexts_stk = 1);
 
     let rec compute_token_stream () =
