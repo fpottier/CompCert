@@ -1134,12 +1134,10 @@ translation_unit_file: PACKED LPAREN INC LPAREN XOR_ASSIGN
 ## LPAREN 
 ##
 
-# TEMPORARY is it ok to say something is likely?
-
 Ill-formed expression.
 At this point, one of the following is expected:
   a type name (if this is the beginning of a compound literal); or
-  an expression (more likely).
+  an expression.
 
 # ------------------------------------------------------------------------------
 
