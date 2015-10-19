@@ -52,7 +52,7 @@
 
 # ------------------------------------------------------------------------------
 
-# ANALYSIS OF WHAT CAN FOLLOW AN EXPRESSION:
+# NOTE ON THE CONTEXT OF AN EXPRESSION:
 
 # A C expression occurs in many contexts.
 
@@ -61,54 +61,15 @@
 # that would be quite heavy: the number of states in the automaton would grow
 # quite dramatically.
 
-# Instead, we choose to distinguish dynamically between these contexts. That
-# is, by testing at runtime which tokens would be accepted at the point where
-# an error was detected, we can find out (to a limited extent) in what context
-# we are.
-
-# By inspection of the grammar, we find that the following 8 contexts are
-# possible, where a context is a set of tokens, one of which must eventually
-# occur:
-
-# COMMA
-#   in __builtin_va_arg
-
-# RPAREN
-#   in an ordinary parenthesized expression
-#   in the condition of if, switch, while, do/while
-#   in a for-loop header
-#   in an asm_operand
-
-# RBRACK
-#   in an expression that serves as an array subscript
-
-# COLON
-#   in a case statement
-
-# SEMICOLON
-#   in an expression statement
-#   in a return statement
-#   in a for-loop header
-
-# COMMA or RPAREN
-#   in an argument_expression_list
-
-# COMMA or SEMICOLON
-#   in a struct_declarator_list
-#   in an init_declarator_list (via c_initializer)
-
-# COMMA or RBRACE
-#   in an enumerator_list
-#   in a c_initializer_list
-
-# As can be seen from this list, in a situation where COMMA is acceptable,
-# it is difficult (given our current tools) to tell what should follow it.
-# For the moment, we choose to just say that a COMMA would be permitted,
-# without saying what it should be followed with.
-
-# We mark with EXPRESSION the places where the context of an expression is
-# statically unknown.
-# TEMPORARY all of them have disappeared! explain.
+# Instead, we prefer to dynamically distinguish between these contexts. We do
+# so in a very simple way: we give --on-error-reduce directives to Menhir (in
+# the Makefile) so as to replace certain error actions with reduction actions.
+# Thus, when Menhir finds an error and whatever is on the stack can be reduced
+# to an expression, the automaton will reduce it to an expression. By carrying
+# out this extra (spurious) reduction, the automaton ends up in a state where
+# sufficient static context is available to tell what should follow. Thus,
+# without doing anything special beyond giving these directives, we are able
+# to sidestep the issue of the context of expressions.
 
 # ------------------------------------------------------------------------------
 
