@@ -788,11 +788,15 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 # So, the last enumerator must be of the second form, which means it is safe
 # for us to say "an expression has just been recognized".
 #
+# On the other hand, we cannot show the expression that has just been recognized;
+# we can only show the enumerator list $0.
+#
 # We omit the fact that a comma is allowed just before the closing brace.
 
 Ill-formed enumeration specifier.
-Up to this point, an expression has been recognized.
-If this expression is complete,
+Up to this point, a list of enumerators has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with an enumerator; or
   a closing brace '}'.
@@ -1100,8 +1104,8 @@ translation_unit_file: PACKED LPAREN INC LPAREN VOID RPAREN XOR_ASSIGN
 # Or maybe the name that we classified as a type was intended to be a variable.
 
 Ill-formed expression.
-The sequence $2 $1 $0
-was interpreted as a type name in parentheses.
+Up to this point, a type name in parentheses has been recognized:
+  $2 $1 $0
 If this is the beginning of a compound literal,
   then at this point, an opening brace '{' is expected.
 If this is intended to be the beginning of a cast expression,
