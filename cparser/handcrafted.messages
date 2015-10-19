@@ -950,7 +950,16 @@ translation_unit_file: PACKED LPAREN SIZEOF LPAREN VOID RPAREN WHILE
 # literal, but then, we do not know what to say -- we are missing context.
 # Should we give a phantom parameter to unary_expression?
 
-Hmm.
+Up to this point, an expression has been recognized:
+  $3 $2 $1 $0
+If this expression is complete,
+then at this point, one of the following is expected:
+   ($RPAREN)  a closing parenthesis ')'; or
+   ($RBRACK)  a closing bracket ']'; or
+   ($RBRACE)  a closing brace '}'; or
+    ($COMMA)  a comma ','; or
+    ($COLON)  a colon ':'; or
+($SEMICOLON)  a semicolon ';'; or
 
 # ------------------------------------------------------------------------------
 
