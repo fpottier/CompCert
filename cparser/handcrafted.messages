@@ -594,8 +594,9 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMM
 # A (non-empty) list of expressions has been read.
 
 Ill-formed gcc attribute.
-Up to this point, an expression has been recognized.
-If this expression is complete,
+Up to this point, a list of expressions has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with another expression; or
   a closing parenthesis ')'.
