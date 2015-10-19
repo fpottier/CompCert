@@ -2646,50 +2646,44 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF STAR VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 231.
-##
-## declarator -> list(pointer1) STAR option(type_qualifier_list) direct_declarator . attribute_specifier_list [ SEMICOLON RPAREN EQ COMMA COLON ]
-## direct_declarator -> direct_declarator . LBRACK option(type_qualifier_list) optional(assignment_expression,RBRACK) [ SEMICOLON RPAREN PACKED LPAREN LBRACK EQ COMMA COLON ATTRIBUTE ALIGNAS ]
-## direct_declarator -> direct_declarator . LPAREN open_context option(parameter_type_list) save_contexts_stk close_context RPAREN [ SEMICOLON RPAREN PACKED LPAREN LBRACK EQ COMMA COLON ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) direct_declarator 
-##
 translation_unit_file: VOID TYPEDEF VAR_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 277.
+## Ends in an error in state: 521.
 ##
-## declarator -> direct_declarator . attribute_specifier_list [ SEMICOLON RPAREN EQ COMMA COLON ]
-## direct_declarator -> direct_declarator . LBRACK option(type_qualifier_list) optional(assignment_expression,RBRACK) [ SEMICOLON RPAREN PACKED LPAREN LBRACK EQ COMMA COLON ATTRIBUTE ALIGNAS ]
-## direct_declarator -> direct_declarator . LPAREN open_context option(parameter_type_list) save_contexts_stk close_context RPAREN [ SEMICOLON RPAREN PACKED LPAREN LBRACK EQ COMMA COLON ATTRIBUTE ALIGNAS ]
+## option(typedef_declarator_list) -> typedef_declarator_list . [ SEMICOLON ]
+## typedef_declarator_list -> typedef_declarator_list . COMMA typedef_declarator [ SEMICOLON COMMA ]
 ##
 ## The known suffix of the stack is as follows:
-## direct_declarator 
+## typedef_declarator_list 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 277, spurious reduction of production attribute_specifier_list -> 
+## In state 283, spurious reduction of production declarator -> direct_declarator attribute_specifier_list 
+## In state 525, spurious reduction of production declare_typename(fst(declarator)) -> declarator 
+## In state 524, spurious reduction of production typedef_declarator -> declare_typename(fst(declarator)) 
+## In state 526, spurious reduction of production typedef_declarator_list -> typedef_declarator 
 ##
 
-# If the declarator is not finished, then we expect:
-#   an attribute specifier
-#   LBRACK, LPAREN
-# If the declarator is finished, then what? Lack of context.
+# Because attribute_specifier_list and declarator have been marked
+# --on-error-reduce, we perform several spurious reductions and end up here.
+# Which is good, because the context is clear.
 
-# The context could be (I think):
-# typedef_declarator: SEMICOLON COMMA
-# init_declarator: SEMICOLON COMMA EQ
-# struct_declarator: SEMICOLON COMMA COLON
-# direct_declarator: RPAREN
-# parameter_declaration: COMMA RPAREN
+# If the attribute_specifier_list or declarator was not finished, then we could have accepted:
+#  an attribute specifier.
+#  a opening bracket '['.
+#  an opening parenthesis '('.
 
-# TEMPORARY
+# As far as the C grammar is concerned, typedef_declarator is just declarator.
 
-Up to this point, a direct declarator has been recognized:
+Up to this point, a list of declarators has been recognized:
   $0
-At this point, one of the following is expected:
-  an attribute specifier;     or
-  a opening bracket '['; or
-  an opening parenthesis '('; or
-  ???.
+If this list is complete,
+then at this point, one of the following is expected:
+  a comma ',', followed with a declarator; or
+  a semicolon ';'.
 
 # ------------------------------------------------------------------------------
 
@@ -2729,36 +2723,6 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN LPAREN XOR_ASSIGN
 At this point, a comma-separated list of parameters,
 followed with a closing parenthesis ')',
 is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: VOID TYPEDEF VAR_NAME RPAREN 
-##
-## Ends in an error in state: 521.
-##
-## option(typedef_declarator_list) -> typedef_declarator_list . [ SEMICOLON ]
-## typedef_declarator_list -> typedef_declarator_list . COMMA typedef_declarator [ SEMICOLON COMMA ]
-##
-## The known suffix of the stack is as follows:
-## typedef_declarator_list 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 277, spurious reduction of production attribute_specifier_list -> 
-## In state 283, spurious reduction of production declarator -> direct_declarator attribute_specifier_list 
-## In state 525, spurious reduction of production declare_typename(fst(declarator)) -> declarator 
-## In state 524, spurious reduction of production typedef_declarator -> declare_typename(fst(declarator)) 
-## In state 526, spurious reduction of production typedef_declarator_list -> typedef_declarator 
-##
-
-Up to this point, a list of declarators has been recognized:
-  $0
-If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with a declarator; or
-  a semicolon ';'.
 
 # ------------------------------------------------------------------------------
 
