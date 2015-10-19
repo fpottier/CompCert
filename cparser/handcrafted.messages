@@ -69,7 +69,9 @@
 # out this extra (spurious) reduction, the automaton ends up in a state where
 # sufficient static context is available to tell what should follow. Thus,
 # without doing anything special beyond giving these directives, we are able
-# to sidestep the issue of the context of expressions.
+# to sidestep the issue of the context of expressions. Of course, we must be
+# careful to say (in our error messages) "IF this expression (or list of
+# expressions) is complete, THEN the following continuations are expected".
 
 # ------------------------------------------------------------------------------
 
@@ -2566,38 +2568,6 @@ At this point, a (possibly empty, comma-separated) list
 of parameter declarations,
 followed with a closing parenthesis ')',
 is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: VOID STAR VAR_NAME PACKED LPAREN CONSTANT RPAREN CHAR 
-##
-## Ends in an error in state: 301.
-##
-## attribute_specifier_list -> attribute_specifier_list . attribute_specifier [ SEMICOLON RPAREN PACKED EQ COMMA COLON ATTRIBUTE ALIGNAS ]
-## declarator -> list(pointer1) STAR option(type_qualifier_list) direct_declarator attribute_specifier_list . [ SEMICOLON RPAREN EQ COMMA COLON ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) direct_declarator attribute_specifier_list 
-##
-translation_unit_file: VOID VAR_NAME PACKED LPAREN CONSTANT RPAREN ADD_ASSIGN 
-##
-## Ends in an error in state: 283.
-##
-## attribute_specifier_list -> attribute_specifier_list . attribute_specifier [ SEMICOLON RPAREN PACKED EQ COMMA COLON ATTRIBUTE ALIGNAS ]
-## declarator -> direct_declarator attribute_specifier_list . [ SEMICOLON RPAREN EQ COMMA COLON ]
-##
-## The known suffix of the stack is as follows:
-## direct_declarator attribute_specifier_list 
-##
-
-# Either we expect one more attribute, or we have a complete declarator.
-# What should it be followed with?
-# The context could be typedef_declarator, init_declarator, struct_declarator,
-# direct_declarator, parameter_declaration.
-
-# TEMPORARY
-
-Stymied.
 
 # ------------------------------------------------------------------------------
 

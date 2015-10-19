@@ -43,7 +43,8 @@ MENHIR_REDUCE_ON_ERROR := \
   logical_or_expression \
   conditional_expression \
   assignment_expression \
-  expression
+  expression \
+  declarator
 
 # Options.
 
