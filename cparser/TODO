@@ -1,3 +1,5 @@
+%reduceonerror should be in the .mly file?
+
 If loop_handle_undo is unused, remove it, as it is costly.
 
 When we say "if this list is complete..."
