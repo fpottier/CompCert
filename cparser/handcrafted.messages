@@ -19,6 +19,10 @@
 # stack. Note that this index is 0-based and counts from right to left, i.e.,
 # $0 refers to the RIGHTMOST stack cell.
 
+# The replacement text for $i can be quite long (up to one line, basically)
+# so one should avoid using several $i on a single line, unless one knows
+# a smaller bound on their length.
+
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
@@ -1030,7 +1034,8 @@ translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON
 ##
 
 Ill-formed use of __builtin_va_arg.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a comma ',' is expected.
 
@@ -1182,8 +1187,8 @@ translation_unit_file: PACKED LPAREN LPAREN VAR_NAME SEMICOLON
 # can be continued with a comma and another expression.
 # So, let's just say a closing parenthesis is expected.
 
-Up to this point, an opening parenthesis '('
-and an expression have been recognized.
+Up to this point, a parenthesis '(' and an expression have been recognized:
+  $1 $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -1225,8 +1230,9 @@ translation_unit_file: PACKED LPAREN LPAREN VOID RPAREN LBRACE VAR_NAME SEMICOLO
 # Let's mention just "an initializer", omitting the optional designation that precedes it.
 
 Ill-formed compound literal.
-Up to this point, an initializer has been recognized.
-If this initializer is complete,
+Up to this point, a list of initializers has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',' followed with an initializer; or 
   a closing brace '}'.
@@ -1517,7 +1523,8 @@ translation_unit_file: PACKED LPAREN VAR_NAME LBRACK VAR_NAME SEMICOLON
 # no reason to mention that -- it can be viewed as part of the
 # hypothesis "if the expression is complete".
 
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing bracket ']' is expected.
 
@@ -1572,8 +1579,9 @@ translation_unit_file: PACKED LPAREN VAR_NAME LPAREN VAR_NAME SEMICOLON
 # TEMPORARY here, we have an argument_expression_list, but we do not have its context.
 
 Ill-formed list of expressions.
-Up to this point, an expression has been recognized.
-If this expression is complete,
+Up to this point, a list of expressions has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with another expression; or
   a closing parenthesis ')'.
@@ -1712,8 +1720,12 @@ translation_unit_file: PACKED LPAREN VAR_NAME QUESTION VAR_NAME SEMICOLON
 ##
 
 Ill-formed use of a conditional operator.
-Up to this point, an expression (the second operand) has been recognized.
-If this expression is complete,
+Up to this point, an expression, a question mark, and an expression
+have been recognized:
+  $2
+  $1
+  $0
+If the second expression is complete,
 then at this point, a colon ':' is expected.
 
 # ------------------------------------------------------------------------------
