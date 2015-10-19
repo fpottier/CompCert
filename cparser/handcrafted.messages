@@ -1,6 +1,8 @@
 # This file contains a complete list of sentences that cause the pre_parser to
 # detect an error.
 
+# ------------------------------------------------------------------------------
+
 # FILE FORMAT:
 
 # Each sentence is followed with a hand-written error message, which must be
@@ -25,6 +27,8 @@
 # so one should avoid using several $i on a single line, unless one knows
 # a smaller bound on their length.
 
+# ------------------------------------------------------------------------------
+
 # CONVENTIONS ABOUT THE FORM AND STYLE OF ERROR MESSAGES:
 
 # If possible, start with "Ill-formed foo", where "foo" is the thing that we
@@ -45,6 +49,65 @@
 
 # When a nonempty list is expected, there can be hesitation: should we say "an
 # element is expected", or "a nonempty list is expected"? TEMPORARY
+
+# ------------------------------------------------------------------------------
+
+# ANALYSIS OF WHAT CAN FOLLOW AN EXPRESSION:
+
+# A C expression occurs in many contexts.
+
+# Although we could distinguish between these contexts statically, by adding a
+# phantom parameter to all of the nonterminal symbols that encode expressions,
+# that would be quite heavy: the number of states in the automaton would grow
+# quite dramatically.
+
+# Instead, we choose to distinguish dynamically between these contexts. That
+# is, by testing at runtime which tokens would be accepted at the point where
+# an error was detected, we can find out (to a limited extent) in what context
+# we are.
+
+# By inspection of the grammar, we find that the following 8 contexts are
+# possible, where a context is a set of tokens, one of which must eventually
+# occur:
+
+# COMMA
+#   in __builtin_va_arg
+
+# RPAREN
+#   in an ordinary parenthesized expression
+#   in the condition of if, switch, while, do/while
+#   in a for-loop header
+#   in an asm_operand
+
+# RBRACK
+#   in an expression that serves as an array subscript
+
+# COLON
+#   in a case statement
+
+# SEMICOLON
+#   in an expression statement
+#   in a return statement
+#   in a for-loop header
+
+# COMMA or RPAREN
+#   in an argument_expression_list
+
+# COMMA or SEMICOLON
+#   in a struct_declarator_list
+#   in an init_declarator_list (via c_initializer)
+
+# COMMA or RBRACE
+#   in an enumerator_list
+#   in a c_initializer_list
+
+# As can be seen from this list, in a situation where COMMA is acceptable,
+# it is difficult (given our current tools) to tell what should follow it.
+# For the moment, we choose to just say that a COMMA would be permitted,
+# without saying what it should be followed with.
+
+# We mark with EXPRESSION the places where the context of an expression is
+# statically unknown.
 
 # ------------------------------------------------------------------------------
 
@@ -942,13 +1005,12 @@ translation_unit_file: PACKED LPAREN SIZEOF LPAREN VOID RPAREN WHILE
 ## SIZEOF LPAREN type_name RPAREN 
 ##
 
-# TEMPORARY another tricky one.
 # Either we have a complete unary expression, of the form alignof(foo).
 # Or we expect an opening brace, because (foo){ initializer-list } is
 # a "compound literal" and is a valid argument to alignof.
 # We would like to omit the unlikely possibility that this is a compound
-# literal, but then, we do not know what to say -- we are missing context.
-# Should we give a phantom parameter to unary_expression?
+# literal, but then, we face the problem that this is an expression whose
+# context is unknown (EXPRESSION).
 
 Up to this point, an expression has been recognized:
   $3 $2 $1 $0
