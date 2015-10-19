@@ -2375,11 +2375,12 @@ translation_unit_file: UNION LBRACE VOID COLON VAR_NAME RPAREN
 ##
 
 # We have seen a non-empty struct_declarator_list.
-# TEMPORARY the trouble is, maybe the last declarator ends in an expression,
-# which could be continued. We should mention that.
 
 Ill-formed struct declaration.
-At this point, one of the following is expected:
+Up to this point, a list of struct declarators has been recognized:
+  $0
+If this list is complete,
+then at this point, one of the following is expected:
   a comma ',', followed with a struct declarator; or
   a semicolon ';'.
 
