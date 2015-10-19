@@ -1762,8 +1762,9 @@ translation_unit_file: PACKED LPAREN VAR_NAME SEMICOLON
 ##
 
 Ill-formed packed attribute.
-Up to this point, an expression has been recognized.
-If this expression is complete,
+Up to this point, a list of expressions has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with another expression; or
   a closing parenthesis ')'.
@@ -2414,7 +2415,8 @@ translation_unit_file: UNION LBRACE VOID VAR_NAME RPAREN
 # or something that follows this struct_declarator.
 
 Ill-formed struct declaration.
-Up to this point, a declarator has been recognized.
+Up to this point, a declarator has been recognized:
+  $0
 If this declarator is complete,
 then at this point, one of the following is expected:
   a colon ':', followed with a constant expression; or
@@ -2548,7 +2550,8 @@ translation_unit_file: VOID LPAREN VAR_NAME SEMICOLON
 ## In state 284, spurious reduction of production declarator -> direct_declarator attribute_specifier_list 
 ##
 
-Up to this point, a declarator has been recognized.
+Up to this point, an opening parenthesis and a declarator have been recognized:
+  $1 $0
 If this declarator is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -2784,7 +2787,8 @@ translation_unit_file: VOID TYPEDEF VAR_NAME XOR_ASSIGN
 
 # TEMPORARY
 
-Up to this point, a direct declarator has been recognized.
+Up to this point, a direct declarator has been recognized:
+  $0
 At this point, one of the following is expected:
   an attribute specifier;     or
   a opening bracket '['; or
@@ -2853,8 +2857,9 @@ translation_unit_file: VOID TYPEDEF VAR_NAME RPAREN
 ## In state 527, spurious reduction of production typedef_declarator_list -> typedef_declarator 
 ##
 
-Up to this point, a declarator has been recognized.
-If this declarator is complete,
+Up to this point, a list of declarators has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with a declarator; or
   a semicolon ';'.
@@ -3101,7 +3106,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE ASM LPAREN STRING_LITERAL COLON 
 ##
 
 Ill-formed assembly operand.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -3501,7 +3507,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE DO CASE VAR_NAME SEMICOLON
 ##
 
 Ill-formed labeled statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a colon ':' is expected.
 
@@ -3696,7 +3703,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE DO DO SEMICOLON WHILE LPAREN VAR
 ##
 
 Ill-formed 'do' ... 'while' statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' and a semicolon ';' are expected.
 
@@ -3909,8 +3917,12 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE FOR LPAREN SEMICOLON SEMICOLON V
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
+# The use of optional(expression,RPAREN) tells us that we are in a FOR statement.
+# Relying on this is a bit fragile, though.
+
 Ill-formed 'for' statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -4025,11 +4037,11 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE FOR LPAREN VAR_NAME RPAREN
 ##
 
 # At the time of writing, optional(expression,SEMICOLON) is used only in FOR
-# loops, but it could be used elsewhere in the future. Let's not mention the
-# context.
-# TEMPORARY
+# loops, but it could be used elsewhere in the future. This is a bit fragile.
 
-Up to this point, an expression has been recognized.
+Ill-formed 'for' statement.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a semicolon ';' is expected.
 
@@ -4327,7 +4339,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME SEMICOLON
 ##
 
 Ill-formed 'if' statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -4518,7 +4531,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE DO SWITCH LPAREN VAR_NAME SEMICO
 ##
 
 Ill-formed 'switch' statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -4719,7 +4733,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE DO WHILE LPAREN VAR_NAME SEMICOL
 ##
 
 Ill-formed 'while' statement.
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -4893,7 +4908,8 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE STRING_LITERAL RPAREN
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
-Up to this point, an expression has been recognized.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a semicolon ';' is expected.
 
@@ -5002,7 +5018,8 @@ translation_unit_file: VOID VAR_NAME COMMA VAR_NAME RPAREN
 # init_declarator always appears as part of init_declarator_list,
 # which is always followed with a SEMICOLON. So the context is clear.
 
-Up to this point, a declarator has been recognized.
+Up to this point, a declarator has been recognized:
+  $0
 If this declarator is complete,
 then at this point, one of the following is expected:
   an equals sign '=', followed with an initializer; or
@@ -5060,8 +5077,9 @@ translation_unit_file: VOID VAR_NAME EQ CONSTANT RPAREN
 ##
 
 Ill-formed declaration.
-Up to this point, an init declarator has been recognized.
-If this init declarator is complete,
+Up to this point, a list of init declarators has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with an init declarator; or
   a semicolon ';'.
@@ -5158,7 +5176,8 @@ translation_unit_file: VOID VAR_NAME EQ LBRACE LBRACK VAR_NAME SEMICOLON
 ##
 
 Ill-formed designator.
-Up to this point, an expression has been recognized.
+Up to this point, an opening bracket and an expression have been recognized:
+  $1 $0
 If this expression is complete,
 then at this point, a closing bracket ']' is expected.
 
@@ -5235,8 +5254,9 @@ translation_unit_file: VOID VAR_NAME EQ LBRACE VAR_NAME SEMICOLON
 # Omitting the fact that the closing brace can be preceded with a comma.
 
 Ill-formed initializer list.
-Up to this point, an initializer has been recognized.
-If this initializer is complete,
+Up to this point, a list of initializers has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with an optional designation and an initializer; or
   a closing brace '}'.
@@ -5310,10 +5330,11 @@ translation_unit_file: VOID VAR_NAME LBRACK VAR_NAME SEMICOLON
 
 # At the time of writing, optional(expression,RBRACK) is used only in direct
 # (possibly abstract) declarators, but it could be used elsewhere in the future.
-# Let's not mention the context.
-# TEMPORARY
+# This is a bit fragile.
 
-Up to this point, an expression has been recognized.
+Ill-formed direct declarator or direct abstract declarator.
+Up to this point, an expression has been recognized:
+  $0
 If this expression is complete,
 then at this point, a closing bracket ']' is expected.
 
@@ -5419,8 +5440,9 @@ translation_unit_file: VOID VAR_NAME LPAREN VOID TYPEDEF_NAME SEMICOLON
 ## In state 264, spurious reduction of production parameter_list -> parameter_declaration 
 ##
 
-Up to this point, a parameter declaration has been recognized.
-If this parameter declaration is complete,
+Up to this point, a list of parameters has been recognized:
+  $0
+If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with a parameter declaration; or
   a comma ',', followed with an ellipsis '...'; or
