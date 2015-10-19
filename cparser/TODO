@@ -1,11 +1,7 @@
-Isoler ErrorReporting.
+Revoir tous les messages d'erreur pour voir où $i peut servir.
 
-Extraire de la pile une zone délimitée par deux locations.
-  Enlever les newline s'il y en a, abréger si trop long.
-  Vérifier qu'un token ne contient jamais newline.
-Syntaxe $i dans les messages d'erreur.
-
-If the problematic token is a name, it could have been mis-classified; show how it was classified.
+If the problematic token is a name, it could have been mis-classified;
+  show how it was classified.
 
 Cerrors.fatal_error is not great for displaying our multi-line messages.
 
