@@ -3,7 +3,7 @@
 SRC      := $(HOME)/dev/menhir/src
 MENHIR   := $(SRC)/_stage2/menhir.native
 COMPCERT := pre_parser
-FLAGS    := --no-stdlib -la 2
+FLAGS    := --no-stdlib -la 2 --table
 MSGS     := handcrafted.messages
 
 all:
@@ -50,6 +50,10 @@ interpret_error:
 interpret_error_canonical:
 # Interpret one error sentence in the canonical automaton (interactive).
 	$(MENHIR) $(COMPCERT).mly $(FLAGS) --interpret-error --canonical
+
+test:
+	$(MAKE) -C .. -f Makefile.extr ccomp
+	../ccomp test.c
 
 clean:
 	rm -f $(COMPCERT).conflicts
