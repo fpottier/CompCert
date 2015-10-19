@@ -5,6 +5,10 @@ If loop_handle_undo is unused, remove it, as it is costly.
 When we say "if this list is complete..."
 we should also say that if it is not complete, then it can
 be continued with a comma, etc.
+Same thing for attribute_specifier_list, declarator.
+
+When a nonempty list is expected, there can be hesitation: should we say "an
+element is expected", or "a nonempty list is expected"?
 
 Revoir tous les messages d'erreur pour voir où $i peut servir.
 

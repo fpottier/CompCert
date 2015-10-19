@@ -47,9 +47,6 @@
 # continuations can be omitted. A continuation can be just one symbol, or
 # a sequence of symbols.
 
-# When a nonempty list is expected, there can be hesitation: should we say "an
-# element is expected", or "a nonempty list is expected"? TEMPORARY
-
 # ------------------------------------------------------------------------------
 
 # NOTE ON THE CONTEXT OF AN EXPRESSION:
