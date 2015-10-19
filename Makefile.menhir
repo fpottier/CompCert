@@ -15,9 +15,36 @@ else
   MENHIR = menhir
 endif
 
+# Which nonterminal symbols should be reduced upon error.
+# This directive replaces error actions with reduction actions,
+# so, if the input is correct, it makes no difference,
+# and if the input is incorrect, then it only forces a few more
+# reductions before the error is detected.
+# It is used to facilitate error reports.
+
+MENHIR_REDUCE_ON_ERROR := \
+  primary_expression \
+  postfix_expression \
+  unary_expression \
+  cast_expression \
+  multiplicative_expression \
+  additive_expression \
+  shift_expression \
+  relational_expression \
+  equality_expression \
+  and_expression \
+  exclusive_or_expression \
+  inclusive_or_expression \
+  logical_and_expression \
+  logical_or_expression \
+  conditional_expression \
+  assignment_expression \
+  expression
+
 # Options.
 
-MENHIR_FLAGS = -v --no-stdlib -la 1
+MENHIR_FLAGS := -v --no-stdlib -la 1 \
+  $(patsubst %,--on-error-reduce %,$(MENHIR_REDUCE_ON_ERROR))
 
 # Using Menhir in --table mode requires MenhirLib.
 
