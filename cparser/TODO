@@ -1,3 +1,9 @@
+If loop_handle_undo is unused, remove it, as it is costly.
+
+When we say "if this list is complete..."
+we should also say that if it is not complete, then it can
+be continued with a comma, etc.
+
 Revoir tous les messages d'erreur pour voir où $i peut servir.
 
 If the problematic token is a name, it could have been mis-classified;
