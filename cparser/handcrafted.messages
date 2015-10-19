@@ -1669,8 +1669,6 @@ translation_unit_file: PACKED LPAREN VAR_NAME LPAREN VAR_NAME SEMICOLON
 ## In state 109, spurious reduction of production argument_expression_list -> assignment_expression 
 ##
 
-# TEMPORARY here, we have an argument_expression_list, but we do not have its context.
-
 Ill-formed list of expressions.
 Up to this point, a list of expressions has been recognized:
   $0
