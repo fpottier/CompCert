@@ -75,6 +75,15 @@
 # understand how the expression should be completed. Our error message exhibits
 # a bias towards ending expressions.
 
+# OTHER USES OF --on-reduce-error:
+
+# We apply this technique also to attribute_specifier_list and declarator. This
+# means, intuitively, that when we find an error at a position where an
+# attribute specifier list and/or a declarator could be complete, but could also
+# be continued, we implicitly assume it is complete. Again, this must be taken
+# into account in messages where an attribute_specifier_list or a declarator has
+# just been recognized.
+
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
