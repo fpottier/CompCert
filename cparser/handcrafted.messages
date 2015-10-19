@@ -1,6 +1,8 @@
 # This file contains a complete list of sentences that cause the pre_parser to
 # detect an error.
 
+# FILE FORMAT:
+
 # Each sentence is followed with a hand-written error message, which must be
 # preceded and followed by a blank line.
 
@@ -22,6 +24,27 @@
 # The replacement text for $i can be quite long (up to one line, basically)
 # so one should avoid using several $i on a single line, unless one knows
 # a smaller bound on their length.
+
+# CONVENTIONS ABOUT THE FORM AND STYLE OF ERROR MESSAGES:
+
+# If possible, start with "Ill-formed foo", where "foo" is the thing that we
+# are trying to recognize, i.e., the left-hand side of our items. This is not
+# always possible, as we do not always know with certainty what we are trying
+# to rcognize.
+
+# If possible, say "Up to this point, a bar has been recognized", and show it,
+# by using $i.
+
+# If the current state was reached via spurious reductions, print a hypothesis,
+# of the form "If this bar is complete, then".
+
+# Show a list of the permitted continuations: "at this point, one of the
+# following is expected:". The list should be complete, although unlikely
+# continuations can be omitted. A continuation can be just one symbol, or
+# a sequence of symbols.
+
+# When a nonempty list is expected, there can be hesitation: should we say "an
+# element is expected", or "a nonempty list is expected"? TEMPORARY
 
 # ------------------------------------------------------------------------------
 
