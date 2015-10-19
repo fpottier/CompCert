@@ -20,6 +20,7 @@ include Makefile.config
 # Menhir configuration and rules.
 
 include Makefile.menhir
+include Makefile.messages
 
 # Directories containing plain Caml code (no preprocessing)
 

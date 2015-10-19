@@ -96,11 +96,3 @@ else
 
 endif
 
-# A manually-maintained list of error messages is compiled by Menhir
-# down to OCaml code.
-
-MENHIR_HANDCRAFTED = cparser/handcrafted.messages
-
-cparser/pre_parser_messages.ml: cparser/pre_parser.mly $(MENHIR_HANDCRAFTED)
-	$(MENHIR) $(MENHIR_MODE) $(MENHIR_FLAGS) $< --compile-errors $(MENHIR_HANDCRAFTED) > $@
-

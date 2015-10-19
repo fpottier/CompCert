@@ -1,26 +1,11 @@
 # Temporary Makefile, used to work on the grammar(s).
 
+include ../Makefile.menhir
+
+FLAGS    := $(MENHIR_FLAGS) -la 2
 SRC      := $(HOME)/dev/menhir/src
 MENHIR   := $(SRC)/_stage2/menhir.native
 COMPCERT := pre_parser
-FLAGS    := --no-stdlib -la 2 --table \
---on-error-reduce primary_expression \
---on-error-reduce postfix_expression \
---on-error-reduce unary_expression \
---on-error-reduce cast_expression \
---on-error-reduce multiplicative_expression \
---on-error-reduce additive_expression \
---on-error-reduce shift_expression \
---on-error-reduce relational_expression \
---on-error-reduce equality_expression \
---on-error-reduce and_expression \
---on-error-reduce exclusive_or_expression \
---on-error-reduce inclusive_or_expression \
---on-error-reduce logical_and_expression \
---on-error-reduce logical_or_expression \
---on-error-reduce conditional_expression \
---on-error-reduce assignment_expression \
---on-error-reduce expression
 MSGS     := handcrafted.messages
 
 all:
