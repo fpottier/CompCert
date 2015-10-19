@@ -17,11 +17,13 @@ val update: 'a buffer -> 'a -> 'a buffer
 (* [report text buffer checkpoint] constructs an error message. The C source
    code must be stored in the string [text]. The start and end positions of the
    last two tokens that were read must be stored in [buffer]. The parser state
-   (i.e., the automaton's state and stack) must be recorded in [checkpoint]. *)
+   (i.e., the automaton's state and stack) must be recorded in the checkpoints
+   [inputneeded] and [checkpoint], as produced by [loop_handle_undo]. *)
 
 val report:
   string ->
   (Lexing.position * Lexing.position) buffer ->
+  _ checkpoint ->
   _ checkpoint ->
   string
 
