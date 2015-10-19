@@ -205,6 +205,9 @@ let fragments text checkpoint (message : string) : string =
 (* The checkpoint used here must be the checkpoint BEFORE spurious reductions
    have taken place. *)
 
+(* These conditional forms currently cannot be nested: there can be at most
+   one such form per line. *)
+
 let conditional text inputneeded message =
   try
     let token = DeLexer.identify (Str.matched_group 1 message)
