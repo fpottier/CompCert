@@ -47,7 +47,7 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 # type name.
 
 Up to this point, a type name has been recognized
-  (the identifier $1 was understood as a type).
+  ($1 is a type identifier).
 At this point, one of the following is expected:
   a type qualifier; or
   an abstract declarator; or
@@ -131,8 +131,9 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 # would be OK too.
 
 Ill-formed alignas specifier.
-Up to this point, an expression has been recognized.
-If this expression is complete,
+Up to this point, a list of expressions has been recognized:
+  $0
+If this list is complete,
 then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
