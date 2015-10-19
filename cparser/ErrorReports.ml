@@ -159,13 +159,15 @@ let element checkpoint i : element =
    single quotes and shortened if it is too long. We also ensure that it does
    not contain any special characters. *)
 
+let width = 30
+
 let range text (e : element) : string =
   (* Extract the start and positions of this stack element. *)
   let Element (_, _, pos1, pos2) = e in
   (* Get the underlying source text fragment. *)
   let fragment = extract text (pos1, pos2) in
   (* Sanitize it and limit its length. Enclose it in single quotes. *)
-  "'" ^ shorten 10 (sanitize fragment) ^ "'"
+  "'" ^ shorten width (sanitize fragment) ^ "'"
 
 (* -------------------------------------------------------------------------- *)
 
