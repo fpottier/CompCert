@@ -69,9 +69,14 @@
 # out this extra (spurious) reduction, the automaton ends up in a state where
 # sufficient static context is available to tell what should follow. Thus,
 # without doing anything special beyond giving these directives, we are able
-# to sidestep the issue of the context of expressions. Of course, we must be
-# careful to say (in our error messages) "IF this expression (or list of
-# expressions) is complete, THEN the following continuations are expected".
+# to sidestep the issue of the context of expressions.
+
+# Of course, we must be careful to say (in our error messages) "IF this
+# expression (or list of expressions) is complete, THEN the following
+# continuations are expected". The weakness of this approach is that if the
+# expression is NOT complete (in the user's mind), then we do not help the user
+# understand how the expression should be completed. Our error message exhibits
+# a bias towards ending expressions.
 
 # ------------------------------------------------------------------------------
 
