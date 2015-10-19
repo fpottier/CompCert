@@ -5300,8 +5300,6 @@ translation_unit_file: VOID VAR_NAME EQ LBRACE XOR_ASSIGN
 # An initializer list is expected.
 # Hence, an initializer is expected.
 
-# TEMPORARY terminology: "compound initializer" OK?
-
 Ill-formed compound initializer.
 At this point, an optional designation,
 followed with an initializer, is expected.
