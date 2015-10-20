@@ -7,59 +7,48 @@ SRC      := $(HOME)/dev/menhir/src
 MENHIR   := $(SRC)/_stage2/menhir.native
 COMPCERT := pre_parser
 MSGS     := handcrafted.messages
+COMMAND  := $(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS)
 
 all:
 # Compile Menhir.
 	make -C $(SRC)
 	make -C $(SRC) bootstrap
 # Produce a description of the automaton.
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --dump --explain
+	$(COMMAND) --dump --explain
 	sleep 2
 #	dot -Tpdf -o $(COMPCERT).pdf $(COMPCERT).dot
 # Compute the symbolic FOLLOW sets.
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) -lg 3 2>$(COMPCERT).follow
+	$(COMMAND) -lg 3 2>$(COMPCERT).follow
 # Re-generate the list of error messages.
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --list-errors >$(COMPCERT).messages
+	$(COMMAND) --list-errors >$(COMPCERT).messages
 	@ echo "Number of error states that involve spurious reductions:"
 	@ grep WARNING pre_parser.messages | wc -l
-#	sleep 2
-# Re-generate the list of error messages for the canonical automaton.
-#	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --canonical --list-errors >$(COMPCERT).canonical
 
 update:
 # Update the auto-comments in $(MSGS).
 	@ mv -f $(MSGS) $(MSGS).bak
-	@ if ! $(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --update-errors $(MSGS).bak > $(MSGS) ; then \
+	@ if ! $(COMMAND) --update-errors $(MSGS).bak > $(MSGS) ; then \
 	  cp $(MSGS).bak $(MSGS) ; \
 	fi
 
 compare:
 # Check $(MSGS) for completeness.
 # We assume $(COMPCERT).messages is up-to-date.
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --compare-errors $(COMPCERT).messages --compare-errors $(MSGS)
+	$(COMMAND) --compare-errors $(COMPCERT).messages --compare-errors $(MSGS)
 
 compile:
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --compile-errors $(MSGS)
+	$(COMMAND) --compile-errors $(MSGS)
 
 interpret:
 # Interpret one sentence (interactive).
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --trace --interpret
+	$(COMMAND) --trace --interpret
 
 interpret_error:
 # Interpret one error sentence (interactive).
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --interpret-error
-
-interpret_error_canonical:
-# Interpret one error sentence in the canonical automaton (interactive).
-	$(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS) --interpret-error --canonical
-
-test:
-	$(MAKE) -C .. -f Makefile.extr ccomp
-	../ccomp test.c
+	$(COMMAND) --interpret-error
 
 clean:
 	rm -f $(COMPCERT).conflicts
-	rm -f $(COMPCERT).canonical
 	rm -f $(COMPCERT).messages
 	rm -f $(COMPCERT).follow
 	rm -f $(COMPCERT).dot
