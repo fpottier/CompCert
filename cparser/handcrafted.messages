@@ -165,13 +165,16 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 ##
 
 # The specifier_qualifier_list is not necessarily complete, but we have
-# reduced anyway (due to --on-error-reduce), and here we are.
-
+# reduced anyway (due to --on-error-reduce), and here we are. We have a
+# valid type name, which could be continued with an abstract declarator,
+# or could be complete.
+#
 # We expect either:
 # 1. One more type qualifier or specifier (part of the specifier_qualifier_list)
 # 2. An abstract declarator               (part of the type name)
 # 3. A closing parenthesis                (which follows the type name).
-#
+
+# gcc, clang: like us, expect a closing parenthesis.
 
 Up to this point, a type name has been recognized:
   $0
