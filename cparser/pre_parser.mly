@@ -615,28 +615,15 @@ type_name:
 | specifier_qualifier_list(type_name) abstract_declarator(type_name)?
     {}
 
-(* We define both %inline and non-%inline versions of [abstract_declarator].
-
-   The %inline version does not need a phantom parameter (which would
-   disappear upon inlining anyway). It is used in one place below, in the
-   definition of [direct_abstract_declarator]. This helps us remove some
-   confusion caused by the fact that a leading LPAREN in a direct abstract
-   declarator can be interpreted in two ways.
-
-   The non-%inline version has a phantom parameter, which can be
-   [parameter_declaration] or [type_name]. *)
-
-%inline inline_abstract_declarator:
+(* The phantom parameter can be [parameter_declaration] or [type_name]
+   or [direct_abstract_declarator]. *)
+abstract_declarator(phantom):
 | pointer
 | ilist(pointer1) direct_abstract_declarator
     {}
 
-abstract_declarator(phantom):
-  inline_abstract_declarator
-    {}
-
 direct_abstract_declarator:
-| LPAREN inline_abstract_declarator RPAREN
+| LPAREN abstract_declarator(direct_abstract_declarator) RPAREN
 | direct_abstract_declarator? LBRACK type_qualifier_list? optional(assignment_expression, RBRACK)
 | ioption(direct_abstract_declarator) LPAREN in_context(parameter_type_list?) RPAREN
     {}
