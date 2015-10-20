@@ -15,9 +15,5 @@ If the problematic token is a name, it could have been mis-classified;
 
 Cerrors.fatal_error is not great for displaying our multi-line messages.
 
-Pour faire une bonne comparaison avec gcc, transformer
-les messages d'erreur en syntaxe concrète, puis les
-faire manger à gcc/clang/CompCert, et comparer les
-résultats côte à côte. En faire un jeu de tests
-systématique.
+Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
