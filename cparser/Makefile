@@ -57,8 +57,7 @@ deLexer: deLexer.ml
 
 generate: $(MSGS).raw deLexer
 # Re-generate the C files in tests/generated.
-	@ rm -rf tests/generated
-	@ mkdir tests/generated
+	@ rm -f tests/generated/*.c
 # Read $(MSGS).raw, line by line.
 # For each sentence, create a new C file.
 # A sentence takes the form "<start symbol>: SYMBOLS...".
