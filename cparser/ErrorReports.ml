@@ -197,49 +197,17 @@ let fragments text checkpoint (message : string) : string =
 
 (* -------------------------------------------------------------------------- *)
 
-(* We allow an error message to contain the special form ($TERMINAL), where
-   TERMINAL is a terminal symbol. We include this line (without the special
-   form) in the error message only if this terminal symbol would have been
-   accepted at this point. This condition is tested dynamically. *)
-
-(* The checkpoint used here must be the checkpoint BEFORE spurious reductions
-   have taken place. *)
-
-(* These conditional forms currently cannot be nested: there can be at most
-   one such form per line. *)
-
-let conditional text inputneeded message =
-  try
-    let token = DeLexer.identify (Str.matched_group 1 message)
-    and line = Str.matched_group 2 message in
-    if acceptable inputneeded token Lexing.dummy_pos then
-      "\n" ^ line
-    else
-      ""
-  with Not_found ->
-    (* In principle, this should not happen, but if it does, let's cover up
-       for our internal error. *)
-    if debug then assert false else Str.matched_string message
-
-let conditionals text inputneeded (message : string) : string =
-  Str.global_substitute
-    (Str.regexp "\n *(\\$\\([A-Z][A-Za-z0-9_]*\\))\\([^\n]*\\)$")
-    (conditional text inputneeded)
-    message
-
-(* -------------------------------------------------------------------------- *)
-
 (* [report text buffer checkpoint] constructs an error message. The C source
    code must be stored in the string [text]. The start and end positions of the
    last two tokens that were read must be stored in [buffer]. The parser state
-   (i.e., the automaton's state and stack) must be recorded in the checkpoints
-   [inputneeded] and [checkpoint], as produced by [loop_handle_undo]. *)
+   (i.e., the automaton's state and stack) must be recorded in the checkpoint
+   [checkpoint]. *)
 
 (* The start and end positions of the invalid token are [lexbuf.lex_start_p]
    and [lexbuf.lex_curr_p], since this is the last token that was read. But
    we need not care about that here. *)
 
-let report text buffer inputneeded checkpoint : string =
+let report text buffer checkpoint : string =
   (* Extract the position where the error occurred, that is, the start
      position of the invalid token. We display it as a filename, a  (1-based)
      line number, and a (0-based) column number. *)
@@ -253,8 +221,7 @@ let report text buffer inputneeded checkpoint : string =
      Then, customize it, based on dynamic information. *)
   let message = try
     Pre_parser_messages.message s |>
-    fragments text checkpoint |>
-    conditionals text inputneeded
+    fragments text checkpoint
   with Not_found ->
     (* If the state number cannot be found -- which, in principle,
        should not happen, since our list of erroneous states is

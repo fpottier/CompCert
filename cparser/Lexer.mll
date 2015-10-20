@@ -471,10 +471,10 @@ and singleline_comment = parse
     let checkpoint = Pre_parser.Incremental.translation_unit_file()
     and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
     and succeed () = ()
-    and fail inputneeded checkpoint =
-      Cerrors.fatal_error "%s" (ErrorReports.report text !buffer inputneeded checkpoint)
+    and fail checkpoint =
+      Cerrors.fatal_error "%s" (ErrorReports.report text !buffer checkpoint)
     in
-    I.loop_handle_undo succeed fail supplier checkpoint
+    I.loop_handle succeed fail supplier checkpoint
 
   (* [tokens_stream filename text] runs the pre_parser and produces a stream
      of (appropriately classified) tokens. *)
