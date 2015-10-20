@@ -150,73 +150,33 @@
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 185.
+## Ends in an error in state: 148.
 ##
-## specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ STAR RPAREN LPAREN LBRACK ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) 
-##
-
-# We are trying to recognize a specifier_qualifier_list.
-# This is in the context of a type_name.
-# Thus, this specifier_qualifier_list should be followed with
-# abstract_declarator? RPAREN.
-# Thus, we expect either:
-# 1. One more type qualifier (part of the type name)
-# 2. An abstract declarator  (part of the type name)
-# 3. A closing parenthesis   (which follows the type name).
-#
-# What we have read so far in fact forms a valid type name. If we could
-# (spuriously) reduce the first production above, we would find that we
-# have a complete specifier_qualifier_list(type_name), hence a complete
-# type name.
-
-Up to this point, a type name has been recognized
-  ($1 is a type identifier).
-At this point, one of the following is expected:
-  a type qualifier; or
-  an abstract declarator; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: ALIGNAS LPAREN INT XOR_ASSIGN 
-##
-## Ends in an error in state: 214.
-##
-## list(specifier_qualifier_no_typedef_name) -> list(specifier_qualifier_no_typedef_name) . specifier_qualifier_no_typedef_name [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL STRUCT STAR SIGNED SHORT RPAREN RESTRICT PACKED LPAREN LONG LBRACK INT FLOAT ENUM DOUBLE CONST CHAR ATTRIBUTE ALIGNAS ]
-## specifier_qualifier_list(type_name) -> option(type_qualifier_list) type_specifier_no_typedef_name list(specifier_qualifier_no_typedef_name) . [ STAR RPAREN LPAREN LBRACK ]
+## type_name -> specifier_qualifier_list(type_name) . option(abstract_declarator(type_name)) [ RPAREN ]
 ##
 ## The known suffix of the stack is as follows:
-## option(type_qualifier_list) type_specifier_no_typedef_name list(specifier_qualifier_no_typedef_name) 
+## specifier_qualifier_list(type_name) 
 ##
-#
-# This situation is rather similar to the one above.
-# We are also trying to recognize a type name.
-# As above, the continuation is abstract_declarator? RPAREN.
-# Furthermore, the list of specifiers and qualifiers can
-# be incomplete.
-# Thus, we expect either:
-# 1. One more type qualifier
-# 2. One more type specifier (which cannot be a typedef name)
-# 3. An abstract declarator
-# 4. A closing parenthesis.
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 185, spurious reduction of production specifier_qualifier_list(type_name) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) 
+##
+
+# The specifier_qualifier_list is not necessarily complete, but we have
+# reduced anyway (due to --on-error-reduce), and here we are.
+
+# We expect either:
+# 1. One more type qualifier or specifier (part of the specifier_qualifier_list)
+# 2. An abstract declarator               (part of the type name)
+# 3. A closing parenthesis                (which follows the type name).
 #
 
-# I note that this state can apparently be reached via spurious reductions
-# (see tests/dubious-enum.c), although I do not quite understand the details.
-# Somehow "enum e" is reduced to a type specifier, even though it could be
-# incomplete (it could continue with an opening brace).
-
-Up to this point, a type name has been recognized
-  ($1 is a type specifier).
-At this point, one of the following is expected:
-  a type qualifier; or
-  a type specifier; or
-  an abstract declarator; or
-  a closing parenthesis ')'.
+Up to this point, a type name has been recognized:
+  $0
+If this type name is complete,
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -2197,27 +2157,32 @@ At this point, one of the following is expected:
 
 translation_unit_file: UNION LBRACE TYPEDEF_NAME XOR_ASSIGN 
 ##
-## Ends in an error in state: 313.
+## Ends in an error in state: 225.
 ##
-## specifier_qualifier_list(struct_declaration) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN COLON ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TYPEDEF_NAME STAR SEMICOLON RESTRICT PACKED LPAREN CONST COLON ATTRIBUTE ALIGNAS ]
+## struct_declaration -> specifier_qualifier_list(struct_declaration) . option(struct_declarator_list) SEMICOLON [ VOLATILE VOID UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT SIGNED SHORT RESTRICT RBRACE PACKED LONG INT FLOAT ENUM DOUBLE CONST CHAR ATTRIBUTE ALIGNAS ]
 ##
 ## The known suffix of the stack is as follows:
-## option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) 
+## specifier_qualifier_list(struct_declaration) 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 313, spurious reduction of production specifier_qualifier_list(struct_declaration) -> option(type_qualifier_list) TYPEDEF_NAME option(type_qualifier_list) 
 ##
 
-# We are trying to recognize a specifier_qualifier_list,
-# in the context of a struct_declaration.
-# Thus, this specifier_qualifier_list should be followed with
-# struct_declarator_list? SEMICOLON.
+# We have (spuriously) recognized a specifier_qualifier_list,
+# part of a struct_declaration.
 # Thus, we expect:
-#   one more type qualifier (part of the specifier_qualifier_list)
+#   more type qualifiers or specifiers (part of the specifier_qualifier_list), or
 #   a struct declarator, or
 #   a semicolon.
 
 Ill-formed struct declaration.
-At this point, one of the following is expected:
-  a type qualifier; or
+Up to this point, a list of qualifiers and specifiers has been recognized:
+  $0
+If this list is complete, then 
+at this point, one of the following is expected:
   a struct declarator; or
   a semicolon ';'.
 
@@ -2325,31 +2290,6 @@ If this declarator is complete,
 then at this point, one of the following is expected:
   a colon ':', followed with a constant expression; or
   a comma ',', followed with a struct declarator; or
-  a semicolon ';'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: UNION LBRACE INT XOR_ASSIGN 
-##
-## Ends in an error in state: 315.
-##
-## list(specifier_qualifier_no_typedef_name) -> list(specifier_qualifier_no_typedef_name) . specifier_qualifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME STRUCT STAR SIGNED SHORT SEMICOLON RESTRICT PACKED LPAREN LONG INT FLOAT ENUM DOUBLE CONST COLON CHAR ATTRIBUTE ALIGNAS ]
-## specifier_qualifier_list(struct_declaration) -> option(type_qualifier_list) type_specifier_no_typedef_name list(specifier_qualifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN COLON ]
-##
-## The known suffix of the stack is as follows:
-## option(type_qualifier_list) type_specifier_no_typedef_name list(specifier_qualifier_no_typedef_name) 
-##
-
-# Several qualifiers and specifiers may have been read.
-# We expect more qualifiers and specifiers,
-# followed with struct_declarator_list? SEMICOLON.
-
-Ill-formed struct declaration.
-$1 is a type specifier.
-At this point, one of the following is expected:
-  a type qualifier; or
-  a type specifier; or
-  a struct declarator; or
   a semicolon ';'.
 
 # ------------------------------------------------------------------------------

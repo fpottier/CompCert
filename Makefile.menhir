@@ -49,7 +49,9 @@ MENHIR_REDUCE_ON_ERROR := \
   statement_finish_close \
   "iteration_statement(nop,statement_finish_close)" \
   enum_specifier \
-  struct_or_union_specifier
+  struct_or_union_specifier \
+  "specifier_qualifier_list(struct_declaration)" \
+  "specifier_qualifier_list(type_name)" \
 
 # Options.
 
