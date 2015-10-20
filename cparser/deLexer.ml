@@ -5,8 +5,8 @@
 
 (* [delex] should be maintained in sync with the lexer! *)
 
-let delex (s : string) : string =
-  match s with
+let delex (symbol : string) : string =
+  match symbol with
   | "ALIGNAS" -> "_Alignas"
   | "ALIGNOF" -> "_Alignof"
   | "UNDERSCORE_BOOL" -> "_Bool"
@@ -101,4 +101,20 @@ let delex (s : string) : string =
   | "PRAGMA" -> "#pragma \n"
   | "EOF" -> ""                             (* this should be ok *)
   | _ -> raise Not_found               (* this should not happen *)
+
+(* De-lexing a sentence. *)
+
+let delex sentence =
+  let symbols = Str.split (Str.regexp " ") sentence in
+  let symbols = List.map delex symbols in
+  List.iter (fun symbol ->
+    Printf.printf "%s " symbol
+  ) symbols
+
+(* This file is meant to be run as a script. We read one line from the standard
+   input channel and delex it. *)
+
+let () =
+  delex (input_line stdin);
+  print_newline()
 
