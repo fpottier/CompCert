@@ -84,6 +84,39 @@
 # into account in messages where an attribute_specifier_list or a declarator has
 # just been recognized.
 
+# ABOUT STRICT VERSUS LAX INTERPRETATIONS OF --on-reduce-error:
+
+# There are two ways in which Menhir could implement --on-reduce-error. In the
+# strict interpretation, an extra reduction takes place only if this is the
+# only reduction that can take place in this state. (Thus, we do not choose
+# between two interpretations of the past.) In the lax interpretation, an extra
+# reduction can take place even if some other reduction is enabled. (In a
+# situation where two extra reductions compete, neither takes place.)
+
+# Adopting the lax interpretation adds more extra reductions, causing some
+# error states to disappear. For instance, this state, where we have a read
+# a VAR_NAME which could be either the beginning of an expression or the
+# beginning of a labeled statement:
+
+# general_identifier -> VAR_NAME . [ COLON ]
+# primary_expression -> VAR_NAME . [ <lots of tokens> ]
+
+# In the strict interpretation, no extra reduction is permitted here, because
+# two reductions are enabled. In the lax interpretation, because we have 
+# requested --on-error-reduce primary_expression, the second production is
+# reduced. Hence, we implicitly assume that this name forms an expression
+# (as opposed to a label). This is slightly inaccurate (we lose completeness)
+# but removes an error state that is rather unpleasant.
+
+# In another instance of this phenomemon, there is a rather tricky state,
+# where we have read "int f" at the toplevel, and we do not know whether this
+# will be a variable definition (declarator) or a function definition
+# (direct_declarator). In the lax interpretation, because we have requested
+# --on-error-reduce declarator, we implicitly assume this must be the
+# beginning of a declarator. Again, we lose completeness (we will not suggest
+# that an opening parenthesis would have been accepted) but this makes our
+# life easier, and does not sound too bad.
+
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
@@ -2584,51 +2617,6 @@ is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID STAR VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 665.
-##
-## declarator -> list(pointer1) STAR option(type_qualifier_list) direct_declarator . attribute_specifier_list [ SEMICOLON EQ COMMA ]
-## direct_declarator -> direct_declarator . LBRACK option(type_qualifier_list) optional(assignment_expression,RBRACK) [ SEMICOLON PACKED LPAREN LBRACK LBRACE EQ COMMA ATTRIBUTE ALIGNAS ]
-## direct_declarator -> direct_declarator . LPAREN open_context option(parameter_type_list) save_contexts_stk close_context RPAREN [ SEMICOLON PACKED LPAREN LBRACK LBRACE EQ COMMA ATTRIBUTE ALIGNAS ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) direct_declarator . [ LBRACE ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) direct_declarator . LPAREN identifier_list RPAREN open_context declaration_list [ LBRACE ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) direct_declarator 
-##
-translation_unit_file: VOID VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 675.
-##
-## declarator -> direct_declarator . attribute_specifier_list [ SEMICOLON EQ COMMA ]
-## direct_declarator -> direct_declarator . LBRACK option(type_qualifier_list) optional(assignment_expression,RBRACK) [ SEMICOLON PACKED LPAREN LBRACK LBRACE EQ COMMA ATTRIBUTE ALIGNAS ]
-## direct_declarator -> direct_declarator . LPAREN open_context option(parameter_type_list) save_contexts_stk close_context RPAREN [ SEMICOLON PACKED LPAREN LBRACK LBRACE EQ COMMA ATTRIBUTE ALIGNAS ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) direct_declarator . [ LBRACE ]
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) direct_declarator . LPAREN identifier_list RPAREN open_context declaration_list [ LBRACE ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifiers(declaration(external_declaration)) direct_declarator 
-##
-
-# Let's ignore the last production, which is K&R syntax.
-# Let's also ignore the possibility of declaring an array of functions,
-# a function that returns a function, etc.
-# The remaining difficulty is that we have read a direct_declarator
-# which could be (a) just the function's name or (b) the function's
-# name and parameters. If (a), we should encourage opening a parenthesis
-# and giving the parameters. If (b), we should encourage opening a brace
-# and giving the function body.
-
-# We should inline direct_declarator into function_definition_begin,
-# and if possible, take this opportunity to eliminate some illegal
-# cases and simplify the dirty business in function_definition_begin.
-# TEMPORARY
-
-Hmm.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: VOID TYPEDEF STAR RPAREN 
 ##
 ## Ends in an error in state: 229.
@@ -4825,39 +4813,6 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE VAR_NAME COMMA XOR_ASSIGN
 
 Ill-formed use of the comma operator.
 At this point, an expression is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: VOID TYPEDEF_NAME LBRACE VAR_NAME WHILE 
-##
-## Ends in an error in state: 386.
-##
-## general_identifier -> VAR_NAME . [ COLON ]
-## primary_expression -> VAR_NAME . [ XOR_ASSIGN SUB_ASSIGN STAR SLASH SEMICOLON RIGHT_ASSIGN RIGHT QUESTION PTR PLUS PERCENT OR_ASSIGN NEQ MUL_ASSIGN MOD_ASSIGN MINUS LT LPAREN LEQ LEFT_ASSIGN LEFT LBRACK INC HAT GT GEQ EQEQ EQ DOT DIV_ASSIGN DEC COMMA BARBAR BAR AND_ASSIGN ANDAND AND ADD_ASSIGN ]
-##
-## The known suffix of the stack is as follows:
-## VAR_NAME 
-##
-
-# Ill-formed statement beginning with a VAR_NAME.
-# It could be a labeled statement, in which case we expect a COLON; unlikely.
-# A binary (arithmetic) operator is unlikely too.
-# A semicolon is unlikely too.
-# An assignment operator is likely.
-# A dereferencing operator is likely.
-# An opening parenthesis or an opening bracket is likely.
-# A unary operator, ++, --, is likely.
-
-# This is a rather heuristic message.
-
-A variable has been recognized.
-Is this the beginning of a statement?
-At this point, one of the following seems likely:
-  an assignment operator; or
-  a dereferencing operator; or
-  an opening parenthesis '('; or
-  an opening bracket '['; or
-  a unary operator '++' or '--'. 
 
 # ------------------------------------------------------------------------------
 
