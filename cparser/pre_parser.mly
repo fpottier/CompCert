@@ -615,15 +615,17 @@ type_name:
 | specifier_qualifier_list(type_name) abstract_declarator(type_name)?
     {}
 
-(* The phantom parameter can be [parameter_declaration] or [type_name]
-   or [direct_abstract_declarator]. *)
+(* The phantom parameter can be [parameter_declaration] or [type_name].
+   We take the latter to mean [type_or_name] or [direct_abstract_declarator].
+   We need not distinguish these two cases: in both cases, a closing parenthesis
+   is permitted (and we do not wish to keep track of why it is permitted). *)
 abstract_declarator(phantom):
 | pointer
 | ilist(pointer1) direct_abstract_declarator
     {}
 
 direct_abstract_declarator:
-| LPAREN abstract_declarator(direct_abstract_declarator) RPAREN
+| LPAREN abstract_declarator(type_name) RPAREN
 | direct_abstract_declarator? LBRACK type_qualifier_list? optional(assignment_expression, RBRACK)
 | ioption(direct_abstract_declarator) LPAREN in_context(parameter_type_list?) RPAREN
     {}

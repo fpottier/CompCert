@@ -362,48 +362,10 @@ translation_unit_file: ALIGNAS LPAREN VOID LPAREN LPAREN RPAREN COMMA
 # At this point, the status of the first LPAREN is still undetermined (regular paren,
 # or beginning of a function type?) but that is not a problem for us.
 #
-# I am not sure if this state can be reached via spurious reductions?
-#
-# It is difficult to be consistent in the terminology. Here, a closing
-# parenthesis would FOLLOW a direct_abstract_declarator, but would also
-# COMPLETE a direct_abstract_declarator, since the production is
-# direct_abstract_declarator -> LPAREN direct_abstract_declarator . RPAREN
-#
-translation_unit_file: ALIGNAS LPAREN VOID LPAREN RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 329.
-##
-## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-## The known suffix of the stack is as follows:
-## direct_abstract_declarator 
-##
-#
 # This case is simplified by giving a phantom context parameter to abstract_declarator.
-# Here, we know we are in the context of a type_name, so RPAREN is allowed next.
+# Here, we know we are in the context of a type_name or direct_abstract_declarator,
+# so RPAREN is allowed next.
 # If we were in the context of a parameter_declaration, COMMA would be allowed next.
-#
-# This case is very similar to the previous example (which is why we share the
-# error message). The states are different because here we know that we are at
-# the top level (type_name -> direct_abstract_declarator) whereas in the other
-# example we are not (direct_abstract_declarator ->
-# direct_abstract_declarator).
-#
-translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR LPAREN RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 269.
-##
-## abstract_declarator(direct_abstract_declarator) -> list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator . [ RPAREN ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator 
-##
-#
-# Another very similar case, it seems.
 #
 translation_unit_file: ALIGNAS LPAREN VOID STAR LPAREN RPAREN XOR_ASSIGN 
 ##
@@ -469,18 +431,6 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ALIGNAS LPAREN VOID LPAREN STAR VAR_NAME 
-##
-## Ends in an error in state: 323.
-##
-## abstract_declarator(direct_abstract_declarator) -> list(pointer1) STAR option(type_qualifier_list) . [ RPAREN ]
-## abstract_declarator(direct_abstract_declarator) -> list(pointer1) STAR option(type_qualifier_list) . direct_abstract_declarator [ RPAREN ]
-## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) 
-##
 translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME 
 ##
 ## Ends in an error in state: 327.
@@ -493,12 +443,6 @@ translation_unit_file: ALIGNAS LPAREN VOID STAR VAR_NAME
 ## The known suffix of the stack is as follows:
 ## list(pointer1) STAR option(type_qualifier_list) 
 ##
-#
-# Very similar to the above example. The difference is that above we have seen an
-# LPAREN and we expect a matching RPAREN, whereas here we are in the context of a
-# type_name and that is why we know an RPAREN should come. In fact, these states
-# would be merged if the phantom parameter of abstract_declarator did not force
-# a distinction.
 
 At this point, one of the following is expected:
   a type qualifier; or
