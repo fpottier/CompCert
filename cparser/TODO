@@ -15,3 +15,8 @@ If the problematic token is a name, it could have been mis-classified;
 
 Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
+List of syntatic categories that appear in error messages:
+  _Alignas qualifier
+  expression
+  type name
+

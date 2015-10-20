@@ -176,6 +176,8 @@ translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN
 
 # gcc, clang: like us, expect a closing parenthesis.
 
+# CHECKED
+
 Up to this point, a type name has been recognized:
   $0
 If this type name is complete,
@@ -220,15 +222,22 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 # But, in CompCert, only one expression is allowed as part of ALIGNAS (see Elab.ml).
 # So we say we expect RPAREN.
 
+# And we say we have recognized "an expression", instead of "a list of expressions".
+# Not sure whether this is a good idea.
+
 # We must be careful: this state is reached via spurious reductions.
 # COMMA and RPAREN are not the only possible tokens at this point.
 # Any token that allows continuing the expression that has been read already
 # would be OK too.
 
-Ill-formed alignas specifier.
-Up to this point, a list of expressions has been recognized:
+# gcc, clang: like us, expect a closing parenthesis.
+
+# CHECKED
+
+Ill-formed _Alignas qualifier.
+Up to this point, an expression has been recognized:
   $0
-If this list is complete,
+If this expression is complete,
 then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
