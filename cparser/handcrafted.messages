@@ -242,7 +242,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ALIGNAS LPAREN INT LBRACK XOR_ASSIGN 
+translation_unit_file: ALIGNAS LPAREN INT LBRACK RPAREN
 ##
 ## Ends in an error in state: 152.
 ##
@@ -252,7 +252,7 @@ translation_unit_file: ALIGNAS LPAREN INT LBRACK XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## option(direct_abstract_declarator) LBRACK option(type_qualifier_list) 
 ##
-translation_unit_file: INT VAR_NAME LBRACK XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LBRACK RPAREN
 ##
 ## Ends in an error in state: 277.
 ##
@@ -266,6 +266,14 @@ translation_unit_file: INT VAR_NAME LBRACK XOR_ASSIGN
 # We are trying to recognize an array declarator.
 # We have seen the opening bracket and (maybe) some type qualifiers.
 # We are expecting more type qualifiers, or an expression, or a closing bracket.
+
+# gcc, clang: both say they expect an expression (and nothing else).
+# Yet, they do accept a closing bracket.
+
+# If in the first sentence we replace the invalid token with a type qualifier, such as CONST,
+# gcc and clang both say:
+# error: type qualifier used in array declarator outside of function prototype
+# On the other hand, in the second sentence, they accept a qualifier.
 
 Ill-formed array declarator.
 At this point, one of the following is expected:
