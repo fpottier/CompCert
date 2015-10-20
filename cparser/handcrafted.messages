@@ -2102,7 +2102,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VOLATILE VAR_NAME 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VOLATILE VAR_NAME 
 ##
 ## Ends in an error in state: 424.
 ##
@@ -2125,7 +2125,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE TYPEDEF_NAME VOLATILE LONG 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE TYPEDEF_NAME VOLATILE LONG 
 ##
 ## Ends in an error in state: 393.
 ##
@@ -2136,7 +2136,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE TYPEDEF_NAME 
 ## The known suffix of the stack is as follows:
 ## TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 426.
 ##
@@ -2171,7 +2171,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VOID XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 423.
 ##
@@ -2637,7 +2637,7 @@ is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM CONST XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM CONST XOR_ASSIGN 
 ##
 ## Ends in an error in state: 453.
 ##
@@ -2646,7 +2646,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM CONST XOR
 ## The known suffix of the stack is as follows:
 ## CONST 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM VOLATILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM VOLATILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 452.
 ##
@@ -2655,7 +2655,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM VOLATILE 
 ## The known suffix of the stack is as follows:
 ## VOLATILE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM XOR_ASSIGN 
 ##
 ## Ends in an error in state: 613.
 ##
@@ -2664,7 +2664,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM XOR_ASSIG
 ## The known suffix of the stack is as follows:
 ## ASM 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO ASM XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO ASM XOR_ASSIGN 
 ##
 ## Ends in an error in state: 451.
 ##
@@ -2681,7 +2681,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL COMMA XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 476.
 ##
@@ -2693,7 +2693,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN ST
 # We are in the clobber list.
 # We have seen a comma, so we expect a string literal.
 # first(asm_flags) = STRING_LITERAL
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 474.
 ##
@@ -2713,7 +2713,7 @@ Examples of clobbered resources:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL XOR_ASSIGN 
 ##
 ## Ends in an error in state: 475.
 ##
@@ -2739,7 +2739,7 @@ Examples of clobbered resources:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 472.
 ##
@@ -2759,7 +2759,7 @@ An assembly statement is terminated with a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME RBRACK XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME RBRACK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 466.
 ##
@@ -2777,7 +2777,7 @@ At this point, a string literal, representing a constraint, is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 461.
 ##
@@ -2792,7 +2792,7 @@ At this point, a closing bracket ']' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 460.
 ##
@@ -2807,7 +2807,7 @@ At this point, an identifier is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN COMMA XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 464.
 ##
@@ -2822,7 +2822,7 @@ At this point, an assembly operand is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 463.
 ##
@@ -2845,7 +2845,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 469.
 ##
@@ -2884,7 +2884,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 468.
 ##
@@ -2899,7 +2899,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL XOR_ASSIGN 
 ##
 ## Ends in an error in state: 467.
 ##
@@ -2920,7 +2920,7 @@ is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 459.
 ##
@@ -2940,7 +2940,7 @@ is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL XOR_ASSIGN 
 ##
 ## Ends in an error in state: 616.
 ##
@@ -2950,7 +2950,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN ST
 ## The known suffix of the stack is as follows:
 ## ASM asm_attributes LPAREN string_literals_list 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN STRING_LITERAL XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN STRING_LITERAL XOR_ASSIGN 
 ##
 ## Ends in an error in state: 458.
 ##
@@ -2971,7 +2971,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 615.
 ##
@@ -2980,7 +2980,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN XO
 ## The known suffix of the stack is as follows:
 ## ASM asm_attributes LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 457.
 ##
@@ -2995,7 +2995,7 @@ At this point, a string literal, representing an instruction, is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE BREAK XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE BREAK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 611.
 ##
@@ -3004,7 +3004,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE BREAK XOR_ASS
 ## The known suffix of the stack is as follows:
 ## BREAK 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO BREAK XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO BREAK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 449.
 ##
@@ -3013,7 +3013,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO BREAK XOR_
 ## The known suffix of the stack is as follows:
 ## BREAK close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CONTINUE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE CONTINUE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 606.
 ##
@@ -3022,7 +3022,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CONTINUE XOR_
 ## The known suffix of the stack is as follows:
 ## CONTINUE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CONTINUE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO CONTINUE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 443.
 ##
@@ -3031,7 +3031,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CONTINUE X
 ## The known suffix of the stack is as follows:
 ## CONTINUE close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 602.
 ##
@@ -3040,7 +3040,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON 
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE open_context LPAREN expression RPAREN close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 507.
 ##
@@ -3049,7 +3049,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOL
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE LPAREN expression RPAREN close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE GOTO VAR_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE GOTO VAR_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 585.
 ##
@@ -3058,7 +3058,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE GOTO VAR_NAME
 ## The known suffix of the stack is as follows:
 ## GOTO general_identifier 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO GOTO VAR_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO GOTO VAR_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 414.
 ##
@@ -3067,7 +3067,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO GOTO VAR_N
 ## The known suffix of the stack is as follows:
 ## GOTO general_identifier close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 539.
 ##
@@ -3077,7 +3077,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE LPAREN expression RPAREN close_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN STRING_LITERAL RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 618.
 ##
@@ -3086,7 +3086,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE ASM LPAREN ST
 ## The known suffix of the stack is as follows:
 ## ASM asm_attributes LPAREN string_literals_list asm_arguments RPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN STRING_LITERAL RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO ASM LPAREN STRING_LITERAL RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 482.
 ##
@@ -3101,7 +3101,7 @@ At this point, a semicolon ';' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 610.
 ##
@@ -3110,7 +3110,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME
 ## The known suffix of the stack is as follows:
 ## CASE conditional_expression COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DEFAULT COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DEFAULT COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 605.
 ##
@@ -3119,7 +3119,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DEFAULT COLON
 ## The known suffix of the stack is as follows:
 ## DEFAULT COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 545.
 ##
@@ -3129,7 +3129,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## CASE conditional_expression COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CASE VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO CASE VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 447.
 ##
@@ -3138,7 +3138,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CASE VAR_N
 ## The known suffix of the stack is as follows:
 ## CASE conditional_expression COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DEFAULT COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DEFAULT COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 542.
 ##
@@ -3148,7 +3148,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DEFAULT COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DEFAULT COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DEFAULT COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 441.
 ##
@@ -3157,7 +3157,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DEFAULT CO
 ## The known suffix of the stack is as follows:
 ## DEFAULT COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 555.
 ##
@@ -3167,7 +3167,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## general_identifier COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 631.
 ##
@@ -3176,7 +3176,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLO
 ## The known suffix of the stack is as follows:
 ## general_identifier COLON 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 496.
 ##
@@ -3191,7 +3191,7 @@ At this point, a statement is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 609.
 ##
@@ -3218,7 +3218,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE VAR_NAME
 ## In state 80, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 78, spurious reduction of production conditional_expression -> logical_or_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 544.
 ##
@@ -3246,7 +3246,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## In state 80, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 78, spurious reduction of production conditional_expression -> logical_or_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CASE VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO CASE VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 446.
 ##
@@ -3282,7 +3282,7 @@ then at this point, a colon ':' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE CASE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 608.
 ##
@@ -3291,7 +3291,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE CASE XOR_ASSI
 ## The known suffix of the stack is as follows:
 ## CASE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN CASE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 543.
 ##
@@ -3301,7 +3301,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## CASE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO CASE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO CASE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 445.
 ##
@@ -3316,7 +3316,7 @@ At this point, a constant expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DEFAULT XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DEFAULT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 604.
 ##
@@ -3325,7 +3325,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DEFAULT XOR_A
 ## The known suffix of the stack is as follows:
 ## DEFAULT 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 495.
 ##
@@ -3334,7 +3334,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO TYPEDEF_NA
 ## The known suffix of the stack is as follows:
 ## general_identifier 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DEFAULT XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DEFAULT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 541.
 ##
@@ -3344,7 +3344,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DEFAULT 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 554.
 ##
@@ -3354,7 +3354,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## general_identifier 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLON TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLON TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 630.
 ##
@@ -3363,7 +3363,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COLO
 ## The known suffix of the stack is as follows:
 ## general_identifier 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DEFAULT XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DEFAULT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 440.
 ##
@@ -3378,7 +3378,7 @@ At this point, a colon ':' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 600.
 ##
@@ -3408,7 +3408,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON 
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 537.
 ##
@@ -3439,7 +3439,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 505.
 ##
@@ -3478,7 +3478,7 @@ then at this point, a closing parenthesis ')' and a semicolon ';' are expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 599.
 ##
@@ -3487,7 +3487,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON 
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE open_context LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 536.
 ##
@@ -3497,7 +3497,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 504.
 ##
@@ -3512,7 +3512,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 598.
 ##
@@ -3521,7 +3521,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON 
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 535.
 ##
@@ -3531,7 +3531,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close WHILE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 503.
 ##
@@ -3546,7 +3546,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 596.
 ##
@@ -3555,7 +3555,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SEMICOLON 
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 534.
 ##
@@ -3565,7 +3565,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 502.
 ##
@@ -3586,7 +3586,7 @@ At this point, a 'while' keyword is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO XOR_ASSIGN 
 ##
 ## Ends in an error in state: 595.
 ##
@@ -3595,7 +3595,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## DO open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN DO XOR_ASSIGN 
 ##
 ## Ends in an error in state: 432.
 ##
@@ -3605,7 +3605,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## DO open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO DO XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO DO XOR_ASSIGN 
 ##
 ## Ends in an error in state: 439.
 ##
@@ -3620,7 +3620,7 @@ At this point, a statement (the loop body) is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 592.
 ##
@@ -3629,7 +3629,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SE
 ## The known suffix of the stack is as follows:
 ## FOR open_context LPAREN for_statement_header optional(expression,SEMICOLON) optional(expression,RPAREN) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 430.
 ##
@@ -3639,7 +3639,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## FOR LPAREN for_statement_header optional(expression,SEMICOLON) optional(expression,RPAREN) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON SEMICOLON RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 437.
 ##
@@ -3654,7 +3654,7 @@ At this point, a statement (the loop body) is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 510.
 ##
@@ -3696,7 +3696,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 591.
 ##
@@ -3705,7 +3705,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SE
 ## The known suffix of the stack is as follows:
 ## FOR open_context LPAREN for_statement_header optional(expression,SEMICOLON) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 428.
 ##
@@ -3715,7 +3715,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## FOR LPAREN for_statement_header optional(expression,SEMICOLON) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 436.
 ##
@@ -3735,7 +3735,7 @@ followed with a closing parenthesis ')', is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 590.
 ##
@@ -3744,7 +3744,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN SE
 ## The known suffix of the stack is as follows:
 ## FOR open_context LPAREN for_statement_header 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 427.
 ##
@@ -3754,7 +3754,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## FOR LPAREN for_statement_header 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN SEMICOLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 435.
 ##
@@ -3773,7 +3773,7 @@ followed with a semicolon ';', is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN VAR_NAME RPAREN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN VAR_NAME RPAREN 
 ##
 ## Ends in an error in state: 512.
 ##
@@ -3815,7 +3815,7 @@ then at this point, a semicolon ';' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 589.
 ##
@@ -3824,7 +3824,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR LPAREN XO
 ## The known suffix of the stack is as follows:
 ## FOR open_context LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 417.
 ##
@@ -3834,7 +3834,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## FOR LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO FOR LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 434.
 ##
@@ -3853,7 +3853,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE FOR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 588.
 ##
@@ -3862,7 +3862,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE FOR XOR_ASSIG
 ## The known suffix of the stack is as follows:
 ## FOR open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN FOR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 416.
 ##
@@ -3872,7 +3872,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## FOR 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO FOR XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO FOR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 433.
 ##
@@ -3887,7 +3887,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE GOTO XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE GOTO XOR_ASSIGN 
 ##
 ## Ends in an error in state: 584.
 ##
@@ -3896,7 +3896,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE GOTO XOR_ASSI
 ## The known suffix of the stack is as follows:
 ## GOTO 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO GOTO XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO GOTO XOR_ASSIGN 
 ##
 ## Ends in an error in state: 412.
 ##
@@ -3911,7 +3911,7 @@ At this point, an identifier (a 'goto' label) is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SEMICOLON ELSE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SEMICOLON ELSE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 628.
 ##
@@ -3920,7 +3920,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## if_else_statement_begin(open_context) ELSE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME RPAREN SEMICOLON ELSE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME RPAREN SEMICOLON ELSE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 552.
 ##
@@ -3930,7 +3930,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## if_else_statement_begin(nop) ELSE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO IF LPAREN CONSTANT RPAREN SEMICOLON ELSE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO IF LPAREN CONSTANT RPAREN SEMICOLON ELSE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 493.
 ##
@@ -3945,7 +3945,7 @@ At this point, a statement is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 403.
 ##
@@ -3955,7 +3955,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## IF LPAREN expression RPAREN save_contexts_stk 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 581.
 ##
@@ -3971,7 +3971,7 @@ At this point, a statement is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 401.
 ##
@@ -4002,7 +4002,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 579.
 ##
@@ -4042,7 +4042,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 400.
 ##
@@ -4052,7 +4052,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## IF LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 578.
 ##
@@ -4068,7 +4068,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN IF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 399.
 ##
@@ -4078,7 +4078,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## IF 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 577.
 ##
@@ -4094,7 +4094,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 411.
 ##
@@ -4104,7 +4104,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## SWITCH LPAREN expression RPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 398.
 ##
@@ -4113,7 +4113,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN
 ## The known suffix of the stack is as follows:
 ## SWITCH open_context LPAREN expression RPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 384.
 ##
@@ -4134,7 +4134,7 @@ enclosed within braces '{' and '}'.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 410.
 ##
@@ -4165,7 +4165,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 397.
 ##
@@ -4195,7 +4195,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 383.
 ##
@@ -4234,7 +4234,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 409.
 ##
@@ -4244,7 +4244,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## SWITCH LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 396.
 ##
@@ -4253,7 +4253,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH LPAREN
 ## The known suffix of the stack is as follows:
 ## SWITCH open_context LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SWITCH LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 382.
 ##
@@ -4268,7 +4268,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN SWITCH XOR_ASSIGN 
 ##
 ## Ends in an error in state: 408.
 ##
@@ -4278,7 +4278,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## SWITCH 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE SWITCH XOR_ASSIGN 
 ##
 ## Ends in an error in state: 395.
 ##
@@ -4287,7 +4287,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE SWITCH XOR_AS
 ## The known suffix of the stack is as follows:
 ## SWITCH open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO SWITCH XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO SWITCH XOR_ASSIGN 
 ##
 ## Ends in an error in state: 381.
 ##
@@ -4302,7 +4302,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 407.
 ##
@@ -4312,7 +4312,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## WHILE LPAREN expression RPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 375.
 ##
@@ -4321,7 +4321,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN 
 ## The known suffix of the stack is as follows:
 ## WHILE open_context LPAREN expression RPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN VAR_NAME RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 379.
 ##
@@ -4336,7 +4336,7 @@ At this point, a statement (the loop body) is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 406.
 ##
@@ -4367,7 +4367,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 374.
 ##
@@ -4397,7 +4397,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN 
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 378.
 ##
@@ -4436,7 +4436,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 405.
 ##
@@ -4446,7 +4446,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## WHILE LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 373.
 ##
@@ -4455,7 +4455,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE LPAREN 
 ## The known suffix of the stack is as follows:
 ## WHILE open_context LPAREN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO WHILE LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 377.
 ##
@@ -4470,7 +4470,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR_NAME RPAREN WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 404.
 ##
@@ -4480,7 +4480,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE IF LPAREN VAR
 ## The known suffix of the stack is as follows:
 ## WHILE 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 372.
 ##
@@ -4489,7 +4489,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE WHILE XOR_ASS
 ## The known suffix of the stack is as follows:
 ## WHILE open_context 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO WHILE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO WHILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 376.
 ##
@@ -4504,7 +4504,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE LBRACE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE LBRACE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 575.
 ##
@@ -4515,7 +4515,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE LBRACE XOR_AS
 ## LBRACE open_context option(block_item_list) 
 ##
 # We are possibly at the end of a block.
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO LBRACE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO LBRACE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 391.
 ##
@@ -4525,7 +4525,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO LBRACE XOR
 ## The known suffix of the stack is as follows:
 ## LBRACE option(block_item_list) 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 370.
 ##
@@ -4550,7 +4550,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE RETURN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE RETURN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 569.
 ##
@@ -4559,7 +4559,7 @@ translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE RETURN XOR_AS
 ## The known suffix of the stack is as follows:
 ## RETURN 
 ##
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE DO RETURN XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE DO RETURN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 385.
 ##
@@ -4576,7 +4576,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE STRING_LITERAL RPAREN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE STRING_LITERAL RPAREN 
 ##
 ## Ends in an error in state: 389.
 ##
@@ -4616,7 +4616,7 @@ then at this point, a semicolon ';' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 392.
 ##
@@ -4649,7 +4649,7 @@ at this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COMMA XOR_ASSIGN 
+translation_unit_file: VOID VAR_NAME LPAREN VOID RPAREN LBRACE VAR_NAME COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 98.
 ##
@@ -5083,7 +5083,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID VAR_NAME LPAREN VOID TYPEDEF_NAME SEMICOLON 
+translation_unit_file: VOID VAR_NAME LPAREN VOID VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 244.
 ##
