@@ -47,7 +47,9 @@ MENHIR_REDUCE_ON_ERROR := \
   attribute_specifier_list \
   declarator \
   statement_finish_close \
-  "iteration_statement(nop,statement_finish_close)"
+  "iteration_statement(nop,statement_finish_close)" \
+  enum_specifier \
+  struct_or_union_specifier
 
 # Options.
 

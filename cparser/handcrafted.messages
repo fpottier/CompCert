@@ -983,50 +983,6 @@ At this point, an enumerator is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ENUM VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 209.
-##
-## enum_specifier -> ENUM attribute_specifier_list general_identifier . [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
-## option(other_identifier) -> general_identifier . [ LBRACE ]
-##
-## The known suffix of the stack is as follows:
-## ENUM attribute_specifier_list general_identifier 
-##
-
-# This one is tricky. We can suggest a missing '{', and that is likely. But,
-# if the user really intended to write "enum foo", without braces, then it is
-# difficult to say what is expected next, because that depends on the calling
-# context.
-
-# TEMPORARY
-
-Maybe an opening brace '{' would be good here?
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: UNION VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 318.
-##
-## option(other_identifier) -> general_identifier . [ LBRACE ]
-## struct_or_union_specifier -> struct_or_union attribute_specifier_list general_identifier . [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RPAREN RESTRICT REGISTER PACKED LPAREN LONG LBRACK INT INLINE FLOAT EXTERN ENUM DOUBLE CONST COMMA COLON CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## struct_or_union attribute_specifier_list general_identifier 
-##
-
-# Same problem as above.
-
-# We have read "union foo". At this point, either we see an opening brace
-# and we expect a struct_declaration_list. Or, we don't, so we have a
-# complete struct_or_union_specifier, which forms a type specifier, and
-# we expect to see... what? lack of context. TEMPORARY
-
-Hmm.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: ENUM XOR_ASSIGN 
 ##
 ## Ends in an error in state: 195.
@@ -2090,6 +2046,11 @@ translation_unit_file: VOID XOR_ASSIGN
 # This situation is analogous to the previous one (above),
 # except we have seen a primitive type specifier (not a TYPEDEF_NAME),
 # so another primitive type specifier is OK.
+
+# Note that we can get here via spurious reductions (e.g. "enum foo" can
+# be considered a complete enum_specifier, hence a complete type_specifier).
+# Thus, the list of permitted continuations below can be slightly incomplete:
+# an opening brace could be used to continue "enum foo".
 
 Ill-formed declaration or function definition.
 At this point, one of the following is expected:
