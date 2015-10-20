@@ -191,7 +191,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN ALIGNOF LPAREN VOID XOR_ASSIGN
+translation_unit_file: INT VAR_NAME EQ ALIGNOF LPAREN VOID XOR_ASSIGN
 ##
 ## Ends in an error in state: 122.
 ##
@@ -209,7 +209,7 @@ translation_unit_file: PACKED LPAREN ALIGNOF LPAREN VOID XOR_ASSIGN
 ## In state 148, spurious reduction of production option(abstract_declarator(type_name)) -> 
 ## In state 324, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator(type_name)) 
 ##
-translation_unit_file: PACKED LPAREN SIZEOF LPAREN VOID XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ SIZEOF LPAREN VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 340.
 ##
@@ -238,7 +238,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN VAR_NAME COMMA VOID XOR_ASSIGN
+translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN VAR_NAME COMMA VOID XOR_ASSIGN
 ##
 ## Ends in an error in state: 331.
 ##
@@ -266,7 +266,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN INC LPAREN VOID XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ INC LPAREN VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 334.
 ##
@@ -294,7 +294,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN VOID XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ LPAREN VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 337.
 ##
@@ -1042,7 +1042,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN ALIGNOF LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ ALIGNOF LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 29.
 ##
@@ -1053,7 +1053,7 @@ translation_unit_file: PACKED LPAREN ALIGNOF LPAREN XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ALIGNOF LPAREN 
 ##
-translation_unit_file: PACKED LPAREN SIZEOF LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ SIZEOF LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 18.
 ##
@@ -1075,7 +1075,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN ALIGNOF XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ ALIGNOF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 28.
 ##
@@ -1094,7 +1094,7 @@ followed with an expression or a type name.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN SIZEOF XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ SIZEOF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 15.
 ##
@@ -1115,7 +1115,7 @@ followed with an expression or a type name.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 329.
 ##
@@ -1152,7 +1152,7 @@ then at this point, a comma ',' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 25.
 ##
@@ -1167,7 +1167,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN BUILTIN_VA_ARG XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG XOR_ASSIGN 
 ##
 ## Ends in an error in state: 24.
 ##
@@ -1182,7 +1182,7 @@ At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN DEC XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ DEC XOR_ASSIGN 
 ##
 ## Ends in an error in state: 22.
 ##
@@ -1191,7 +1191,7 @@ translation_unit_file: PACKED LPAREN DEC XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## DEC 
 ##
-translation_unit_file: PACKED LPAREN INC XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ INC XOR_ASSIGN 
 ##
 ## Ends in an error in state: 20.
 ##
@@ -1206,7 +1206,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN INC LPAREN INT RPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ INC LPAREN INT RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 335.
 ##
@@ -1234,7 +1234,7 @@ If this is intended to be the beginning of a cast expression,
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN INC LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ INC LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 21.
 ##
@@ -1252,7 +1252,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 326.
 ##
@@ -1295,7 +1295,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN INT RPAREN LBRACE VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN LBRACE VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 145.
 ##
@@ -1340,7 +1340,7 @@ then at this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN INT RPAREN LBRACE XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN LBRACE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 124.
 ##
@@ -1355,7 +1355,7 @@ At this point, an initializer is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN INT RPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 338.
 ##
@@ -1373,7 +1373,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 19.
 ##
@@ -1393,7 +1393,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN TILDE XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ TILDE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 30.
 ##
@@ -1408,7 +1408,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME AND XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME AND XOR_ASSIGN 
 ##
 ## Ends in an error in state: 92.
 ##
@@ -1417,7 +1417,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME AND XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## and_expression AND 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME ANDAND XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME ANDAND XOR_ASSIGN 
 ##
 ## Ends in an error in state: 81.
 ##
@@ -1426,7 +1426,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME ANDAND XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## logical_and_expression ANDAND 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME BAR XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME BAR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 83.
 ##
@@ -1435,7 +1435,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME BAR XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## inclusive_or_expression BAR 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME BARBAR XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME BARBAR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 104.
 ##
@@ -1444,7 +1444,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME BARBAR XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## logical_or_expression BARBAR 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME HAT XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME HAT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 85.
 ##
@@ -1453,7 +1453,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME HAT XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## exclusive_or_expression HAT 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME LT XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 75.
 ##
@@ -1462,7 +1462,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME LT XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## relational_expression relational_operator 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME NEQ XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME NEQ XOR_ASSIGN 
 ##
 ## Ends in an error in state: 89.
 ##
@@ -1471,7 +1471,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME NEQ XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## equality_expression equality_operator 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME PLUS XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME PLUS XOR_ASSIGN 
 ##
 ## Ends in an error in state: 68.
 ##
@@ -1480,7 +1480,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME PLUS XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## additive_expression additive_operator 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME RIGHT XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME RIGHT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 57.
 ##
@@ -1489,7 +1489,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME RIGHT XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## shift_expression shift_operator 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME STAR XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME STAR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 62.
 ##
@@ -1509,7 +1509,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME XOR_ASSIGN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME XOR_ASSIGN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 53.
 ##
@@ -1524,7 +1524,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME COMMA XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN VAR_NAME COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 111.
 ##
@@ -1542,7 +1542,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME DOT XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME DOT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 117.
 ##
@@ -1551,7 +1551,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME DOT XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## postfix_expression DOT 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME PTR XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME PTR XOR_ASSIGN 
 ##
 ## Ends in an error in state: 36.
 ##
@@ -1566,7 +1566,7 @@ At this point, the name of a struct or union member is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME LBRACK VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LBRACK VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 114.
 ##
@@ -1610,7 +1610,7 @@ then at this point, a closing bracket ']' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME LBRACK XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LBRACK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 113.
 ##
@@ -1625,7 +1625,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 110.
 ##
@@ -1666,7 +1666,7 @@ then at this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME LPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 40.
 ##
@@ -1682,7 +1682,7 @@ followed with a closing parenthesis ')', is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME QUESTION VAR_NAME COLON XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME QUESTION VAR_NAME COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 101.
 ##
@@ -1691,7 +1691,7 @@ translation_unit_file: PACKED LPAREN VAR_NAME QUESTION VAR_NAME COLON XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## logical_or_expression QUESTION expression COLON 
 ##
-translation_unit_file: PACKED LPAREN VAR_NAME QUESTION XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME QUESTION XOR_ASSIGN 
 ##
 ## Ends in an error in state: 79.
 ##
@@ -1706,7 +1706,7 @@ At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: PACKED LPAREN VAR_NAME QUESTION VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ VAR_NAME QUESTION VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 97.
 ##
