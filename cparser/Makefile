@@ -72,6 +72,14 @@ generate: $(MSGS).raw deLexer
 	    > $$filename ; \
 	  f=$$((f+1)) ; \
 	done < $<
+# Note: due to the lexer hack, I believe it could be the case that
+# beginning with a token stream xs, de-lexing xs, followed with
+# lexing & parsing, yields a token stream other than xs. As a result,
+# it could happen that one of the concrete sentences that we produce
+# does not lead to an error in the desired state. Hopefully, this
+# won't happen in practice. If it did happen, maybe we could let the
+# de-lexer produce unique identifiers every time it is asked for a
+# VAR_NAME.
 
 clean:
 	rm -f $(COMPCERT).conflicts
