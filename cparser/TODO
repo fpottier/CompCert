@@ -1,8 +1,3 @@
-Extend --on-error-reduce to allow also the case where there are several
-reductions (but only one of them is marked --on-error-reduce). In that
-case, maybe signal a conflict when several reductions are marked. Use
-that to deal with statements that could be followed with ELSE.
-
 %reduceonerror should be in the .mly file?
 
 If loop_handle_undo is unused, remove it, as it is costly.
