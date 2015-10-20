@@ -490,18 +490,6 @@ translation_unit_file: ALIGNAS LPAREN INT LPAREN LPAREN RPAREN COMMA
 # so RPAREN is allowed next.
 # If we were in the context of a parameter_declaration, COMMA would be allowed next.
 #
-translation_unit_file: ALIGNAS LPAREN INT STAR LPAREN RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 269.
-##
-## abstract_declarator(type_name) -> list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator . [ RPAREN ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator 
-
-# Ill-formed (direct) abstract declarator.
 
 # gcc and clang simply request a closing parenthesis.
 
@@ -550,27 +538,6 @@ At this point, one of the following is expected:
     and an optional expression; or
   a comma ',',
     followed with a parameter declaration; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: ALIGNAS LPAREN INT STAR VAR_NAME 
-##
-## Ends in an error in state: 323.
-##
-## abstract_declarator(type_name) -> list(pointer1) STAR option(type_qualifier_list) . [ RPAREN ]
-## abstract_declarator(type_name) -> list(pointer1) STAR option(type_qualifier_list) . direct_abstract_declarator [ RPAREN ]
-## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) 
-##
-
-At this point, one of the following is expected:
-  a type qualifier; or
-  a star '*', possibly followed with type qualifiers; or
-  a direct abstract declarator, followed with a closing parenthesis ')'; or
   a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
@@ -5214,33 +5181,6 @@ If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with a parameter declaration; or
   a comma ',', followed with an ellipsis '...'; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME LPAREN INT LPAREN STAR COMMA 
-##
-## Ends in an error in state: 268.
-##
-## abstract_declarator(type_name) -> list(pointer1) STAR option(type_qualifier_list) . [ RPAREN ]
-## abstract_declarator(type_name) -> list(pointer1) STAR option(type_qualifier_list) . direct_abstract_declarator [ RPAREN ]
-## declarator -> list(pointer1) STAR option(type_qualifier_list) . direct_declarator attribute_specifier_list [ RPAREN ]
-## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TYPEDEF_NAME STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) 
-##
-
-# TEMPORARY
-# I can say what is expected, but am a little lost as to why.
-# Can we say "Ill-formed declarator or abstract declarator"?
-
-At this point, one of the following is expected:
-  a type qualifier; or
-  a star '*', possibly followed with type qualifiers; or
-  a direct declarator; or
-  a direct abstract declarator, followed with a closing parenthesis ')'; or
   a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
