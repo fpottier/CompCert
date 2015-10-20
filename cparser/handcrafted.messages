@@ -156,7 +156,7 @@
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME INT
+translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME INT 
 ##
 ## Ends in an error in state: 177.
 ##
@@ -191,7 +191,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME EQ ALIGNOF LPAREN VOID XOR_ASSIGN
+translation_unit_file: INT VAR_NAME EQ ALIGNOF LPAREN VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 122.
 ##
@@ -238,7 +238,7 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN VAR_NAME COMMA VOID XOR_ASSIGN
+translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN VAR_NAME COMMA VOID XOR_ASSIGN 
 ##
 ## Ends in an error in state: 331.
 ##
@@ -463,14 +463,18 @@ At this point, a closing parenthesis ')' is expected.
 
 translation_unit_file: ALIGNAS LPAREN INT LPAREN LPAREN RPAREN COMMA 
 ##
-## Ends in an error in state: 282.
+## Ends in an error in state: 285.
 ##
-## abstract_declarator(type_name) -> direct_abstract_declarator . [ RPAREN ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
+## direct_abstract_declarator -> LPAREN abstract_declarator(type_name) . RPAREN [ RPAREN LPAREN LBRACK COMMA ]
 ##
 ## The known suffix of the stack is as follows:
-## direct_abstract_declarator 
+## LPAREN abstract_declarator(type_name) 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 282, spurious reduction of production abstract_declarator(type_name) -> direct_abstract_declarator 
 ##
 #
 # The first LPAREN in this example must be the beginning of an abstract_declarator.
