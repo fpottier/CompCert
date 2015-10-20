@@ -47,6 +47,33 @@ interpret_error:
 # Interpret one error sentence (interactive).
 	$(COMMAND) --interpret-error
 
+%.messages.raw: %.messages
+	@ $(COMMAND) --echo-errors $< > $@
+
+# We compile deLexer.ml to native code, because running it as an ocaml script
+# is way too slow.
+deLexer: deLexer.ml
+	@ ocamlopt -o $@ str.cmxa $<
+
+generate: $(MSGS).raw deLexer
+# Re-generate the C files in tests/generated.
+	@ rm -rf tests/generated
+	@ mkdir tests/generated
+# Read $(MSGS).raw, line by line.
+# For each sentence, create a new C file.
+# A sentence takes the form "<start symbol>: SYMBOLS...".
+# We cut the start symbol away,
+# and translate the rest to concrete C syntax using the deLexer.
+	@ f=0 ; \
+	while read -r line ; do \
+	  filename=`printf "tests/generated/%03d.c" $$f` ; \
+	  echo "$$line" \
+	    | cut --fields="1" --delimiter=" " --complement \
+	    | ./deLexer \
+	    > $$filename ; \
+	  f=$$((f+1)) ; \
+	done < $<
+
 clean:
 	rm -f $(COMPCERT).conflicts
 	rm -f $(COMPCERT).messages
@@ -54,3 +81,5 @@ clean:
 	rm -f $(COMPCERT).dot
 	rm -f $(COMPCERT).pdf
 	rm -f lr.csv
+	rm -f deLexer
+

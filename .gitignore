@@ -44,7 +44,9 @@ cparser/pre_parser.automaton
 cparser/pre_parser.follow
 cparser/pre_parser.messages
 cparser/handcrafted.messages.bak
+cparser/handcrafted.messages.raw
 cparser/pre_parser_messages.ml
+cparser/deLexer
 lib/Readconfig.ml
 lib/Tokenize.ml
 driver/Version.ml
