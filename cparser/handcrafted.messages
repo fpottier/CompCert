@@ -497,52 +497,11 @@ translation_unit_file: ALIGNAS LPAREN INT LPAREN LPAREN RPAREN COMMA
 
 # gcc and clang simply request a closing parenthesis.
 
-At this point, one of the following is expected:
-  an opening parenthesis '(',
-    followed with a list of parameters; or
-  an opening bracket '[',
-    followed with a list of type qualifiers
-    and an optional expression; or
-  a closing parenthesis ')'.
+# CHECKED
 
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME LPAREN INT LPAREN RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 292.
-##
-## abstract_declarator(parameter_declaration) -> direct_abstract_declarator . [ RPAREN COMMA ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK COMMA ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-## The known suffix of the stack is as follows:
-## direct_abstract_declarator 
-##
-translation_unit_file: INT VAR_NAME LPAREN INT STAR LPAREN RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 291.
-##
-## abstract_declarator(parameter_declaration) -> list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator . [ RPAREN COMMA ]
-## direct_abstract_declarator -> direct_abstract_declarator . LPAREN in_context(option(parameter_type_list)) RPAREN [ RPAREN LPAREN LBRACK COMMA ]
-## option(direct_abstract_declarator) -> direct_abstract_declarator . [ LBRACK ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator 
-##
-
-# Identical to the previous one, except we are in the context of a
-# parameter declaration, so COMMA is permitted too.
-
-Ill-formed (direct) abstract declarator.
-At this point, one of the following is expected:
-  an opening parenthesis '(',
-    followed with a comma-separated list of parameters; or
-  an opening bracket '[',
-    followed with a possibly empty list of type qualifiers
-    and an optional expression; or
-  a comma ',',
-    followed with a parameter declaration; or
-  a closing parenthesis ')'.
+Up to this point, an abstract declarator has been recognized:
+  $1 $0
+At this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -5179,51 +5138,15 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME SEMICOLON
 ## In state 263, spurious reduction of production parameter_list -> parameter_declaration 
 ##
 
+# The last parameter could be incomplete.
+# TEMPORARY bizarre to say: if the list is complete, then it could be continued.
+
 Up to this point, a list of parameters has been recognized:
   $0
 If this list is complete,
 then at this point, one of the following is expected:
   a comma ',', followed with a parameter declaration; or
   a comma ',', followed with an ellipsis '...'; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME LPAREN INT STAR XOR_ASSIGN 
-##
-## Ends in an error in state: 290.
-##
-## abstract_declarator(parameter_declaration) -> list(pointer1) STAR option(type_qualifier_list) . [ RPAREN COMMA ]
-## abstract_declarator(parameter_declaration) -> list(pointer1) STAR option(type_qualifier_list) . direct_abstract_declarator [ RPAREN COMMA ]
-## declarator -> list(pointer1) STAR option(type_qualifier_list) . direct_declarator attribute_specifier_list [ RPAREN COMMA ]
-## list(pointer1) -> list(pointer1) STAR option(type_qualifier_list) . [ STAR ]
-## type_qualifier_list -> option(type_qualifier_list) . type_qualifier [ VOLATILE VAR_NAME TYPEDEF_NAME STAR RPAREN RESTRICT PACKED LPAREN LBRACK CONST COMMA ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(pointer1) STAR option(type_qualifier_list) 
-##
-
-# We are in a parameter declaration, which can end with a declarator
-# or an abstract declarator.
-
-# So far, we have read a (non-empty) pointer,
-# which could form an abstract declarator,
-# hence a well-formed parameter declaration.
-
-# We expect:
-#   a type qualifier, extending our pointer;
-#   a star,           extending our pointer;
-#   a direct_abstract_declarator, extending our abstract declarator;
-#   a direct declarator, meaning that this is a declarator;
-#   COMMA, meaning that we move to the next parameter declaration;
-#   RPAREN, meaning that the list of parameter declaration is over.
-
-At this point, one of the following is expected:
-  a type qualifier; or
-  a star '*', possibly followed with type qualifiers; or
-  a direct declarator; or
-  a direct abstract declarator; or
-  a comma ',', followed with a parameter declaration; or
   a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
