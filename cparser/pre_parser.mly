@@ -870,14 +870,16 @@ function_definition_begin:
 | declaration_specifiers(declaration(external_declaration))
   ilist(pointer1) x=direct_declarator
     { match x with
-      | (_, None) -> $syntaxerror
+      | (_, None) -> !open_context()
+                     (* this case does not make sense, but will be caught later on by a type check *)
       | (i, Some restore_fun) -> restore_fun ()
     }
 | declaration_specifiers(declaration(external_declaration))
   ilist(pointer1) x=direct_declarator
   LPAREN params=identifier_list RPAREN open_context declaration_list
     { match x with
-      | (_, Some _) -> $syntaxerror
+      | (i, Some _) -> declare_varname i
+                       (* this case does not make sense, but the syntax of K&R declarators is broken anyway, ask JH *)
       | (i, None) ->
 	declare_varname i;
 	List.iter declare_varname params
