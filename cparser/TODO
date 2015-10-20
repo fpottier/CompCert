@@ -19,10 +19,13 @@ Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
 List of syntatic categories that appear in error messages:
   _Alignas qualifier
+  attribute specifier
   coumpound literal
+  enumerator
   expression
-  list of parameters (possibly empty; comma-separated)
-  list of type qualifiers (possibly empty; whitespace-separated)
+  gcc attribute
+  list of expressions (argument_expression_list) (possibly empty; comma-separated)
+  list of parameters (parameter_type_list) (possibly empty; comma-separated)
   type cast
   type name
 

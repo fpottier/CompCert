@@ -516,11 +516,16 @@ translation_unit_file: ALIGNAS LPAREN INT LPAREN XOR_ASSIGN
 ## LPAREN 
 ##
 
+# gcc and clang both say they want a closing parenthesis.
+# This seems a bit extreme.
+
+# CHECKED
+
 An opening parenthesis '(' has been recognized.
 At this point, one of the following is expected:
   an abstract declarator,
     if this parenthesis is a delimiter; or
-  a parameter type list,
+  a list of parameters,
     if this parenthesis is the beginning of a function declarator.
 
 # ------------------------------------------------------------------------------
@@ -539,11 +544,13 @@ translation_unit_file: INT VAR_NAME LPAREN INT LPAREN XOR_ASSIGN
 
 # Analogous to the above, but has a third item.
 
+# CHECKED
+
 An opening parenthesis '(' has been recognized.
 At this point, one of the following is expected:
   an abstract declarator or a declarator,
     if this parenthesis is a delimiter; or
-  a parameter type list,
+  a list of parameters,
     if this parenthesis is the beginning of a function declarator.
 
 # ------------------------------------------------------------------------------
@@ -562,6 +569,11 @@ translation_unit_file: ALIGNAS LPAREN VOLATILE ADD_ASSIGN
 
 # We are trying to recognize a specifier-qualifier-list, and have not yet seen
 # a type specifier, which is why we know the list is not finished.
+
+# clang says it expects a type.
+# gcc says the missing type defaults to int, and expects a closing parenthesis.
+
+# CHECKED
 
 Ill-formed type name.
 At this point, one of the following is expected:
@@ -583,7 +595,11 @@ translation_unit_file: ALIGNAS LPAREN XOR_ASSIGN
 
 # This one seems easy. We have recognized ALIGNAS LPAREN, and nothing that makes sense beyond that.
 
-Ill-formed alignas specifier.
+# clang and gcc say they expect an expression.
+
+# CHECKED
+
+Ill-formed _Alignas qualifier.
 At this point, one of the following is expected:
   an expression; or
   a type name.
@@ -603,7 +619,9 @@ translation_unit_file: ALIGNAS XOR_ASSIGN
 
 # Fingers in the nose.
 
-Ill-formed alignas specifier.
+# CHECKED.
+
+Ill-formed _Alignas qualifier.
 At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
@@ -623,6 +641,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN COMMA XOR_ASSIGN
 # possibility in the error message (why would someone use an
 # empty attribute?).
 
+# clang and gcc say they expect a closing parenthesis.
+
+# CHECKED
+
 Ill-formed attribute specifier.
 At this point, a gcc attribute is expected.
 
@@ -638,8 +660,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN RPAREN XOR_ASSIGN
 ## ATTRIBUTE LPAREN LPAREN gcc_attribute_list RPAREN 
 ##
 
+# CHECKED
+
 Ill-formed attribute specifier.
-At this point, another closing parenthesis ')' is expected.
+At this point, a second closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -656,6 +680,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN RPAREN XOR_ASSIGN
 
 # We have a seen a (non-empty) attribute list, so we expect either
 # a COMMA or a closing LPAREN LPAREN.
+
+# gcc/clang say they expect a closing parenthesis.
+
+# CHECKED
 
 Ill-formed attribute specifier.
 At this point, one of the following is expected:
@@ -698,13 +726,15 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMM
 # We know for sure that we are parsing a gcc attribute.
 # A (non-empty) list of expressions has been read.
 
+# gcc/clang say they want a closing parenthesis.
+
+# CHECKED
+
 Ill-formed gcc attribute.
 Up to this point, a list of expressions has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with another expression; or
-  a closing parenthesis ')'.
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -717,6 +747,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME COMM
 ## The known suffix of the stack is as follows:
 ## gcc_attribute_word LPAREN TYPEDEF_NAME COMMA 
 ##
+
+# gcc/clang agree.
+
+# CHECKED.
 
 Ill-formed gcc attribute.
 At this point, an expression is expected.
@@ -732,6 +766,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN TYPEDEF_NAME XOR_
 ## The known suffix of the stack is as follows:
 ## gcc_attribute_word LPAREN TYPEDEF_NAME 
 ##
+
+# gcc and clang complain about the TYPEDEF_NAME, not sure why.
+
+# CHECKED
 
 Ill-formed gcc attribute.
 At this point, a comma ',' is expected.
@@ -749,11 +787,14 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME LPAREN XOR_ASSIGN
 ## gcc_attribute_word LPAREN 
 ##
 
+# gcc and clang just say they expect an expression.
+# There is kind of hack in the pre_parser, here.
+# Without going into the details, we should just say we expect a list of attribute arguments.
+
+# CHECKED
+
 Ill-formed gcc attribute.
-At this point, one of the following is expected:
-  an identifier, followed with a comma ',',
-    followed with a non-empty comma-separated list of expressions; or
-  a possibly empty comma-separated list of expressions.
+At this point, a list of expressions is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -769,7 +810,13 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN VAR_NAME XOR_ASSIGN
 ## gcc_attribute_word 
 ##
 
+# gcc and clang say they expect a closing parenthesis (as usual).
+
+# CHECKED
+
 Ill-formed gcc attribute specifier.
+Up to this point, an attribute has been recognized:
+  $0
 At this point, one of the following is expected:
   an opening parenthesis '(',
     followed with a list of parameters for this attribute; or
@@ -794,6 +841,10 @@ translation_unit_file: ATTRIBUTE LPAREN LPAREN XOR_ASSIGN
 # (The gcc documentation says a list of attributes can be empty, but
 # since an attribute can be empty too, this creates a conflict.)
 
+# clang and gcc want a closing parenthesis, as usual (sigh)...
+
+# CHECKED
+
 Ill-formed gcc attribute specifier.
 At this point, a gcc attribute is expected.
 
@@ -809,8 +860,10 @@ translation_unit_file: ATTRIBUTE LPAREN XOR_ASSIGN
 ## ATTRIBUTE LPAREN 
 ##
 
+# CHECKED.
+
 Ill-formed gcc attribute specifier.
-At this point, another opening parenthesis '(' is expected.
+At this point, a second opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -823,6 +876,8 @@ translation_unit_file: ATTRIBUTE XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ATTRIBUTE 
 ##
+
+# CHECKED.
 
 Ill-formed gcc attribute specifier.
 At this point, two opening parentheses '((' are expected.
@@ -840,10 +895,15 @@ translation_unit_file: ENUM LBRACE VAR_NAME COMMA XOR_ASSIGN
 ## enumerator_list COMMA 
 ##
 
+# We omit the possibility of a closing brace.
+
+# gcc and clang say they want an identifier.
+# Indeed, an enumerator must begin with an identifier.
+
+# CHECKED.
+
 Ill-formed enumeration specifier.
-At this point, one of the following is expected:
-  an enumerator; or
-  a closing brace '}'.
+At this point, an enumerator is expected.
 
 # ------------------------------------------------------------------------------
 
