@@ -472,7 +472,7 @@ and singleline_comment = parse
     and supplier = I.lexer_lexbuf_to_supplier lexer lexbuf
     and succeed () = ()
     and fail checkpoint =
-      Cerrors.fatal_error "%s" (ErrorReports.report text !buffer checkpoint)
+      Cerrors.fatal_error_raw "%s" (ErrorReports.report text !buffer checkpoint)
     in
     I.loop_handle succeed fail supplier checkpoint
 

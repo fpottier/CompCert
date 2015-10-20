@@ -13,7 +13,5 @@ Revoir tous les messages d'erreur pour voir où $i peut servir.
 If the problematic token is a name, it could have been mis-classified;
   show how it was classified.
 
-Cerrors.fatal_error is not great for displaying our multi-line messages.
-
 Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
