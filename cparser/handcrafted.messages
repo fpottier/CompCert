@@ -412,9 +412,13 @@ translation_unit_file: INT VAR_NAME LBRACK RPAREN
 # error: type qualifier used in array declarator outside of function prototype
 # On the other hand, in the second sentence, they accept a qualifier.
 
+# We choose not to mention the possibility of a type qualifier (which may be
+# illegal here anyway).
+
+# CHECKED
+
 Ill-formed array declarator.
 At this point, one of the following is expected:
-  a type qualifier; or
   an expression, followed with a closing bracket ']'; or
   a closing bracket ']'.
 
@@ -450,6 +454,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT COMMA ELLIPSIS XOR_ASSIGN
 
 # Unlikely error, since only the ELLIPSIS allows us to tell that
 # the parameter list is finished.
+
+# CHECKED
 
 At this point, a closing parenthesis ')' is expected.
 
@@ -494,16 +500,16 @@ translation_unit_file: ALIGNAS LPAREN INT STAR LPAREN RPAREN XOR_ASSIGN
 ##
 ## The known suffix of the stack is as follows:
 ## list(pointer1) STAR option(type_qualifier_list) direct_abstract_declarator 
-##
-# Another very similar case, it seems.
-#
 
-Ill-formed (direct) abstract declarator.
+# Ill-formed (direct) abstract declarator.
+
+# gcc and clang simply request a closing parenthesis.
+
 At this point, one of the following is expected:
   an opening parenthesis '(',
-    followed with a comma-separated list of parameters; or
+    followed with a list of parameters; or
   an opening bracket '[',
-    followed with a possibly empty list of type qualifiers
+    followed with a list of type qualifiers
     and an optional expression; or
   a closing parenthesis ')'.
 

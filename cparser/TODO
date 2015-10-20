@@ -1,5 +1,7 @@
 %reduceonerror should be in the .mly file?
 
+Should we keep the "Ill-formed ..." headers? or remove them all?
+
 When we say "if this list is complete..."
 we should also say that if it is not complete, then it can
 be continued with a comma, etc.
@@ -19,6 +21,8 @@ List of syntatic categories that appear in error messages:
   _Alignas qualifier
   coumpound literal
   expression
+  list of parameters (possibly empty; comma-separated)
+  list of type qualifiers (possibly empty; whitespace-separated)
   type cast
   type name
 
