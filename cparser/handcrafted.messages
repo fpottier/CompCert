@@ -108,6 +108,15 @@
 # (as opposed to a label). This is slightly inaccurate (we lose completeness)
 # but removes an error state that is rather unpleasant.
 
+# Even though it may sound "bad" to arbitrarily force one reduction among
+# several possible reductions, one should keep in mind that an arbitrary
+# choice is already made for us by the user when he "chooses" the incorrect
+# token. Indeed, depending on which incorrect token is used, we may fall
+# within or outside of a lookahead set, so we may make different reduction
+# choices, and give different error messages. So, we shouldn't feel too bad
+# about forcing a few more arbitrary choices. This is actually more regular,
+# in a sense.
+
 # In another instance of this phenomemon, there is a rather tricky state,
 # where we have read "int f" at the toplevel, and we do not know whether this
 # will be a variable definition (declarator) or a function definition
@@ -116,6 +125,15 @@
 # beginning of a declarator. Again, we lose completeness (we will not suggest
 # that an opening parenthesis would have been accepted) but this makes our
 # life easier, and does not sound too bad.
+
+# Another instance is a state where we have read "enum foo". This could be a
+# complete enum_specifier, or it could be continued with an opening brace. If it
+# is complete, though, we lack static context to tell what should come after it.
+# Using lax --on-error-reduce enum_specifier allows us to force a reduction,
+# (thus forgetting that an opening brace would have been permitted) and to move
+# to another state where more contextual information is available. As noted
+# above, this reduction can already take place naturally, depending on the
+# lookahead token, so we are only adding more cases where it takes place.
 
 # The lax --on-reduce-error is used also to deal with a family of error states
 # where we have recognized a complete statement which could be continued with an
@@ -186,6 +204,11 @@ translation_unit_file: ALIGNAS LPAREN VOID XOR_ASSIGN
 # 3. An abstract declarator
 # 4. A closing parenthesis.
 #
+
+# I note that this state can apparently be reached via spurious reductions
+# (see tests/dubious-enum.c), although I do not quite understand the details.
+# Somehow "enum e" is reduced to a type specifier, even though it could be
+# incomplete (it could continue with an opening brace).
 
 Up to this point, a type name has been recognized
   ($1 is a type specifier).
