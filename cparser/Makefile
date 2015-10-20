@@ -9,6 +9,8 @@ COMPCERT := pre_parser
 MSGS     := handcrafted.messages
 COMMAND  := $(MENHIR) $(MENHIR_MODE) $(COMPCERT).mly $(FLAGS)
 
+CUT      := $(shell if which gcut >/dev/null ; then echo gcut ; else echo cut ; fi)
+
 all:
 # Compile Menhir.
 	make -C $(SRC)
@@ -70,7 +72,7 @@ generate: $(MSGS).raw deLexer
 	  rm -f $$filename ; \
 	  echo "typedef int t;" >> $$filename ; \
 	  echo "$$line" \
-	    | cut --fields="1" --delimiter=" " --complement \
+	    | $(CUT) --fields="1" --delimiter=" " --complement \
 	    | ./deLexer \
 	    >> $$filename ; \
 	  f=$$((f+1)) ; \
