@@ -117,6 +117,17 @@
 # that an opening parenthesis would have been accepted) but this makes our
 # life easier, and does not sound too bad.
 
+# The lax --on-reduce-error is used also to deal with a family of error states
+# where we have recognized a complete statement which could be continued with an
+# ELSE branch. These error states are difficult to explain: although we can
+# definitely say that ELSE is permitted, we have difficulty telling what else is
+# permitted, by lack of static context. We could recover this static information
+# by introducing a phantom parameter on statements, but that would be heavy. We
+# just cut a corner and use --on-reduce-error to view this as a complete
+# statement. Thus, we abandon the possibility that the statement could be
+# continued with ELSE: our error message will not mention it. Again, this makes
+# our life easier, and does not sound too bad.
+
 # ------------------------------------------------------------------------------
 
 translation_unit_file: ALIGNAS LPAREN TYPEDEF_NAME XOR_ASSIGN 
@@ -3996,78 +4007,6 @@ At this point, an identifier (a 'goto' label) is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN ASM LPAREN STRING_LITERAL RPAREN SEMICOLON XOR_ASSIGN 
-##
-## Ends in an error in state: 565.
-##
-## statement_finish_close -> asm_statement(close_context) . [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
-## statement_intern_close -> asm_statement(close_context) . [ ELSE ]
-##
-## The known suffix of the stack is as follows:
-## asm_statement(close_context) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN DO SEMICOLON WHILE LPAREN VAR_NAME RPAREN SEMICOLON XOR_ASSIGN 
-##
-## Ends in an error in state: 546.
-##
-## iteration_statement(nop,statement_finish_close) -> DO open_context statement_finish_close WHILE LPAREN expression RPAREN close_context SEMICOLON . [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
-## iteration_statement(nop,statement_intern_close) -> DO open_context statement_finish_close WHILE LPAREN expression RPAREN close_context SEMICOLON . [ ELSE ]
-##
-## The known suffix of the stack is as follows:
-## DO open_context statement_finish_close WHILE LPAREN expression RPAREN close_context SEMICOLON 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN LBRACE RBRACE XOR_ASSIGN 
-##
-## Ends in an error in state: 564.
-##
-## statement_finish_close -> compound_statement(nop) . [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
-## statement_intern_close -> compound_statement(nop) . [ ELSE ]
-##
-## The known suffix of the stack is as follows:
-## compound_statement(nop) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN RETURN SEMICOLON XOR_ASSIGN 
-##
-## Ends in an error in state: 555.
-##
-## statement_finish_close -> jump_statement(close_context) . [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
-## statement_intern_close -> jump_statement(close_context) . [ ELSE ]
-##
-## The known suffix of the stack is as follows:
-## jump_statement(close_context) 
-##
-translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN SEMICOLON XOR_ASSIGN 
-##
-## Ends in an error in state: 563.
-##
-## statement_finish_close -> expression_statement(close_context) . [ WHILE VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF TILDE SWITCH STRUCT STRING_LITERAL STATIC STAR SIZEOF SIGNED SHORT SEMICOLON RETURN RESTRICT REGISTER RBRACE PRAGMA PLUS PACKED MINUS LPAREN LONG LBRACE INT INLINE INC IF GOTO FOR FLOAT EXTERN ENUM DOUBLE DO DEFAULT DEC CONTINUE CONSTANT CONST CHAR CASE BUILTIN_VA_ARG BREAK BANG AUTO ATTRIBUTE ASM AND ALIGNOF ALIGNAS ]
-## statement_intern_close -> expression_statement(close_context) . [ ELSE ]
-##
-## The known suffix of the stack is as follows:
-## expression_statement(close_context) 
-##
-
-# Tricky.
-
-# We have recognized a complete statement, which should be classified
-# either as a statement_finish or a statement_intern, depending on whether an ELSE
-# follows. In the first case, what should it be followed with? This depends upon
-# the context. The contexts in which a statement_finish occurs are:
-
-# statement_finish itself (always appears last, so contributes nothing)
-# block_item (should then be followed with another block_item or RBRACE)
-# DO/WHILE (should then be followed by WHILE)
-
-# TEMPORARY parameterize statement_finish with a context?
-
-At this point, one of the following is expected:
-  an 'else' keyword, followed with a statement; or
-  a 'while' keyword (maybe!); or
-  a declaration, statement, or pragma (maybe!); or
-  a closing brace '}' (maybe!).
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: VOID TYPEDEF_NAME LBRACE IF LPAREN VAR_NAME RPAREN SEMICOLON ELSE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 634.
@@ -4693,6 +4632,11 @@ translation_unit_file: VOID TYPEDEF_NAME LBRACE XOR_ASSIGN
 ## function_definition_begin LBRACE option(block_item_list) 
 ##
 # We are possibly at the end of a function body.
+#
+# Note that, because we have used --on-error-reduce to consider some statements
+# as complete even when they could be continued ELSE, we may end up here even
+# though ELSE is permitted. There is nothing we can do about it. We just omit
+# this permitted continuation in our message.
 
 At this point, one of the following is expected:
   a declaration; or

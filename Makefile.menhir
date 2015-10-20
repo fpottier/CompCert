@@ -45,7 +45,9 @@ MENHIR_REDUCE_ON_ERROR := \
   assignment_expression \
   expression \
   attribute_specifier_list \
-  declarator
+  declarator \
+  statement_finish_close \
+  "iteration_statement(nop,statement_finish_close)"
 
 # Options.
 
