@@ -284,6 +284,9 @@ translation_unit_file: INT VAR_NAME EQ INC LPAREN VOID XOR_ASSIGN
 ## In state 324, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator(type_name)) 
 ##
 
+# gcc simply says it expects a closing parenthesis,
+# but clang says it expects a closing parenthesis and an opening brace.
+
 # CHECKED
 
 Ill-formed compound literal.
@@ -313,10 +316,10 @@ translation_unit_file: INT VAR_NAME EQ LPAREN VOID XOR_ASSIGN
 ## In state 324, spurious reduction of production type_name -> specifier_qualifier_list(type_name) option(abstract_declarator(type_name)) 
 ##
 
-# This could be a type cast or a compound literal, but we will assume
-# it is the former.
+# gcc and clang say they expect a closing parenthesis.
 
-Ill-formed type cast.
+# CHECKED
+
 Up to this point, a type name has been recognized:
   $1 $0
 If this type name is complete,
@@ -363,11 +366,6 @@ translation_unit_file: ALIGNAS LPAREN VAR_NAME SEMICOLON
 
 # And we say we have recognized "an expression", instead of "a list of expressions".
 # Not sure whether this is a good idea.
-
-# We must be careful: this state is reached via spurious reductions.
-# COMMA and RPAREN are not the only possible tokens at this point.
-# Any token that allows continuing the expression that has been read already
-# would be OK too.
 
 # gcc, clang: like us, expect a closing parenthesis.
 

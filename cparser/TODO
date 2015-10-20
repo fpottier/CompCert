@@ -17,6 +17,8 @@ Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
 List of syntatic categories that appear in error messages:
   _Alignas qualifier
+  coumpound literal
   expression
+  type cast
   type name
 
