@@ -63,13 +63,16 @@ generate: $(MSGS).raw deLexer
 # A sentence takes the form "<start symbol>: SYMBOLS...".
 # We cut the start symbol away,
 # and translate the rest to concrete C syntax using the deLexer.
+# We declare a type name "t", which the de-lexer uses as a type name.
 	@ f=0 ; \
 	while read -r line ; do \
 	  filename=`printf "tests/generated/%03d.c" $$f` ; \
+	  rm -f $$filename ; \
+	  echo "typedef int t;" >> $$filename ; \
 	  echo "$$line" \
 	    | cut --fields="1" --delimiter=" " --complement \
 	    | ./deLexer \
-	    > $$filename ; \
+	    >> $$filename ; \
 	  f=$$((f+1)) ; \
 	done < $<
 # Note: due to the lexer hack, I believe it could be the case that

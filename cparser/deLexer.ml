@@ -48,7 +48,7 @@ let delex (symbol : string) : string =
   | "UNSIGNED" -> "unsigned"
   | "VOID" -> "void"
   | "WHILE" -> "while"
-  | "TYPEDEF_NAME" -> "__builtin_va_list" (* this is a type name *)
+  | "TYPEDEF_NAME" -> "t"          (* this should be a type name *)
   | "VAR_NAME" -> "x"          (* this should be a variable name *)
   | "CONSTANT" -> "42"
   | "STRING_LITERAL" -> "\"\""
