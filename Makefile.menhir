@@ -52,6 +52,7 @@ MENHIR_REDUCE_ON_ERROR := \
   struct_or_union_specifier \
   "specifier_qualifier_list(struct_declaration)" \
   "specifier_qualifier_list(type_name)" \
+  "option(abstract_declarator(type_name))" \
 
 # Options.
 
