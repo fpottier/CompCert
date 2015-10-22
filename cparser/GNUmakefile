@@ -125,6 +125,8 @@ interpret_error:
 # Translating the database of erroneous input sentences to concrete syntax.
 
 # [make concrete] destroys and re-creates the C files in tests/generated/.
+# Once this is done, run [make -C tests/generated] to submit these C files
+# to CompCert, clang and gcc.
 
 .PHONY: concrete
 
