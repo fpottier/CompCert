@@ -2753,6 +2753,10 @@ translation_unit_file: TYPEDEF INT STAR RPAREN
 #   one more '*', possibly followed with type qualifiers.
 # If the pointer is finished, then we expect a direct declarator.
 
+# If may seem tempting to declare --on-error-reduce "list(pointer1)", but
+# that would clash with --on-error-reduce "abstract_declarator(type_name)":
+# there are states where both reductions are enabled.
+
 # clang and gcc expect identifier or '(', as usual.
 
 # CHECKED.
