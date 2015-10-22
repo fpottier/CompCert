@@ -13,7 +13,7 @@ CLANG   := clang
 all: $(TARGETS)
 
 clean:
-	@ rm -f $(TARGETS) *~
+	@ rm -f *.err *~
 
 %.ccomp.err: %.c $(CCOMP)
 	@ echo $(CCOMP) -c $<
