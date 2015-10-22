@@ -5011,13 +5011,13 @@ At this point, an expression is expected.
 
 translation_unit_file: INT VAR_NAME COMMA VAR_NAME RPAREN 
 ##
-## Ends in an error in state: 529.
+## Ends in an error in state: 526.
 ##
-## init_declarator -> declare_varname(fst(declarator)) . [ SEMICOLON COMMA ]
-## init_declarator -> declare_varname(fst(declarator)) . EQ c_initializer [ SEMICOLON COMMA ]
+## init_declarator_list -> init_declarator_list . COMMA init_declarator [ SEMICOLON COMMA ]
+## option(init_declarator_list) -> init_declarator_list . [ SEMICOLON ]
 ##
 ## The known suffix of the stack is as follows:
-## declare_varname(fst(declarator)) 
+## init_declarator_list 
 ##
 ## WARNING: This example involves spurious reductions.
 ## This implies that, although the LR(1) items shown above provide an
@@ -5026,18 +5026,16 @@ translation_unit_file: INT VAR_NAME COMMA VAR_NAME RPAREN
 ## In state 275, spurious reduction of production attribute_specifier_list -> 
 ## In state 281, spurious reduction of production declarator -> direct_declarator attribute_specifier_list 
 ## In state 294, spurious reduction of production declare_varname(fst(declarator)) -> declarator 
+## In state 529, spurious reduction of production init_declarator -> declare_varname(fst(declarator)) 
+## In state 528, spurious reduction of production init_declarator_list -> init_declarator_list COMMA init_declarator 
 ##
 
-# init_declarator always appears as part of init_declarator_list,
-# which is always followed with a SEMICOLON. So the context is clear.
+# CHECKED.
 
-Up to this point, a declarator has been recognized:
+Up to this point, a list of declarators has been recognized:
   $0
-If this declarator is complete,
-then at this point, one of the following is expected:
-  an equals sign '=', followed with an initializer; or
-  a comma ',', followed with an init declarator; or
-  a semicolon ';'.
+If this list is complete,
+then at this point, a semicolon ';' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -5051,51 +5049,10 @@ translation_unit_file: INT VAR_NAME COMMA XOR_ASSIGN
 ## init_declarator_list COMMA 
 ##
 
+# CHECKED.
+
 Ill-formed declaration.
 At this point, an init declarator is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME EQ CONSTANT RPAREN 
-##
-## Ends in an error in state: 526.
-##
-## init_declarator_list -> init_declarator_list . COMMA init_declarator [ SEMICOLON COMMA ]
-## option(init_declarator_list) -> init_declarator_list . [ SEMICOLON ]
-##
-## The known suffix of the stack is as follows:
-## init_declarator_list 
-##
-## WARNING: This example involves spurious reductions.
-## This implies that, although the LR(1) items shown above provide an
-## accurate view of the past (what has been recognized so far), they
-## may provide an INCOMPLETE view of the future (what was expected next).
-## In state 35, spurious reduction of production unary_expression -> postfix_expression 
-## In state 41, spurious reduction of production cast_expression -> unary_expression 
-## In state 64, spurious reduction of production multiplicative_expression -> cast_expression 
-## In state 58, spurious reduction of production additive_expression -> multiplicative_expression 
-## In state 77, spurious reduction of production shift_expression -> additive_expression 
-## In state 54, spurious reduction of production relational_expression -> shift_expression 
-## In state 70, spurious reduction of production equality_expression -> relational_expression 
-## In state 86, spurious reduction of production and_expression -> equality_expression 
-## In state 94, spurious reduction of production exclusive_or_expression -> and_expression 
-## In state 95, spurious reduction of production inclusive_or_expression -> exclusive_or_expression 
-## In state 96, spurious reduction of production logical_and_expression -> inclusive_or_expression 
-## In state 80, spurious reduction of production logical_or_expression -> logical_and_expression 
-## In state 78, spurious reduction of production conditional_expression -> logical_or_expression 
-## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
-## In state 138, spurious reduction of production c_initializer -> assignment_expression 
-## In state 531, spurious reduction of production init_declarator -> declare_varname(fst(declarator)) EQ c_initializer 
-## In state 532, spurious reduction of production init_declarator_list -> init_declarator 
-##
-
-Ill-formed declaration.
-Up to this point, a list of init declarators has been recognized:
-  $0
-If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with an init declarator; or
-  a semicolon ';'.
 
 # ------------------------------------------------------------------------------
 

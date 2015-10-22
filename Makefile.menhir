@@ -57,6 +57,7 @@ MENHIR_REDUCE_ON_ERROR := \
   "abstract_declarator(parameter_declaration)" \
   asm_flags \
   asm_operands \
+  init_declarator \
 
 # Options.
 

@@ -30,6 +30,7 @@ List of syntatic categories that appear in error messages:
   expression
   gcc attribute
   initializer
+  list of declarators (possibly empty, but usually non-empty; comma-separated);
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
   list of init declarators (non-empty; comma-separated)
   list of initializers
