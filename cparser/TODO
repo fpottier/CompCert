@@ -1,21 +1,7 @@
 %reduceonerror should be in the .mly file?
 
-Should we keep the "Ill-formed ..." headers? or remove them all?
-
-When we say "if this list is complete..."
-we should also say that if it is not complete, then it can
-be continued with a comma, etc.
-Same thing for attribute_specifier_list, declarator.
-
-When a nonempty list is expected, there can be hesitation: should we say "an
-element is expected", or "a nonempty list is expected"?
-
-Revoir tous les messages d'erreur pour voir où $i peut servir.
-
 If the problematic token is a name, it could have been mis-classified;
-  show how it was classified.
-
-Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
+  show how it was classified?
 
 Revoir toutes les catégories syntaxiques et en donner des exemples.
   (Qui peuvent être ajoutés automatiquement?)
