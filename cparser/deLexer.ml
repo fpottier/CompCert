@@ -8,7 +8,7 @@
 let delex (symbol : string) : string =
   match symbol with
   | "ALIGNAS" -> "_Alignas"
-  | "ALIGNOF" -> "_Alignof"
+  | "ALIGNOF" -> "__alignof__" (* use the gcc-compatible form *)
   | "UNDERSCORE_BOOL" -> "_Bool"
   | "ASM" -> "__asm"
   | "ATTRIBUTE" -> "__attribute"
