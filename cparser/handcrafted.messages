@@ -230,9 +230,9 @@ translation_unit_file: INT VAR_NAME EQ SIZEOF LPAREN VOID XOR_ASSIGN
 
 # CHECKED
 
-Ill-formed use of sizeof or _Alignof.
+Ill-formed use of $2.
 Up to this point, a type name has been recognized:
-  $2 $1 $0
+  $0
 If this type name is complete,
 then at this point, a closing parenthesis ')' is expected.
 
@@ -949,7 +949,7 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 #   enumerator -> enumeration_constant . EQ constant_expression [ RBRACE COMMA ]
 # To see this, try the sentence ENUM LBRACE VAR_NAME XOR_ASSIGN.
 #
-# So, the last enumerator must be of the second form, which means it is safe
+# So, the last enumerator must be of the second form, which means it would be safe
 # for us to say "an expression has just been recognized".
 #
 # On the other hand, we cannot show the expression that has just been recognized;
@@ -957,13 +957,13 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ CONSTANT SEMICOLON
 #
 # We omit the fact that a comma is allowed just before the closing brace.
 
+# CHECKED.
+
 Ill-formed enumeration specifier.
 Up to this point, a list of enumerators has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with an enumerator; or
-  a closing brace '}'.
+then at this point, a closing brace '}' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -976,6 +976,8 @@ translation_unit_file: ENUM LBRACE VAR_NAME EQ XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## enumeration_constant EQ 
 ##
+
+# CHECKED.
 
 Ill-formed enumeration specifier.
 At this point, a constant expression is expected.
@@ -992,6 +994,10 @@ translation_unit_file: ENUM LBRACE VAR_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## enumeration_constant 
 ##
+
+# Here, both clang and gcc give an incomplete diagnostic message.
+
+# CHECKED.
 
 Ill-formed enumeration specifier.
 At this point, one of the following is expected:
@@ -1011,6 +1017,11 @@ translation_unit_file: ENUM LBRACE XOR_ASSIGN
 ## ENUM attribute_specifier_list option(other_identifier) LBRACE 
 ##
 
+# gcc says it expects an identifier.
+# clang says it expects a closing brace (which seems incorrect).
+
+# CHECKED.
+
 Ill-formed enumeration specifier.
 At this point, an enumerator is expected.
 
@@ -1027,6 +1038,10 @@ translation_unit_file: ENUM XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ENUM attribute_specifier_list 
 ##
+
+# Here, both clang and gcc give an incomplete diagnostic message.
+
+# CHECKED.
 
 Ill-formed enumeration specifier.
 At this point, one of the following is expected:
@@ -1059,13 +1074,17 @@ translation_unit_file: INT VAR_NAME EQ SIZEOF LPAREN XOR_ASSIGN
 ## SIZEOF LPAREN 
 ##
 
-# Tricky because we do not know whether we are looking at a compound literal,
-# an ordinary parenthesized expression, or a sizeof/alignof expression!
-# Fortunately, it is easy to say what is expected next.
+# Tricky because we could be looking at the beginning of a compound
+# literal, in which case we expect a type name! But that would be a
+# use of SIZEOF or ALIGNOF without parentheses, which is very unlikely.
+# So, we omit this possibility.
 
-At this point, one of the following is expected:
-  an expression; or
-  a type name.
+# gcc/clang do the same.
+
+# CHECKED.
+
+Ill-formed use of $1.
+At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -1079,15 +1098,6 @@ translation_unit_file: INT VAR_NAME EQ ALIGNOF XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ALIGNOF 
 ##
-
-# Let's not reveal that alignof can be used without parentheses.
-
-Ill-formed use of _Alignof.
-At this point, an opening parenthesis '(' is expected,
-followed with an expression or a type name.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: INT VAR_NAME EQ SIZEOF XOR_ASSIGN 
 ##
 ## Ends in an error in state: 15.
@@ -1099,11 +1109,14 @@ translation_unit_file: INT VAR_NAME EQ SIZEOF XOR_ASSIGN
 ## SIZEOF 
 ##
 
-# Same as above, this time with sizeof.
+# Let's not reveal that _Alignof and sizeof can be used without parentheses.
 
-# Let's not reveal that sizeof can be used without parentheses.
+# gcc and clang say they expect an expression, which seems both surprising
+# (they don't request a parenthesis) and incomplete (they don't allow a type name).
 
-Ill-formed use of sizeof.
+# CHECKED.
+
+Ill-formed use of $0.
 At this point, an opening parenthesis '(' is expected,
 followed with an expression or a type name.
 

@@ -17,11 +17,14 @@ If the problematic token is a name, it could have been mis-classified;
 
 Vérifier un par un les résultats de la comparaison ccomp/gcc/clang.
 
+Revoir toutes les catégories syntaxiques et en donner des exemples.
+  (Qui peuvent être ajoutés automatiquement?)
 List of syntatic categories that appear in error messages:
   _Alignas qualifier
   attribute specifier
   coumpound literal
   enumerator
+  enumeration specifier
   expression
   gcc attribute
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
