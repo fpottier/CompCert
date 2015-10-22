@@ -2039,6 +2039,10 @@ translation_unit_file: TYPEDEF XOR_ASSIGN
 #     function specifiers (i.e., INLINE, but I suspect this is illegal here).
 # followed with a type specifier.
 
+# gcc and clang expect identifier or '('.
+
+# CHECKED.
+
 Ill-formed type definition.
 At this point, one of the following is expected:
   a storage class specifier; or
@@ -2047,7 +2051,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN VOLATILE VAR_NAME 
+translation_unit_file: INT VAR_NAME LPAREN VOLATILE XOR_ASSIGN
 ##
 ## Ends in an error in state: 257.
 ##
@@ -2068,6 +2072,8 @@ translation_unit_file: INT VAR_NAME LPAREN VOLATILE VAR_NAME
 # continuation would be declarator, abstract_declarator, or nothing,
 # which implies COMMA or RPAREN. Let's not mention that, and describe
 # things only up to the (required) type specifier.)
+
+# CHECKED.
 
 Ill-formed parameter declaration.
 At this point, one of the following is expected:
@@ -2099,16 +2105,33 @@ translation_unit_file: VOLATILE TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
+translation_unit_file: INT XOR_ASSIGN 
+##
+## Ends in an error in state: 360.
+##
+## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
+##
 
-# We have seen a TYPEDEF_NAME,
+# We have seen a TYPEDEF_NAME or a primitive type specifier,
 # and possibly some declaration_specifiers_no_type.
 # We expect:
-# possibly more declaration_specifiers_no_type?,
+# possibly more declaration_specifier_no_type or declaration_specifier_no_typedef_name,
 #   which means a list of:
 #     storage class specifiers,
 #     type qualifiers,
 #     function specifiers,
+#     possibly type specifiers,
 # possibly followed with a TYPEDEF keyword.
+
+# Note that we can get here via spurious reductions (e.g. "enum foo" can
+# be considered a complete enum_specifier, hence a complete type_specifier).
+# Thus, the list of permitted continuations below can be slightly incomplete:
+# an opening brace could be used to continue "enum foo".
 
 # Let's NOT mention the possibility of placing TYPEDEF somewhere in the middle.
 # This means we pretend to be definitely in a declaration_specifiers(declaration).
@@ -2124,52 +2147,24 @@ translation_unit_file: VOLATILE TYPEDEF_NAME XOR_ASSIGN
 #   ioption(pointer) x=direct_declarator     if this is a function definition.
 #                                            (followed with a function body)
 
-Ill-formed declaration or function definition.
-At this point, one of the following is expected:
-  a storage class specifier; or
-  a type qualifier; or
-  a comma-separated list of init declarators,
-  followed with a semicolon ';',
-    if this is a declaration; or
-  a possibly empty list of pointers,
-  followed with a direct declarator,
-  followed with a function body,
-    if this is a function definition.
+# gcc and clang expect identifier or '(', which is very low-level.
 
-# ------------------------------------------------------------------------------
+# We simplify "a list of init declarators" to "an init declarator".
 
-translation_unit_file: INT XOR_ASSIGN 
-##
-## Ends in an error in state: 360.
-##
-## declaration_specifiers(declaration(external_declaration)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
+# Our message is probably too elaborate; we could omit certain elements,
+# or try to simplify our description in the case of a function definition.
 
-# This situation is analogous to the previous one (above),
-# except we have seen a primitive type specifier (not a TYPEDEF_NAME),
-# so another primitive type specifier is OK.
-
-# Note that we can get here via spurious reductions (e.g. "enum foo" can
-# be considered a complete enum_specifier, hence a complete type_specifier).
-# Thus, the list of permitted continuations below can be slightly incomplete:
-# an opening brace could be used to continue "enum foo".
+# CHECKED.
 
 Ill-formed declaration or function definition.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a type specifier; or
-  a comma-separated list of init declarators,
-  followed with a semicolon ';',
+  an init declarator,
     if this is a declaration; or
   a possibly empty list of pointers,
-  followed with a direct declarator,
-  followed with a function body,
+    followed with a direct declarator,
+    followed with a function body,
     if this is a function definition.
 
 # ------------------------------------------------------------------------------
@@ -2194,38 +2189,6 @@ translation_unit_file: INT VAR_NAME LPAREN VOLATILE TYPEDEF_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
-
-# Analogous to the above two situations, except this time, we are in the
-# context of a parameter declaration (as opposed to a declaration or
-# function definition). This rules out 'typedef' and 'inline', for real,
-# I think. Also, this changes the continuation.
-
-# We have seen a type specifier,
-# and possibly some declaration_specifiers_no_type.
-# We expect:
-# possibly more declaration_specifiers_no_type?,
-#   which means a list of:
-#     storage class specifiers,
-#     type qualifiers.
-
-# If this declaration_specifiers(parameter_declaration) is complete,
-# then we expect:
-#   declarator
-#   abstract_declarator
-#   or neither, which means that the parameter_declaration is over,
-#   which means we expect COMMA or RPAREN.
-
-Ill-formed parameter declaration.
-At this point, one of the following is expected:
-  a storage class specifier; or
-  a type qualifier; or
-  a declarator; or
-  an abstract declarator; or
-  a comma ',', followed with a parameter declaration; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: INT VAR_NAME LPAREN INT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 250.
@@ -2237,15 +2200,39 @@ translation_unit_file: INT VAR_NAME LPAREN INT XOR_ASSIGN
 ## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
 ##
 
-# This situation is analogous to the previous one (above),
-# except we have seen a primitive type specifier (not a TYPEDEF_NAME),
-# so another primitive type specifier is OK.
+# Analogous to the above situation, except this time, we are in the
+# context of a parameter declaration (as opposed to a declaration or
+# function definition). This rules out 'typedef' and 'inline', for real,
+# I think. Also, this changes the continuation.
+
+# We have seen a type specifier,
+# and possibly some declaration_specifiers_no_type.
+# We expect:
+# possibly more declaration_specifier_no_type or declaration_specifier_no_typedef_name,
+#   which means a list of:
+#     storage class specifiers,
+#     type qualifiers.
+#     (omitting the possibility of another type specifier)
+
+# If this declaration_specifiers(parameter_declaration) is complete,
+# then we expect:
+#   declarator
+#   abstract_declarator
+#   or neither, which means that the parameter_declaration is over,
+#   which means we expect COMMA or RPAREN.
+
+# We could say that $1 has been interpreted as a type specifier,
+# although I don't know if that would help.
+
+# clang expects ')'.
+# gcc expects ‘;’, ‘,’ or ‘)’. The semicolon seems incorrect.
+
+# CHECKED.
 
 Ill-formed parameter declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a type specifier; or
   a declarator; or
   an abstract declarator; or
   a comma ',', followed with a parameter declaration; or
@@ -2281,6 +2268,8 @@ translation_unit_file: VOLATILE VAR_NAME
 # We have not yet seen a type specifier, so we must see it, regardless
 # of whether this is a declaration or function definition.
 
+# CHECKED.
+
 Ill-formed declaration or function definition.
 At this point, one of the following is expected:
   a storage class specifier; or
@@ -2289,7 +2278,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE VOLATILE VAR_NAME 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE VOLATILE VAR_NAME 
 ##
 ## Ends in an error in state: 424.
 ##
@@ -2304,6 +2293,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE VOLATILE VAR_NAME
 # Identical to the previous one, except we are not at the top level,
 # so we know this cannot be the beginning of a function definition.
 
+# CHECKED.
+
 Ill-formed declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
@@ -2312,7 +2303,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE TYPEDEF_NAME VOLATILE LONG 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE TYPEDEF_NAME VOLATILE XOR_ASSIGN
 ##
 ## Ends in an error in state: 393.
 ##
@@ -2323,7 +2314,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE TYPEDEF_NAME VOLATI
 ## The known suffix of the stack is as follows:
 ## TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE VOLATILE TYPEDEF_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 426.
 ##
@@ -2334,8 +2325,19 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE VOLATILE TYPEDEF_NA
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) 
 ##
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE INT XOR_ASSIGN 
+##
+## Ends in an error in state: 423.
+##
+## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
+## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
+##
+## The known suffix of the stack is as follows:
+## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
+##
 
-# This is analogous to the error sentence TYPEDEF_NAME VOLATILE LONG,
+# This is analogous to the error sentence TYPEDEF_NAME VOLATILE XOR_ASSIGN,
 # except we are inside a block, instead of at the top level, so we
 # know that this cannot be the beginning of a function definition.
 
@@ -2350,34 +2352,17 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE VOLATILE TYPEDEF_NA
 # possibly empty, comma-separated list of init declarators, followed
 # with a semicolon.
 
-Ill-formed declaration.
-At this point, one of the following is expected:
-  a storage class specifier; or
-  a type qualifier; or
-  an init declarator.
+# We do not distinguish the case where we have seen a primitive type
+# specifier, so another primitive type specifier would be OK.
 
-# ------------------------------------------------------------------------------
+# gcc and clang expect identifier or '(', which is incomplete and low-level.
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE INT XOR_ASSIGN 
-##
-## Ends in an error in state: 423.
-##
-## declaration_specifiers(declaration(block_item)) -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## declaration_specifiers_typedef -> list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) . TYPEDEF list(declaration_specifier_no_typedef_name) [ VAR_NAME TYPEDEF_NAME STAR SEMICOLON LPAREN ]
-## list(declaration_specifier_no_typedef_name) -> list(declaration_specifier_no_typedef_name) . declaration_specifier_no_typedef_name [ VOLATILE VOID VAR_NAME UNSIGNED UNION UNDERSCORE_BOOL TYPEDEF_NAME TYPEDEF STRUCT STATIC STAR SIGNED SHORT SEMICOLON RESTRICT REGISTER PACKED LPAREN LONG INT INLINE FLOAT EXTERN ENUM DOUBLE CONST CHAR AUTO ATTRIBUTE ALIGNAS ]
-##
-## The known suffix of the stack is as follows:
-## list(declaration_specifier_no_type) type_specifier_no_typedef_name list(declaration_specifier_no_typedef_name) 
-##
-
-# Analogous to the above, except we have seen a primitive type specifier,
-# so another primitive type specifier is OK.
+# CHECKED.
 
 Ill-formed declaration.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a type specifier; or
   an init declarator.
 
 # ------------------------------------------------------------------------------
@@ -2405,8 +2390,22 @@ translation_unit_file: UNION LBRACE TYPEDEF_NAME XOR_ASSIGN
 #   a struct declarator, or
 #   a semicolon.
 
-Ill-formed struct declaration.
-Up to this point, a list of qualifiers and specifiers has been recognized:
+# The nonterminal symbol is officially called struct-declaration.
+# But this means struct *or union*,
+# and it is a declaration of a struct or union *member*.
+
+# It seems good to show the type specifier that we have just read (if
+# there is one), as it could be a variable name that has been
+# mis-classified as a type name, I suppose.
+
+# clang's message is analogous to ours.
+# gcc expects identifier or '('.
+
+# CHECKED.
+
+Ill-formed declaration of a struct or union member.
+Up to this point,
+a list of type qualifiers and type specifiers has been recognized:
   $0
 If this list is complete, then 
 at this point, one of the following is expected:

@@ -29,8 +29,10 @@ List of syntatic categories that appear in error messages:
   gcc attribute
   initializer
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
+  list of init declarators (non-empty; comma-separated)
   list of initializers
   list of parameters (parameter_type_list) (possibly empty; comma-separated)
+  list of pointers (possibly empty; whitespace-separated)
   type cast
   type name
 
