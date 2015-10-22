@@ -33,6 +33,8 @@ List of syntatic categories that appear in error messages:
   list of initializers
   list of parameters (parameter_type_list) (possibly empty; comma-separated)
   list of pointers (possibly empty; whitespace-separated)
+  struct declaration (could be baptized "declaration of a struct or union member"?)
+  struct or union specifier
   type cast
   type name
 
