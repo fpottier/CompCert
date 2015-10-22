@@ -27,7 +27,9 @@ List of syntatic categories that appear in error messages:
   enumeration specifier
   expression
   gcc attribute
+  initializer
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
+  list of initializers
   list of parameters (parameter_type_list) (possibly empty; comma-separated)
   type cast
   type name

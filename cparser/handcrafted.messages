@@ -1151,7 +1151,9 @@ translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN VAR_NAME SEMICOLON
 ## In state 99, spurious reduction of production assignment_expression -> conditional_expression 
 ##
 
-Ill-formed use of __builtin_va_arg.
+# CHECKED.
+
+Ill-formed use of $2.
 Up to this point, an expression has been recognized:
   $0
 If this expression is complete,
@@ -1169,7 +1171,9 @@ translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG LPAREN XOR_ASSIGN
 ## BUILTIN_VA_ARG LPAREN 
 ##
 
-Ill-formed use of __builtin_va_arg.
+# CHECKED.
+
+Ill-formed use of $1.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1184,7 +1188,9 @@ translation_unit_file: INT VAR_NAME EQ BUILTIN_VA_ARG XOR_ASSIGN
 ## BUILTIN_VA_ARG 
 ##
 
-Ill-formed use of __builtin_va_arg.
+# CHECKED.
+
+Ill-formed use of $0.
 At this point, an opening parenthesis '(' is expected.
 
 # ------------------------------------------------------------------------------
@@ -1207,6 +1213,8 @@ translation_unit_file: INT VAR_NAME EQ INC XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## INC 
 ##
+
+# CHECKED.
 
 Ill-formed expression.
 At this point, an expression is expected.
@@ -1231,6 +1239,11 @@ translation_unit_file: INT VAR_NAME EQ INC LPAREN INT RPAREN XOR_ASSIGN
 # to open one more parenthesis before the one we see here.
 # Or maybe the name that we classified as a type was intended to be a variable.
 
+# gcc says an expression is expected, which seems incorrect.
+# clang says "expected '{' in compound literal".
+
+# CHECKED.
+
 Ill-formed expression.
 Up to this point, a type name in parentheses has been recognized:
   $2 $1 $0
@@ -1251,6 +1264,11 @@ translation_unit_file: INT VAR_NAME EQ INC LPAREN XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## LPAREN 
 ##
+
+# gcc and clang expect an expression.
+# We could choose to omit the first possibility, too.
+
+# CHECKED.
 
 Ill-formed expression.
 At this point, one of the following is expected:
@@ -1295,6 +1313,8 @@ translation_unit_file: INT VAR_NAME EQ LPAREN VAR_NAME SEMICOLON
 # can be continued with a comma and another expression.
 # So, let's just say a closing parenthesis is expected.
 
+# CHECKED.
+
 Up to this point, a parenthesis '(' and an expression have been recognized:
   $1 $0
 If this expression is complete,
@@ -1335,15 +1355,14 @@ translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN LBRACE VAR_NAME SEMICOL
 ##
 
 # Let's ignore the fact that a comma can precede a closing brace.
-# Let's mention just "an initializer", omitting the optional designation that precedes it.
+
+# CHECKED.
 
 Ill-formed compound literal.
 Up to this point, a list of initializers has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',' followed with an initializer; or 
-  a closing brace '}'.
+then at this point, a closing brace '}' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -1356,6 +1375,10 @@ translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN LBRACE XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## LPAREN type_name RPAREN LBRACE 
 ##
+
+# gcc and clang say an expression is expected, which is incomplete.
+
+# CHECKED.
 
 Ill-formed compound literal.
 At this point, an initializer is expected.
@@ -1373,9 +1396,15 @@ translation_unit_file: INT VAR_NAME EQ LPAREN INT RPAREN XOR_ASSIGN
 ## LPAREN type_name RPAREN 
 ##
 
+# clang and gcc expect an expression.
+
+# CHECKED.
+
 Ill-formed expression.
+Up to this point, a type name in parentheses has been recognized:
+  $2 $1 $0
 At this point, one of the following is expected:
-  an expression,        if this is a cast; or
+  an expression,        if this is a type cast; or
   an opening brace '{', if this is a compound literal.
 
 # ------------------------------------------------------------------------------
@@ -1392,10 +1421,14 @@ translation_unit_file: INT VAR_NAME EQ LPAREN XOR_ASSIGN
 ## LPAREN 
 ##
 
+# clang and gcc expect an expression.
+
+# CHECKED.
+
 Ill-formed expression.
 An opening parenthesis '(' has just been recognized.
 At this point, one of the following is expected:
-  a type name,   if this is a cast or a compound literal; or
+  a type name,   if this is a type cast or a compound literal; or
   an expression, if this is a parenthesized expression.
 
 # ------------------------------------------------------------------------------
@@ -1410,7 +1443,11 @@ translation_unit_file: INT VAR_NAME EQ TILDE XOR_ASSIGN
 ## unary_operator 
 ##
 
-Ill-formed use of a unary operator.
+# clang and gcc expect an expression.
+
+# CHECKED.
+
+Ill-formed use of the unary operator $0.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1506,12 +1543,11 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME STAR XOR_ASSIGN
 ## multiplicative_expression multiplicative_operator 
 ##
 
-# There are many binary operators. It does not seem very useful to
-# repeat in the error message which operator we have just seen. We
-# can just say that this is a binary operator, and share this
-# message for every binary operator.
+# clang and gcc expect an expression.
 
-Ill-formed use of a binary operator.
+# CHECKED.
+
+Ill-formed use of the binary operator $0.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1526,7 +1562,11 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME XOR_ASSIGN XOR_ASSIGN
 ## unary_expression assignment_operator 
 ##
 
-Ill-formed use of an assignment operator.
+# clang and gcc expect an expression.
+
+# CHECKED.
+
+Ill-formed use of the assignment operator $0.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1545,6 +1585,11 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN VAR_NAME COMMA XOR_ASSIGN
 # argument_expression_list with a context. For the moment, let
 # us just say that an expression is expected at this point.
 
+# clang and gcc expect an expression.
+
+# CHECKED.
+
+Ill-formed list of expressions.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1568,7 +1613,11 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME PTR XOR_ASSIGN
 ## postfix_expression PTR 
 ##
 
-Ill-formed struct or union access.
+# clang and gcc expect an identifier.
+
+# CHECKED.
+
+Ill-formed use of the dereferencing operator $0.
 At this point, the name of a struct or union member is expected.
 
 # ------------------------------------------------------------------------------
@@ -1610,6 +1659,9 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME LBRACK VAR_NAME SEMICOLON
 # no reason to mention that -- it can be viewed as part of the
 # hypothesis "if the expression is complete".
 
+# CHECKED.
+
+Ill-formed expression.
 Up to this point, an expression has been recognized:
   $0
 If this expression is complete,
@@ -1627,7 +1679,9 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME LBRACK XOR_ASSIGN
 ## postfix_expression LBRACK 
 ##
 
-Ill-formed array subscript expression.
+# CHECKED.
+
+Ill-formed expression.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1663,13 +1717,12 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN VAR_NAME SEMICOLON
 ## In state 109, spurious reduction of production argument_expression_list -> assignment_expression 
 ##
 
-Ill-formed list of expressions.
+# CHECKED.
+
 Up to this point, a list of expressions has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with another expression; or
-  a closing parenthesis ')'.
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -1683,8 +1736,12 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME LPAREN XOR_ASSIGN
 ## postfix_expression LPAREN 
 ##
 
-Ill-formed function call.
-At this point, a possibly empty list of expressions,
+# gcc and clang expect an expression: this is incomplete.
+
+# CHECKED.
+
+Ill-formed expression.
+At this point, a list of expressions,
 followed with a closing parenthesis ')', is expected.
 
 # ------------------------------------------------------------------------------
@@ -1708,7 +1765,9 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME QUESTION XOR_ASSIGN
 ## logical_or_expression QUESTION 
 ##
 
-Ill-formed use of a conditional operator.
+# CHECKED.
+
+Ill-formed conditional expression.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
@@ -1744,13 +1803,16 @@ translation_unit_file: INT VAR_NAME EQ VAR_NAME QUESTION VAR_NAME SEMICOLON
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
-Ill-formed use of a conditional operator.
-Up to this point, an expression, a question mark, and an expression
-have been recognized:
+# gcc and clang simply expect a colon.
+
+# CHECKED.
+
+Ill-formed conditional expression.
+Up to this point, an expression, '?', and an expression have been recognized:
   $2
   $1
   $0
-If the second expression is complete,
+If the last expression is complete,
 then at this point, a colon ':' is expected.
 
 # ------------------------------------------------------------------------------
@@ -1786,13 +1848,13 @@ translation_unit_file: PACKED LPAREN VAR_NAME SEMICOLON
 ## In state 109, spurious reduction of production argument_expression_list -> assignment_expression 
 ##
 
-Ill-formed packed attribute.
+# CHECKED.
+
+Ill-formed $2 attribute.
 Up to this point, a list of expressions has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with another expression; or
-  a closing parenthesis ')'.
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -1806,7 +1868,13 @@ translation_unit_file: PACKED LPAREN XOR_ASSIGN
 ## PACKED LPAREN 
 ##
 
-Ill-formed packed attribute.
+# clang expects a "parameter declarator" (?).
+# gcc expects "declaration specifiers or ‘...’".
+#   Which is incorrect, since an ellipsis is rejected here.
+
+# CHECKED.
+
+Ill-formed $1 attribute.
 At this point, a list of expressions is expected.
 
 # ------------------------------------------------------------------------------
@@ -1821,6 +1889,12 @@ translation_unit_file: PACKED XOR_ASSIGN
 ## PACKED 
 ##
 
+# This one seems important, since CompCert currently does not support __packed__
+# without an argument.
+
+# CHECKED.
+
+Ill-formed $0 attribute.
 At this point, an opening parenthesis '(',
 followed with a possibly empty list of expressions,
 is expected.
@@ -1850,6 +1924,10 @@ translation_unit_file: XOR_ASSIGN
 # The king of all syntax errors: an error in the initial state.
 
 # Anyway, we are at the toplevel.
+
+# clang and gcc want an identifier or an opening parenthesis, which is way incomplete.
+
+# CHECKED.
 
 At this point, one of the following is expected:
   a function definition; or
@@ -1889,25 +1967,6 @@ translation_unit_file: VOLATILE TYPEDEF_NAME TYPEDEF XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## list(declaration_specifier_no_type) declaration_specifier_no_type TYPEDEF_NAME list(declaration_specifier_no_type) TYPEDEF list(declaration_specifier_no_type) 
 ##
-
-# We have begun a type definition (a.k.a. declaration_specifiers_typedef).
-# To complete this type definition,
-# we expect a possibly-empty list declaration_specifiers_no_type?,
-# which means a list of:
-#   storage class specifiers,
-#   type qualifiers,
-#   function specifiers (i.e., INLINE, but I suspect this is illegal here).
-# After this type definition,
-# we expect typedef_declarator_list? SEMICOLON.
-
-Ill-formed type definition.
-At this point, one of the following is expected:
-  a storage class specifier; or
-  a type qualifier; or
-  a list of declarators, followed with a semicolon ';'.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: TYPEDEF INT XOR_ASSIGN 
 ##
 ## Ends in an error in state: 358.
@@ -1930,29 +1989,31 @@ translation_unit_file: INT TYPEDEF XOR_ASSIGN
 ##
 
 # We have begun a type definition (a.k.a. declaration_specifiers_typedef).
-
-# We could be at the top level or inside a block, but we do not care.
-
 # To complete this type definition,
-# we expect a possibly-empty list declaration_specifiers_no_typedef_name?,
-# which means a list of:
+# we expect a possibly-empty list declaration_specifiers_no_type?,
+#                               or declaration_specifiers_no_typedef_name?,
+# (depending on which example sentence one looks at)
+# which (in all cases) means a list of:
 #   storage class specifiers,
 #   type qualifiers,
 #   function specifiers (i.e., INLINE, but I suspect this is illegal here).
+# and (in the second case) also includes:
 #   type_specifier_no_typedef_name (e.g., INT, etc.).
 # After this type definition,
 # we expect typedef_declarator_list? SEMICOLON.
 
-# Let's just add "a type specifier" to the list of possibilities of the
-# previous message, omitting the fact that this type specifier should
-# not be a TYPEDEF_NAME (actually, it can be one, but it will be
-# interpreted as a declarator).
+# We omit the possibility of giving another type specifier, such as INT.
+
+# We could omit the possibility of a storage class specifier and a type qualifier.
+
+# gcc and clang expect identifier or '(', which is correct but incomplete (and too low-level).
+
+# CHECKED.
 
 Ill-formed type definition.
 At this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a type specifier;
   a list of declarators, followed with a semicolon ';'.
 
 # ------------------------------------------------------------------------------
