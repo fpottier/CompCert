@@ -3780,6 +3780,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO DO SEMI
 ## DO open_context statement_finish_close WHILE LPAREN 
 ##
 
+# CHECKED.
+
 Ill-formed 'do' ... 'while' statement.
 At this point, an expression is expected.
 
@@ -3814,6 +3816,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO DO SEMI
 ## DO open_context statement_finish_close WHILE 
 ##
 
+# CHECKED.
+
 Ill-formed 'do' ... 'while' statement.
 At this point, an opening parenthesis '(' is expected.
 
@@ -3847,6 +3851,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO DO SEMI
 ## The known suffix of the stack is as follows:
 ## DO open_context statement_finish_close 
 ##
+
+# CHECKED.
 
 # Quite nicely, in this case, there is no doubt that the statement is
 # finished. This is not true in general, I think (the statement could
@@ -3888,6 +3894,10 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO DO XOR_
 ## DO open_context 
 ##
 
+# gcc and clang expect an expression.
+
+# CHECKED.
+
 Ill-formed 'do' ... 'while' statement.
 At this point, a statement (the loop body) is expected.
 
@@ -3921,6 +3931,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO FOR LPA
 ## The known suffix of the stack is as follows:
 ## FOR LPAREN for_statement_header optional(expression,SEMICOLON) optional(expression,RPAREN) 
 ##
+
+# CHECKED.
 
 Ill-formed 'for' statement.
 At this point, a statement (the loop body) is expected.
@@ -3960,6 +3972,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE FOR LPAREN
 
 # The use of optional(expression,RPAREN) tells us that we are in a FOR statement.
 # Relying on this is a bit fragile, though.
+
+# CHECKED.
 
 Ill-formed 'for' statement.
 Up to this point, an expression has been recognized:
@@ -4001,9 +4015,11 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO FOR LPA
 # Expecting the third part of the loop header -- the expression
 # that tells what happens after each iteration.
 
+# CHECKED.
+
 Ill-formed 'for' statement.
-At this point, an optional expression,
-  (evaluated after each execution of the loop body)
+At this point, an optional expression
+  (evaluated after each execution of the loop body),
 followed with a closing parenthesis ')', is expected.
 
 # ------------------------------------------------------------------------------
@@ -4037,11 +4053,13 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO FOR LPA
 ## FOR LPAREN for_statement_header 
 ##
 
+# CHECKED.
+
 # Expecting the second part of the loop header -- the controlling expression.
 
 Ill-formed 'for' statement.
-At this point, an optional expression,
-  (evaluated before each execution of the loop body)
+At this point, an optional expression
+  (evaluated before each execution of the loop body),
 followed with a semicolon ';', is expected.
 
 # ------------------------------------------------------------------------------
@@ -4080,6 +4098,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE FOR LPAREN
 # At the time of writing, optional(expression,SEMICOLON) is used only in FOR
 # loops, but it could be used elsewhere in the future. This is a bit fragile.
 
+# CHECKED.
+
 Ill-formed 'for' statement.
 Up to this point, an expression has been recognized:
   $0
@@ -4117,10 +4137,14 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO FOR LPA
 ## FOR LPAREN 
 ##
 
+# gcc and clang say they expect an expression, which is incomplete.
+
+# CHECKED.
+
 Ill-formed 'for' statement.
 At this point, one of the following is expected:
-  an optional expression,
-    (evaluated once at the beginning)
+  an optional expression
+    (evaluated once at the beginning),
   followed with a semicolon ';'; or
   a declaration.
 
@@ -4155,6 +4179,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO FOR XOR
 ## FOR 
 ##
 
+# CHECKED.
+
 Ill-formed 'for' statement.
 At this point, an opening parenthesis '(' is expected.
 
@@ -4178,6 +4204,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO GOTO XO
 ## The known suffix of the stack is as follows:
 ## GOTO 
 ##
+
+# CHECKED.
 
 Ill-formed 'goto' statement.
 At this point, an identifier (a 'goto' label) is expected.
@@ -4213,6 +4241,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO IF LPAR
 ## if_else_statement_begin(nop) ELSE 
 ##
 
+# CHECKED.
+
 Ill-formed 'if' ... 'else' statement.
 At this point, a statement is expected.
 
@@ -4238,6 +4268,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE IF LPAREN 
 ## The known suffix of the stack is as follows:
 ## IF open_context LPAREN expression RPAREN save_contexts_stk 
 ##
+
+# CHECKED.
 
 Ill-formed 'if' statement.
 At this point, a statement is expected.
@@ -4307,6 +4339,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE IF LPAREN 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
+# CHECKED.
+
 Ill-formed 'if' statement.
 Up to this point, an expression has been recognized:
   $0
@@ -4336,6 +4370,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE IF LPAREN 
 ## IF open_context LPAREN 
 ##
 
+# CHECKED.
+
 Ill-formed 'if' statement.
 At this point, an expression is expected.
 
@@ -4361,6 +4397,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE IF XOR_ASS
 ## The known suffix of the stack is as follows:
 ## IF open_context 
 ##
+
+# CHECKED.
 
 Ill-formed 'if' statement.
 At this point, an opening parenthesis '(' is expected.
@@ -4399,6 +4437,10 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO SWITCH 
 # Technically, the body of a 'switch' statement is just a statement,
 # but in practice, it should be a list of labeled statements, 
 # enclosed in braces. (Unless someone is writing a Duff loop...)
+
+# gcc and clang again request an expression...
+
+# CHECKED.
 
 Ill-formed 'switch' statement.
 At this point, a statement is expected.
@@ -4499,6 +4541,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO SWITCH 
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
+# CHECKED.
+
 Ill-formed 'switch' statement.
 Up to this point, an expression has been recognized:
   $0
@@ -4536,6 +4580,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO SWITCH 
 ## SWITCH LPAREN 
 ##
 
+# CHECKED.
+
 Ill-formed 'switch' statement.
 At this point, an expression is expected.
 
@@ -4570,6 +4616,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO SWITCH 
 ## SWITCH 
 ##
 
+# CHECKED.
+
 Ill-formed 'switch' statement.
 At this point, an opening parenthesis '(' is expected.
 
@@ -4603,6 +4651,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO WHILE L
 ## The known suffix of the stack is as follows:
 ## WHILE LPAREN expression RPAREN 
 ##
+
+# CHECKED.
 
 Ill-formed 'while' statement.
 At this point, a statement (the loop body) is expected.
@@ -4701,6 +4751,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO WHILE L
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
+# CHECKED.
+
 Ill-formed 'while' statement.
 Up to this point, an expression has been recognized:
   $0
@@ -4738,6 +4790,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO WHILE L
 ## WHILE LPAREN 
 ##
 
+# CHECKED.
+
 Ill-formed 'while' statement.
 At this point, an expression is expected.
 
@@ -4771,6 +4825,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO WHILE X
 ## The known suffix of the stack is as follows:
 ## WHILE 
 ##
+
+# CHECKED.
 
 Ill-formed 'while' statement.
 At this point, an opening parenthesis '(' is expected.
@@ -4815,6 +4871,10 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE XOR_ASSIGN
 # though ELSE is permitted. There is nothing we can do about it. We just omit
 # this permitted continuation in our message.
 
+# clang and gcc say an expression is expected.
+
+# CHECKED.
+
 At this point, one of the following is expected:
   a declaration; or
   a statement; or
@@ -4841,6 +4901,10 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO RETURN 
 ## The known suffix of the stack is as follows:
 ## RETURN 
 ##
+
+# clang and gcc expect an expression.
+
+# CHECKED.
 
 Ill-formed 'return' statement.
 At this point, one of the following is expected:
@@ -4882,6 +4946,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE STRING_LIT
 ## In state 103, spurious reduction of production expression -> assignment_expression 
 ##
 
+# CHECKED.
+
 Up to this point, an expression has been recognized:
   $0
 If this expression is complete,
@@ -4913,12 +4979,16 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE TYPEDEF_NA
 # This could also be a labeled statement, in which case we expect a colon.
 #   This case sounds rather unlikely. Let's omit it.
 
+# We simplify "a list of init declarators" to "an init declarator".
+
+# CHECKED.
+
 A type identifier has been recognized.
 Assuming this is the beginning of a declaration,
 at this point, one of the following is expected:
   a storage class specifier; or
   a type qualifier; or
-  a list of init declarators, followed with a semicolon ';'.
+  an init declarator, followed with a semicolon ';'.
 
 # ------------------------------------------------------------------------------
 
@@ -4932,7 +5002,9 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE VAR_NAME C
 ## expression COMMA 
 ##
 
-Ill-formed use of the comma operator.
+# CHECKED.
+
+Ill-formed use of the sequencing operator ','.
 At this point, an expression is expected.
 
 # ------------------------------------------------------------------------------
