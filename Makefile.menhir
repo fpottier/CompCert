@@ -55,6 +55,7 @@ MENHIR_REDUCE_ON_ERROR := \
   "option(abstract_declarator(type_name))" \
   "abstract_declarator(type_name)" \
   "abstract_declarator(parameter_declaration)" \
+  asm_flags \
 
 # Options.
 

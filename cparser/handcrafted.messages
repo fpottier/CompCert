@@ -2051,7 +2051,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN VOLATILE XOR_ASSIGN
+translation_unit_file: INT VAR_NAME LPAREN VOLATILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 257.
 ##
@@ -2303,7 +2303,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE TYPEDEF_NAME VOLATILE XOR_ASSIGN
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE TYPEDEF_NAME VOLATILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 393.
 ##
@@ -2906,12 +2906,12 @@ At this point, one of the following is expected:
 
 translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL COMMA XOR_ASSIGN 
 ##
-## Ends in an error in state: 476.
+## Ends in an error in state: 477.
 ##
-## asm_flags -> string_literals_list COMMA . asm_flags [ RPAREN ]
+## asm_flags -> asm_flags COMMA . string_literals_list [ RPAREN COMMA ]
 ##
 ## The known suffix of the stack is as follows:
-## string_literals_list COMMA 
+## asm_flags COMMA 
 ##
 # We are in the clobber list.
 # We have seen a comma, so we expect a string literal.
@@ -2940,27 +2940,32 @@ Examples of clobbered resources:
 
 translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL XOR_ASSIGN 
 ##
-## Ends in an error in state: 475.
+## Ends in an error in state: 476.
 ##
-## asm_flags -> string_literals_list . [ RPAREN ]
-## asm_flags -> string_literals_list . COMMA asm_flags [ RPAREN ]
-## string_literals_list -> string_literals_list . STRING_LITERAL [ STRING_LITERAL RPAREN COMMA ]
+## asm_arguments -> COLON asm_operands COLON asm_operands COLON asm_flags . [ RPAREN ]
+## asm_flags -> asm_flags . COMMA string_literals_list [ RPAREN COMMA ]
 ##
 ## The known suffix of the stack is as follows:
-## string_literals_list 
+## COLON asm_operands COLON asm_operands COLON asm_flags 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 475, spurious reduction of production asm_flags -> string_literals_list 
 ##
 
 # Let's ignore the possibility of concatenating string literals.
 # We are in the clobber list (asm_flags).
 # Either we extend it, or we terminate it with RPAREN.
 
+# CHECKED.
+
 Ill-formed assembly statement.
-At this point, one of the following is expected:
-  a comma ',', followed with a clobbered resource; or
-  a closing parenthesis ')'.
-Examples of clobbered resources:
-  "memory"
-  "eax"
+Up to this point, a list of clobbered resources has been recognized:
+  $0
+If this list is complete,
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
