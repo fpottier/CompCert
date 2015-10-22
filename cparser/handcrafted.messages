@@ -2904,7 +2904,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL COMMA XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 476.
 ##
@@ -2916,7 +2916,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 # We are in the clobber list.
 # We have seen a comma, so we expect a string literal.
 # first(asm_flags) = STRING_LITERAL
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 474.
 ##
@@ -2928,15 +2928,17 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 # We are at the beginning of the clobber list.
 # first(asm_flags) = STRING_LITERAL
 
+# CHECKED.
+
 Ill-formed assembly statement.
-At this point, a string literal, representing a clobbered resource, is expected.
+At this point, a clobbered resource is expected.
 Examples of clobbered resources:
   "memory"
   "eax"
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON COLON STRING_LITERAL XOR_ASSIGN 
 ##
 ## Ends in an error in state: 475.
 ##
@@ -2954,7 +2956,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 
 Ill-formed assembly statement.
 At this point, one of the following is expected:
-  a comma ',', followed with a string literal, representing a clobbered resource; or
+  a comma ',', followed with a clobbered resource; or
   a closing parenthesis ')'.
 Examples of clobbered resources:
   "memory"
@@ -2962,7 +2964,7 @@ Examples of clobbered resources:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
 ##
 ## Ends in an error in state: 472.
 ##

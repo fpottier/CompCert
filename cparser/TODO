@@ -22,6 +22,7 @@ Revoir toutes les catégories syntaxiques et en donner des exemples.
 List of syntatic categories that appear in error messages:
   _Alignas qualifier
   attribute specifier
+  clobbered resource (another name for string_literal)
   coumpound literal
   enumerator
   enumeration specifier
