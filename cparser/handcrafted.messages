@@ -2690,6 +2690,16 @@ translation_unit_file: INT STAR VAR_NAME LPAREN VAR_NAME XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) direct_declarator LPAREN identifier_list 
 ##
+translation_unit_file: INT VAR_NAME LPAREN VAR_NAME XOR_ASSIGN 
+##
+## Ends in an error in state: 671.
+##
+## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) direct_declarator LPAREN identifier_list . RPAREN open_context declaration_list [ LBRACE ]
+## identifier_list -> identifier_list . COMMA VAR_NAME [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## declaration_specifiers(declaration(external_declaration)) direct_declarator LPAREN identifier_list 
+##
 
 # CHECKED.
 
@@ -5075,6 +5085,8 @@ translation_unit_file: INT VAR_NAME EQ LBRACE VAR_NAME COMMA DOT VAR_NAME EQ ALI
 ## initializer_list COMMA option(designation) 
 ##
 
+# CHECKED.
+
 Ill-formed initializer list.
 At this point, an initializer is expected.
 
@@ -5094,10 +5106,13 @@ translation_unit_file: INT VAR_NAME EQ LBRACE DOT VAR_NAME XOR_ASSIGN
 # We are expecting either one more designator,
 # or an EQ sign (which marks the end of the designation).
 
+# CHECKED.
+
 Ill-formed designation.
-At this point, one of the following is expected:
-  a designator; or
-  an equals sign '='.
+Up to this point, a list of designators has been recognized:
+  $0
+If this list is complete,
+then at this point, an equals sign '=' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -5110,6 +5125,10 @@ translation_unit_file: INT VAR_NAME EQ LBRACE DOT XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## DOT 
 ##
+
+# clang gives examples of designators.
+
+# CHECKED.
 
 Ill-formed designator.
 At this point, the name of a struct or union member is expected.
@@ -5143,6 +5162,8 @@ translation_unit_file: INT VAR_NAME EQ LBRACE LBRACK VAR_NAME SEMICOLON
 ## In state 80, spurious reduction of production logical_or_expression -> logical_and_expression 
 ## In state 78, spurious reduction of production conditional_expression -> logical_or_expression 
 ##
+
+# CHECKED.
 
 Ill-formed designator.
 Up to this point, an opening bracket and an expression have been recognized:
@@ -5181,6 +5202,8 @@ translation_unit_file: INT VAR_NAME EQ LBRACE VAR_NAME COMMA XOR_ASSIGN
 # This could be a trailing comma, in which case a closing brace is legal.
 # Or, this comma could announce a new option(designation) c_initializer.
 
+# CHECKED.
+
 Ill-formed initializer list.
 At this point, one of the following is expected:
   an optional designation, followed with an initializer; or
@@ -5188,7 +5211,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME EQ LBRACE VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME EQ LBRACE CONSTANT SEMICOLON 
 ##
 ## Ends in an error in state: 134.
 ##
@@ -5222,13 +5245,13 @@ translation_unit_file: INT VAR_NAME EQ LBRACE VAR_NAME SEMICOLON
 
 # Omitting the fact that the closing brace can be preceded with a comma.
 
-Ill-formed initializer list.
+# CHECKED.
+
+Ill-formed initializer.
 Up to this point, a list of initializers has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with an optional designation and an initializer; or
-  a closing brace '}'.
+then at this point, a closing brace '}' is expected.
 
 # ------------------------------------------------------------------------------
 
@@ -5245,7 +5268,11 @@ translation_unit_file: INT VAR_NAME EQ LBRACE XOR_ASSIGN
 # An initializer list is expected.
 # Hence, an initializer is expected.
 
-Ill-formed compound initializer.
+# clang and gcc expect an expression (incomplete).
+
+# CHECKED.
+
+Ill-formed initializer.
 At this point, an optional designation,
 followed with an initializer, is expected.
 
@@ -5261,12 +5288,16 @@ translation_unit_file: INT VAR_NAME EQ XOR_ASSIGN
 ## declare_varname(fst(declarator)) EQ 
 ##
 
+# clang and gcc expect an expression (incomplete).
+
+# CHECKED.
+
 Ill-formed init declarator.
 At this point, an initializer is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LBRACK VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME LBRACK CONSTANT SEMICOLON 
 ##
 ## Ends in an error in state: 279.
 ##
@@ -5299,7 +5330,10 @@ translation_unit_file: INT VAR_NAME LBRACK VAR_NAME SEMICOLON
 # (possibly abstract) declarators, but it could be used elsewhere in the future.
 # This is a bit fragile.
 
-Ill-formed direct declarator or direct abstract declarator.
+# Ill-formed direct declarator or direct abstract declarator.
+
+# CHECKED.
+
 Up to this point, an expression has been recognized:
   $0
 If this expression is complete,
@@ -5316,6 +5350,10 @@ translation_unit_file: INT VAR_NAME LPAREN VAR_NAME COMMA XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## identifier_list COMMA 
 ##
+
+# Strangely, gcc requests ')'.
+
+# CHECKED.
 
 Ill-formed K&R function definition.
 At this point, an identifier is expected.
@@ -5343,28 +5381,14 @@ translation_unit_file: INT STAR VAR_NAME LPAREN VAR_NAME RPAREN XOR_ASSIGN
 ## declaration_specifiers(declaration(external_declaration)) list(pointer1) STAR option(type_qualifier_list) direct_declarator LPAREN identifier_list RPAREN open_context declaration_list 
 ##
 
+# clang requests the function body; gcc requests a declaration :-)
+
+# CHECKED.
+
 Ill-formed K&R function definition.
 At this point, one of the following is expected:
   a declaration; or
   an opening brace '{' (for the function body).
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME LPAREN VAR_NAME XOR_ASSIGN 
-##
-## Ends in an error in state: 671.
-##
-## function_definition_begin -> declaration_specifiers(declaration(external_declaration)) direct_declarator LPAREN identifier_list . RPAREN open_context declaration_list [ LBRACE ]
-## identifier_list -> identifier_list . COMMA VAR_NAME [ RPAREN COMMA ]
-##
-## The known suffix of the stack is as follows:
-## declaration_specifiers(declaration(external_declaration)) direct_declarator LPAREN identifier_list 
-##
-
-Ill-formed K&R function definition.
-At this point, one of the following is expected:
-  a comma ',', followed with an identifier; or
-  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
@@ -5378,6 +5402,8 @@ translation_unit_file: INT VAR_NAME LPAREN INT COMMA XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## parameter_list COMMA 
 ##
+
+# CHECKED.
 
 At this point, one of the following is expected:
   a parameter declaration; or
@@ -5407,16 +5433,18 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME SEMICOLON
 ## In state 263, spurious reduction of production parameter_list -> parameter_declaration 
 ##
 
-# The last parameter could be incomplete.
-# TEMPORARY bizarre to say: if the list is complete, then it could be continued.
+# We omit the possibility of an ellipsis.
+# It can be understood as part of the "if this list is complete..." hypothesis.
+
+# Strangely, gcc is not bothered by the last SEMICOLON,
+# but complains that this is a "forward declaration" of the parameter.
+
+# CHECKED.
 
 Up to this point, a list of parameter declarations has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with a parameter declaration; or
-  a comma ',', followed with an ellipsis '...'; or
-  a closing parenthesis ')'.
+then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 

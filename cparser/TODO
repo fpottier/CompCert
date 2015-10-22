@@ -25,15 +25,18 @@ List of syntatic categories that appear in error messages:
   attribute specifier
   clobbered resource (another name for string_literal)
   coumpound literal
+  designation
+  designator
   enumerator
   enumeration specifier
   expression
   gcc attribute
   initializer
   list of declarators (possibly empty, but usually non-empty; comma-separated);
+  list of designators (non-empty; whitespace-separated)
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
   list of init declarators (non-empty; comma-separated)
-  list of initializers
+  list of initializers (be careful: allows optional designations, so a list of designations-and-initializers)
   list of inputs (possibly empty; comma-separated) (in asm statements)
   list of outputs (possibly empty; comma-separated) (in asm statements)
   list of parameter declarations (parameter_list, parameter_type_list) (possibly empty; comma-separated)
