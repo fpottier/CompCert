@@ -2982,14 +2982,18 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN
 
 # We have just seen a second COLON.
 
+# clang requests a closing parenthesis. gcc requests a string literal.
+
+# CHECKED.
+
 Ill-formed assembly statement.
-At this point, a possibly empty, comma-separated list of outputs is expected.
+At this point, a list of outputs is expected.
 This list may be followed with a colon ':' and a list of clobbered resources.
 An assembly statement is terminated with a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME RBRACK XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME RBRACK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 466.
 ##
@@ -3001,13 +3005,16 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 
 # Example of asm_operand: [oldval]"=r"(res)
 # We have seen an asm_op_name, we now expect a string literal list.
+# "=r" is an example of a constraint.
+
+# CHECKED.
 
 Ill-formed assembly operand.
 At this point, a string literal, representing a constraint, is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK VAR_NAME XOR_ASSIGN 
 ##
 ## Ends in an error in state: 461.
 ##
@@ -3017,12 +3024,14 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 ## LBRACK general_identifier 
 ##
 
+# CHECKED.
+
 Ill-formed assembly operand.
 At this point, a closing bracket ']' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON LBRACK XOR_ASSIGN 
 ##
 ## Ends in an error in state: 460.
 ##
@@ -3032,12 +3041,14 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 ## LBRACK 
 ##
 
+# CHECKED.
+
 Ill-formed assembly operand.
 At this point, an identifier is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN COMMA XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 464.
 ##
@@ -3047,12 +3058,16 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 ## asm_operands_ne COMMA 
 ##
 
+# clang and gcc request a string literal (which is incomplete).
+
+# CHECKED.
+
 Ill-formed assembly statement.
 At this point, an assembly operand is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 463.
 ##
@@ -3075,7 +3090,7 @@ At this point, one of the following is expected:
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN VAR_NAME SEMICOLON 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 469.
 ##
