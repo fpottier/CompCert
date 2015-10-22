@@ -3,6 +3,13 @@
 
 # ------------------------------------------------------------------------------
 
+# WORKFLOW:
+
+# The workflow (when and how this file should be modified; which tools exist
+# to maintain it; etc.) is documented in GNUmakefile in this directory.
+
+# ------------------------------------------------------------------------------
+
 # FILE FORMAT:
 
 # Each sentence is followed with a hand-written error message, which must be
