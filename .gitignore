@@ -41,7 +41,6 @@ cparser/Lexer.ml
 cparser/pre_parser.ml
 cparser/pre_parser.mli
 cparser/pre_parser.automaton
-cparser/pre_parser.follow
 cparser/pre_parser.messages
 cparser/handcrafted.messages.bak
 cparser/handcrafted.messages.raw
