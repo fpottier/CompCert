@@ -525,7 +525,7 @@ An opening parenthesis '(' has been recognized.
 At this point, one of the following is expected:
   an abstract declarator,
     if this parenthesis is a delimiter; or
-  a list of parameters,
+  a list of parameter declarations,
     if this parenthesis is the beginning of a function declarator.
 
 # ------------------------------------------------------------------------------
@@ -550,7 +550,7 @@ An opening parenthesis '(' has been recognized.
 At this point, one of the following is expected:
   an abstract declarator or a declarator,
     if this parenthesis is a delimiter; or
-  a list of parameters,
+  a list of parameter declarations,
     if this parenthesis is the beginning of a function declarator.
 
 # ------------------------------------------------------------------------------
@@ -2694,7 +2694,7 @@ translation_unit_file: INT STAR VAR_NAME LPAREN VAR_NAME XOR_ASSIGN
 # CHECKED.
 
 Ill-formed K&R function definition.
-Up to this point, a list of parameters has been recognized:
+Up to this point, a list of identifiers has been recognized:
   $0
 If this list is complete,
 then at this point, a closing parenthesis ')' is expected.
@@ -2754,8 +2754,9 @@ translation_unit_file: TYPEDEF INT STAR RPAREN
 # If the pointer is finished, then we expect a direct declarator.
 
 # If may seem tempting to declare --on-error-reduce "list(pointer1)", but
-# that would clash with --on-error-reduce "abstract_declarator(type_name)":
-# there are states where both reductions are enabled.
+# that would clash with --on-error-reduce "abstract_declarator(type_name)".
+# There are states where both reductions are enabled, and Menhir currently
+# refuses to choose between them.
 
 # clang and gcc expect identifier or '(', as usual.
 
@@ -2801,16 +2802,19 @@ translation_unit_file: TYPEDEF INT VAR_NAME XOR_ASSIGN
 
 # As far as the C grammar is concerned, typedef_declarator is just declarator.
 
+# clang says "invalid token after top level declarator", which seems vague.
+# gcc expects a list of many things...
+
+# CHECKED.
+
 Up to this point, a list of declarators has been recognized:
   $0
 If this list is complete,
-then at this point, one of the following is expected:
-  a comma ',', followed with a declarator; or
-  a semicolon ';'.
+then at this point, a semicolon ';' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT TYPEDEF VAR_NAME COMMA XOR_ASSIGN 
+translation_unit_file: TYPEDEF INT VAR_NAME COMMA XOR_ASSIGN 
 ##
 ## Ends in an error in state: 516.
 ##
@@ -2820,11 +2824,13 @@ translation_unit_file: INT TYPEDEF VAR_NAME COMMA XOR_ASSIGN
 ## typedef_declarator_list COMMA 
 ##
 
+# CHECKED.
+
 At this point, a declarator is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT TYPEDEF VAR_NAME LPAREN XOR_ASSIGN 
+translation_unit_file: TYPEDEF INT VAR_NAME LPAREN XOR_ASSIGN 
 ##
 ## Ends in an error in state: 233.
 ##
@@ -2843,13 +2849,14 @@ translation_unit_file: ALIGNAS LPAREN INT LPAREN RPAREN LPAREN XOR_ASSIGN
 ## open_context 
 ##
 
-At this point, a comma-separated list of parameters,
-followed with a closing parenthesis ')',
-is expected.
+# CHECKED.
+
+At this point, a list of parameter declarations,
+followed with a closing parenthesis ')', is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM CONST XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM CONST XOR_ASSIGN 
 ##
 ## Ends in an error in state: 453.
 ##
@@ -2858,7 +2865,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM CONST XOR_ASSIG
 ## The known suffix of the stack is as follows:
 ## CONST 
 ##
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM VOLATILE XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM VOLATILE XOR_ASSIGN 
 ##
 ## Ends in an error in state: 452.
 ##
@@ -2867,7 +2874,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM VOLATILE XOR_AS
 ## The known suffix of the stack is as follows:
 ## VOLATILE 
 ##
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM XOR_ASSIGN 
 ##
 ## Ends in an error in state: 613.
 ##
@@ -2876,7 +2883,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ASM 
 ##
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE DO ASM XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE DO ASM XOR_ASSIGN 
 ##
 ## Ends in an error in state: 451.
 ##
@@ -2885,6 +2892,10 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE DO ASM XOR_ASSIGN
 ## The known suffix of the stack is as follows:
 ## ASM 
 ##
+
+# TEMPORARY maybe 'const' does not make sense here; gcc and clang ignore it; check.
+
+# CHECKED.
 
 Ill-formed assembly statement.
 At this point, one of the following is expected:
@@ -5320,7 +5331,7 @@ translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME SEMICOLON
 # The last parameter could be incomplete.
 # TEMPORARY bizarre to say: if the list is complete, then it could be continued.
 
-Up to this point, a list of parameters has been recognized:
+Up to this point, a list of parameter declarations has been recognized:
   $0
 If this list is complete,
 then at this point, one of the following is expected:
