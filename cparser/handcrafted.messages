@@ -2969,27 +2969,71 @@ then at this point, a closing parenthesis ')' is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
 ##
-## Ends in an error in state: 472.
+## Ends in an error in state: 471.
 ##
-## asm_arguments -> COLON asm_operands COLON . asm_operands [ RPAREN ]
-## asm_arguments -> COLON asm_operands COLON . asm_operands COLON asm_flags [ RPAREN ]
+## asm_arguments -> COLON asm_operands . [ RPAREN ]
+## asm_arguments -> COLON asm_operands . COLON asm_operands [ RPAREN ]
+## asm_arguments -> COLON asm_operands . COLON asm_operands COLON asm_flags [ RPAREN ]
 ##
 ## The known suffix of the stack is as follows:
-## COLON asm_operands COLON 
+## COLON asm_operands 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 463, spurious reduction of production asm_operands -> asm_operands_ne 
 ##
 
-# We have just seen a second COLON.
+# We have seen one COLON, hence the outputs. (The list of outputs may be empty.)
+
+# TEMPORARY the grammar allows a list of outputs, but the documentation allows at most one output.
+
+# CHECKED.
+
+Ill-formed assembly statement.
+Up to this point, a list of outputs has been recognized:
+  $0
+If this list is complete,
+then at this point, one of the following is expected:
+  a colon ':', followed with a list of inputs; or
+  a closing parenthesis ')'.
+
+# ------------------------------------------------------------------------------
+
+translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON COLON XOR_ASSIGN 
+##
+## Ends in an error in state: 473.
+##
+## asm_arguments -> COLON asm_operands COLON asm_operands . [ RPAREN ]
+## asm_arguments -> COLON asm_operands COLON asm_operands . COLON asm_flags [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## COLON asm_operands COLON asm_operands 
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 472, spurious reduction of production asm_operands -> 
+##
+
+# We have seen two COLONs, hence the outputs and inputs. (The list of inputs may be empty.)
 
 # clang requests a closing parenthesis. gcc requests a string literal.
 
 # CHECKED.
 
 Ill-formed assembly statement.
-At this point, a list of outputs is expected.
-This list may be followed with a colon ':' and a list of clobbered resources.
-An assembly statement is terminated with a closing parenthesis ')'.
+Up to this point, a list of outputs and a list of inputs have been recognized:
+  $2
+  $0
+If the latter list is complete,
+then at this point, one of the following is expected:
+  a colon ':', followed with a list of clobbered resources; or
+  a closing parenthesis ')'.
 
 # ------------------------------------------------------------------------------
 
@@ -3067,29 +3111,6 @@ At this point, an assembly operand is expected.
 
 # ------------------------------------------------------------------------------
 
-translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN CONSTANT RPAREN XOR_ASSIGN 
-##
-## Ends in an error in state: 463.
-##
-## asm_operands -> asm_operands_ne . [ RPAREN COLON ]
-## asm_operands_ne -> asm_operands_ne . COMMA asm_operand [ RPAREN COMMA COLON ]
-##
-## The known suffix of the stack is as follows:
-## asm_operands_ne 
-##
-
-# We cannot tell whether we are reading the output operands or the input operands.
-# Thus, we cannot say what should come after a COLON.
-# TEMPORARY pass the context?
-
-Ill-formed assembly statement.
-At this point, one of the following is expected:
-  a comma ',', followed with one more assembly operand; or
-  a colon ':'; or
-  a closing parenthesis ')'.
-
-# ------------------------------------------------------------------------------
-
 translation_unit_file: INT VAR_NAME LPAREN INT VAR_NAME RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON STRING_LITERAL LPAREN VAR_NAME SEMICOLON 
 ##
 ## Ends in an error in state: 469.
@@ -3161,26 +3182,6 @@ translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_L
 Ill-formed assembly operand.
 At this point, an opening parenthesis '(',
 followed with an expression and a closing parenthesis ')',
-is expected.
-
-# ------------------------------------------------------------------------------
-
-translation_unit_file: INT VAR_NAME LPAREN INT RPAREN LBRACE ASM LPAREN STRING_LITERAL COLON XOR_ASSIGN 
-##
-## Ends in an error in state: 459.
-##
-## asm_arguments -> COLON . asm_operands [ RPAREN ]
-## asm_arguments -> COLON . asm_operands COLON asm_operands [ RPAREN ]
-## asm_arguments -> COLON . asm_operands COLON asm_operands COLON asm_flags [ RPAREN ]
-##
-## The known suffix of the stack is as follows:
-## COLON 
-##
-
-# We have just seen the first COLON.
-
-Ill-formed assembly statement.
-At this point, a possibly empty, comma-separated list of output operands
 is expected.
 
 # ------------------------------------------------------------------------------

@@ -33,6 +33,7 @@ List of syntatic categories that appear in error messages:
   list of expressions (argument_expression_list) (possibly empty; comma-separated)
   list of init declarators (non-empty; comma-separated)
   list of initializers
+  list of inputs (possibly empty; comma-separated) (in asm statements)
   list of outputs (possibly empty; comma-separated) (in asm statements)
   list of parameter declarations (parameter_list, parameter_type_list) (possibly empty; comma-separated)
   list of pointers (possibly empty; whitespace-separated)
