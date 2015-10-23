@@ -17,10 +17,14 @@
 
 include Makefile.config
 
-# Menhir configuration and rules.
+# Menhir configuration.
 
 include Makefile.menhir
-include Makefile.messages
+
+# The pre-parser's error message database is compiled as follows.
+
+cparser/pre_parser_messages.ml:
+	$(MAKE) -C cparser correct
 
 # Directories containing plain Caml code (no preprocessing)
 

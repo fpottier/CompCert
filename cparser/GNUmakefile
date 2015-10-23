@@ -68,13 +68,13 @@ nothing:
 	@ echo "If you wish to compile CompCert, please run \"make\" one level up."
 	@ echo "If you wish to work on the pre-parser, please read GNUmakefile."
 
-# Checking correctness and irredundancy is done via --compile-errors,
-# which (incidentally) also compiles the message database down to OCaml
-# code (this is not exploited here).
+# Checking correctness and irredundancy is done via --compile-errors.
+# This entry is also called from [Makefile.extr] to compile the message
+# database down to OCaml code.
 # This also produces a description of the automaton in pre_parser.automaton
 # and a description of the conflicts (if any) in pre_parser.conflicts.
 correct:
-	@ $(COMMAND) --compile-errors $(DATABASE) >/dev/null && \
+	@ $(COMMAND) --compile-errors $(DATABASE) > pre_parser_messages.ml && \
 	    echo "OK. The set of erroneous inputs is correct and irredundant."
 
 # Checking completeness is done by first generating a complete list of
