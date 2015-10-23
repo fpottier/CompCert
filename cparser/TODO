@@ -1,5 +1,3 @@
-%reduceonerror should be in the .mly file?
-
 If the problematic token is a name, it could have been mis-classified;
   show how it was classified?
 
